@@ -8,10 +8,8 @@ package models;
  *
  * @author thomaskojoaddaquay
  */
-public class Enterprise {
-    public static String Utility = "Utility";
-    public static String Bank = "Bank";
-    public static String Wallet = "Wallet";
-    public static String Government = "Government";
-     public static String None = "None";
+public class Staff extends User {
+  public Staff(String username, String password, String enterprise, String role) {
+    super(username, password, enterprise, Role.staff);
+  }
 }

@@ -9,7 +9,7 @@ package models;
  * @author thomaskojoaddaquay
  */
 public class Role {
-    public static Integer systemAdmin = 100;
-    public static Integer admin = 50;
-    public static Integer staff = 10;
+    public static String systemAdmin = "System Admin";
+    public static String admin = "Admin";
+    public static String staff = "Staff";
 }

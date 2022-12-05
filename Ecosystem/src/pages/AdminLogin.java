@@ -4,6 +4,9 @@
  */
 package pages;
 
+import javax.swing.JOptionPane;
+import models.UserDirectory;
+
 /**
  *
  * @author thomaskojoaddaquay
@@ -14,6 +17,7 @@ public class AdminLogin extends javax.swing.JFrame {
      * Creates new form AdminLogin
      */
     public AdminLogin() {
+        UserDirectory users = new UserDirectory();
         initComponents();
     }
 
@@ -30,7 +34,7 @@ public class AdminLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         usernameField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +49,10 @@ public class AdminLogin extends javax.swing.JFrame {
             }
         });
 
+        usernameField.setText("sys");
+
+        passwordField.setText("admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -55,8 +63,8 @@ public class AdminLogin extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(passwordField)
-                    .addComponent(usernameField))
+                    .addComponent(usernameField)
+                    .addComponent(passwordField))
                 .addContainerGap(344, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -80,7 +88,21 @@ public class AdminLogin extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        UserDirectory.checkUsername(username);
+        UserDirectory.checkPassword(username, password);
+                if (!UserDirectory.checkUsername(username)) {
+            JOptionPane.showMessageDialog(this, "Username does not exist. Please try again", "Error", 0);
+            return;
+        }
+        if (!UserDirectory.checkPassword(username, password)) {
+            JOptionPane.showMessageDialog(this, "Invalid Password. Please try again", "Error", 0);
+            return;
+        }
+         AdminHomePage home = new AdminHomePage();
+        home.show();
+        dispose();
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
@@ -122,7 +144,7 @@ public class AdminLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
-    private javax.swing.JTextField passwordField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
