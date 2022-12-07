@@ -7,10 +7,10 @@ package pages;
 import java.text.MessageFormat;
 import javax.swing.JOptionPane;
 import models.Admin;
-import models.Enterprise;
-import models.Role;
-import models.Staff;
-import models.UserDirectory;
+import Business.Enterprise.Enterprise;
+import Business.Role.Role;
+import Business.Staff.Staff;
+import Business.User.UserDirectory;
 
 /**
  *

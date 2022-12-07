@@ -5,7 +5,7 @@
 package pages;
 
 import javax.swing.JOptionPane;
-import models.UserDirectory;
+import Business.User.UserDirectory;
 
 /**
  *

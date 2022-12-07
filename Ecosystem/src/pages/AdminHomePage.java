@@ -5,8 +5,8 @@
 package pages;
 
 import javax.swing.table.DefaultTableModel;
-import models.User;
-import models.UserDirectory;
+import Business.User.User;
+import Business.User.UserDirectory;
 
 /**
  *
