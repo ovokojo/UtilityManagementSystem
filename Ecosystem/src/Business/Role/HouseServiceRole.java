@@ -18,8 +18,10 @@ public class HouseServiceRole extends Role {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShelterWorkAreaJPanel(userProcessContainer, account, (HouseServiceOrganization)organization, enterprise, business);
+        return new HousingServiceWorkAreaJPanel(userProcessContainer, account, (HouseServiceOrganization)organization, enterprise, business);
     }
-    
-    
+    // View list of homes
+    // View homes on map
+    // Register new home
+    // Update home
 }

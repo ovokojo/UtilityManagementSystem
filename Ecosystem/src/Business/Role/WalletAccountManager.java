@@ -18,7 +18,9 @@ public class WalletAccountManager extends Role {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShelterWorkAreaJPanel(userProcessContainer, account, (WalletAccountOrganization)organization, enterprise, business);
+        return new WalletAccountManagerAreaJPanel(userProcessContainer, account, (WalletAccountOrganization)organization, enterprise, business);
     }
-    
+    /// WalletAccountManagerAreaJPanel 
+    // Can see list of account requests in a table
+    // Can approve / reject request
 }

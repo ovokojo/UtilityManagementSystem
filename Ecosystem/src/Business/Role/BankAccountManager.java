@@ -18,8 +18,10 @@ public class BankAccountManager extends Role {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShelterWorkAreaJPanel(userProcessContainer, account, (BankAccountOrganization)organization, enterprise, business);
+        return new BankAccountManagerAreaJPanel(userProcessContainer, account, (BankAccountOrganization)organization, enterprise, business);
     }
-    
+    /// BankAccountManagerAreaJPanel 
+    // Can see list of account requests in a table
+    // Can approve / reject request
     
 }

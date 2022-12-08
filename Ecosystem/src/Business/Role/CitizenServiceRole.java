@@ -18,8 +18,9 @@ public class CitizenServiceRole extends Role {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShelterWorkAreaJPanel(userProcessContainer, account, (CitizenServiceOrganization)organization, enterprise, business);
+        return new CitizenServiceWorkAreaJPanel(userProcessContainer, account, (CitizenServiceOrganization)organization, enterprise, business);
     }
-    
-    
+    // View list of citizens
+    // Register new citizen
+    // Update citizen
 }

@@ -7,21 +7,28 @@ package Business.Role;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.WalletServiceUpdateOrganization;
-import javax.swing.JPanel;
 import Business.User.User;
+import javax.swing.JPanel;
 
 /**
  *
- * @author liuyanzi
+ * @author thomaskojoaddaquay
  */
-public class WalletServiceUpdateRole extends Role {
-    
-       @Override
+public class CustomerRole {
+           @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new WalletServiceUpdateWorkAreaJPanel(userProcessContainer, account, (WalletServiceUpdateOrganization)organization, enterprise, business);
+        return new CustomerRoleWorkAreaJPanel(userProcessContainer, account, (WalletServiceUpdateOrganization)organization, enterprise, business);
     }
-    /// WalletServiceUpdateWorkAreaJPanel 
-    // Creates system status updates
-    // Maybe sends email to customers
-    
 }
+/// CustomerRoleWorkAreaJPanel
+// Bank
+// Request bank account
+// View bank account details
+// schedule appointment with Bank
+// Wallet
+// Request wallet account
+// View wallet service updates
+// view wallet details
+// Utility
+// view utility bills
+// pay utility bills

@@ -18,8 +18,9 @@ public class UtilityMaintenanceRole extends Role {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShelterWorkAreaJPanel(userProcessContainer, account, (UtilityMaintenanceOrganization)organization, enterprise, business);
+        return new UtilityMaintenanceWorkAreaJPanel(userProcessContainer, account, (UtilityMaintenanceOrganization)organization, enterprise, business);
     }
-    
+    /// Assign maintenance requests
+    /// Mark requests as complete
     
 }

@@ -6,7 +6,7 @@ package Business.Organization;
 
 import java.util.ArrayList;
 import Business.Role.Role;
-import Business.Role.WalletCustomerAdviosr;
+import Business.Role.BankAdvisor;
 
 /**
  *
@@ -21,7 +21,7 @@ public class WalletCustomerServiceOrganization extends Organization{
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-        roles.add(new WalletCustomerAdviosr());
+        roles.add(new BankAdvisor());
         return roles;
     }
     

@@ -18,8 +18,10 @@ public class UtilityBillingRole extends Role {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ShelterWorkAreaJPanel(userProcessContainer, account, (UtilityBillingOrganization)organization, enterprise, business);
+        return new UtilityBillingWorkAreaJPanel(userProcessContainer, account, (UtilityBillingOrganization)organization, enterprise, business);
     }
     
-    
+    /// UtilityBillingWorkAreaJPanel
+    /// View completed maintenance requests
+    /// Create bill for maintenance requests
 }
