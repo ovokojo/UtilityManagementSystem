@@ -4,6 +4,12 @@
  */
 package pages;
 
+import com.sun.jdi.connect.spi.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import net.proteanit.sql.DbUtils;
+import java.sql.DriverManager;
 import java.text.MessageFormat;
 import javax.swing.JOptionPane;
 import models.Admin;
@@ -24,7 +30,14 @@ public class NewUserPage extends javax.swing.JFrame {
     public NewUserPage() {
         initComponents();
     }
-
+    
+    String driver = "com.mysql.cj.jdbc.Driver";
+    String url = "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL ";
+    String user = "root";
+    String password = " 23082000vjK";
+    
+    Statement st;
+    ResultSet rs;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +63,11 @@ public class NewUserPage extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         roleDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Staff" }));
+        roleDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roleDropdownActionPerformed(evt);
+            }
+        });
 
         enterpriseDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Bank", "Government", "Utility", "Wallet" }));
         enterpriseDropdown.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +138,18 @@ public class NewUserPage extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        try{
+        Class.forName(driver);
+        
+        Connection con = (Connection) DriverManager.getConnection(url , user, password);
+        String sql="Insert into admin_login"(' "+usernameField.getText()"');
+        st= con.createStatement();
+        st.execute(sql);
+        }
+        catch(exception e)
+        {
+            
+        }
         String _username = usernameField.getText();
         String _password = passwordField.getText();
         String _enterprise =  enterpriseDropdown.getSelectedItem().toString();
@@ -162,6 +192,10 @@ public class NewUserPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void roleDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleDropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roleDropdownActionPerformed
 
     /**
      * @param args the command line arguments
