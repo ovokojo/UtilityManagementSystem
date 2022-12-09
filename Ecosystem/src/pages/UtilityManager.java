@@ -4,21 +4,80 @@
  */
 package pages;
 
+import Models.MaintenanceRequest;
+import Models.MaintenanceRequestDirectory;
+import Models.MaintenanceStaff;
 import Models.MaintenanceStaffDirectory;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author thomaskojoaddaquay
  */
 public class UtilityManager extends javax.swing.JFrame {
-
+ ArrayList<MaintenanceRequest> allRequests= new MaintenanceRequestDirectory().getRequests();
+ ArrayList<MaintenanceStaff> allStaff = new MaintenanceStaffDirectory().getStaff();
     /**
      * Creates new form UtilityManager
      */
     public UtilityManager() {
         initComponents();
-        MaintenanceStaffDirectory allStaff = new MaintenanceStaffDirectory();
-        requestDetailsPanel.hide();
+        populateRequestsTable();
+        populateStaffTable();
+        setStaffDropDownOptions();
+        hideRequestUpdatePanel();
+    }
+       public void populateRequestsTable() {
+        DefaultTableModel model = (DefaultTableModel) requestsTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active request:");
+                for (MaintenanceRequest request : allRequests)  {
+                    Object[] row = new Object[6];
+                        row[0] = request;
+                        row[1] = request.date;
+                        row[2] = request.type;
+                        row[3] = request.description;
+                        row[4] = request.assignedTo.name;
+                        row[5] = request.status;
+                        
+                        model.addRow(row);
+                }
+    }
+    
+    public void populateStaffTable() {
+        DefaultTableModel model = (DefaultTableModel) staffTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active staff:");
+                for (MaintenanceStaff staff : allStaff)  {
+                    Object[] row = new Object[4];
+                        row[0] = staff.name;
+                        row[1] = staff.title;
+                        row[2] = staff.phone;
+                        row[3] = staff.years.toString();
+                        model.addRow(row);
+                }
+    }
+         public void setStaffDropDownOptions(){
+         dropDownStaff.setModel(new DefaultComboBoxModel(_getStaffNames()));
+         }
+         
+         public String[] _getStaffNames() {
+            ArrayList<String> names = new ArrayList<String>();
+         for (MaintenanceStaff staff: allStaff) {
+              names.add("Unassigned");
+             names.add(staff.name);
+         }
+         String[] dropdownNames = names.toArray(new String[names.size()]);
+         return dropdownNames;
+         }
+         
+         public void hideRequestUpdatePanel() {
+                requestDetailsPanel.setVisible(false);
+    }
+         public void showRequestUpdatePanel() {
+                requestDetailsPanel.setVisible(true);
     }
 
     /**
@@ -54,7 +113,7 @@ public class UtilityManager extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        staffTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,23 +225,22 @@ public class UtilityManager extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        requestsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestsTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(requestsTable);
         if (requestsTable.getColumnModel().getColumnCount() > 0) {
             requestsTable.getColumnModel().getColumn(0).setResizable(false);
-            requestsTable.getColumnModel().getColumn(0).setPreferredWidth(30);
             requestsTable.getColumnModel().getColumn(1).setResizable(false);
-            requestsTable.getColumnModel().getColumn(1).setPreferredWidth(30);
             requestsTable.getColumnModel().getColumn(2).setResizable(false);
-            requestsTable.getColumnModel().getColumn(2).setPreferredWidth(30);
             requestsTable.getColumnModel().getColumn(3).setResizable(false);
-            requestsTable.getColumnModel().getColumn(3).setPreferredWidth(150);
             requestsTable.getColumnModel().getColumn(4).setResizable(false);
-            requestsTable.getColumnModel().getColumn(4).setPreferredWidth(50);
             requestsTable.getColumnModel().getColumn(5).setResizable(false);
-            requestsTable.getColumnModel().getColumn(5).setPreferredWidth(30);
         }
 
-        saveReqeustButton.setText("jButton1");
+        saveReqeustButton.setText("Save");
 
         jLabel7.setText("Maintenance Request");
 
@@ -198,31 +256,31 @@ public class UtilityManager extends javax.swing.JFrame {
         requestDetailsPanel.setLayout(requestDetailsPanelLayout);
         requestDetailsPanelLayout.setHorizontalGroup(
             requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestDetailsPanelLayout.createSequentialGroup()
+                .addGap(0, 158, Short.MAX_VALUE)
+                .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dropDownStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dropDownStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(177, 177, 177))
             .addGroup(requestDetailsPanelLayout.createSequentialGroup()
                 .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(requestDetailsPanelLayout.createSequentialGroup()
                         .addGap(248, 248, 248)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(requestDetailsPanelLayout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(saveReqeustButton)))
+                        .addGap(245, 245, 245)
+                        .addComponent(saveReqeustButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestDetailsPanelLayout.createSequentialGroup()
-                .addGap(0, 170, Short.MAX_VALUE)
-                .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dropDownStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dropDownStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(216, 216, 216))
         );
         requestDetailsPanelLayout.setVerticalGroup(
             requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestDetailsPanelLayout.createSequentialGroup()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
@@ -230,9 +288,9 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dropDownStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropDownStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(41, 41, 41)
                 .addComponent(saveReqeustButton)
-                .addGap(34, 34, 34))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout utilityHomePanelLayout = new javax.swing.GroupLayout(utilityHomePanel);
@@ -257,16 +315,16 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(52, 52, 52)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab1", utilityHomePanel);
 
         jLabel6.setText("Staff");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        staffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -277,7 +335,7 @@ public class UtilityManager extends javax.swing.JFrame {
                 "Name", "Title", "Phone", "Years of Experience"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(staffTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -299,13 +357,13 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(410, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab2", jPanel1);
 
-        pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 760, 640));
+        pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -330,6 +388,20 @@ public class UtilityManager extends javax.swing.JFrame {
         // TODO add your handling code here:
         tabbedPane.setSelectedIndex(1);
     }//GEN-LAST:event_staffTabMouseClicked
+
+    private void requestsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTableMouseClicked
+        // TODO add your handling code here:
+        int tableSize = requestsTable.getRowCount();
+         int selectedRow = requestsTable.getSelectedRow();
+         System.out.println("Row");
+         System.out.println(selectedRow);
+         if (selectedRow >= 0 || selectedRow < tableSize) {
+            MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
+            dropDownStaff.setSelectedItem(selectedRequest.assignedTo.name);
+            dropDownStatus.setSelectedItem(selectedRequest.status);
+            showRequestUpdatePanel();
+         }
+    }//GEN-LAST:event_requestsTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -381,7 +453,6 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel pagePanel;
     private javax.swing.JPanel requestDetailsPanel;
@@ -390,6 +461,7 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JButton saveReqeustButton;
     private javax.swing.JPanel sideBarPanel;
     private javax.swing.JPanel staffTab;
+    private javax.swing.JTable staffTable;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JPanel utilityHomePanel;
     // End of variables declaration//GEN-END:variables

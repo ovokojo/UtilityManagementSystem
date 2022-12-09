@@ -17,7 +17,11 @@ public class MaintenanceStaffDirectory {
         allStaff.add(new MaintenanceStaff("Janet Peague", "Plumber", "(465) 293-7458", 3));
         allStaff.add(new MaintenanceStaff("Jerome Mali", "Plumber", "(958) 293-1235", 5));
         allStaff.add(new MaintenanceStaff("Hannah Wile", "Electrician", "(465) 121-2232", 5));
-        allStaff.add(new MaintenanceStaff("Hannah Wile", "Engineer", "(425) 324-1298", 10));
+        allStaff.add(new MaintenanceStaff("Niko Flame", "Engineer", "(425) 324-1298", 10));
         allStaff.add(new MaintenanceStaff("Greg Chase", "Engineer", "(123) 344-1495", 12));
+    }
+    
+    public ArrayList<MaintenanceStaff> getStaff() {
+    return allStaff;
     }
 }

@@ -9,6 +9,14 @@ package Models;
  * @author thomaskojoaddaquay
  */
 public class MaintenanceRequest {
+    public MaintenanceRequest(String meterNumber, String date, String type, String description, MaintenanceStaff assignedTo, String status) {
+        this.meterNumber = meterNumber;
+        this.date = date;
+        this.type = type;
+        this.description = description;
+        this.assignedTo = assignedTo;
+        this.status = status;
+    }
 
     public String getMeterNumber() {
         return meterNumber;
@@ -57,6 +65,12 @@ public class MaintenanceRequest {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    @Override
+    public String toString() {
+     return meterNumber;
+    }
+    
     public String meterNumber;
     public String date;
     public String type;
