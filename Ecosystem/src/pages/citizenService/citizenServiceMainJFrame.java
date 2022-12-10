@@ -4,6 +4,13 @@
  */
 package pages.citizenService;
 
+import javax.swing.JOptionPane;
+//import models.Admin;
+import Business.Enterprise.Enterprise;
+import Business.Role.Role;
+import Business.Staff.Staff;
+import Business.User.UserDirectory;
+
 /**
  *
  * @author vatsalkapadia
@@ -36,7 +43,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel7 = new javax.swing.JPanel();
+        createJPanel = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         areaDropdown = new javax.swing.JComboBox<>();
@@ -50,7 +57,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         addressL1Field = new javax.swing.JTextField();
         addressL1Field1 = new javax.swing.JTextField();
-        jPanel8 = new javax.swing.JPanel();
+        viewJPanel = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         addressL1Field2 = new javax.swing.JTextField();
         addressL1Field3 = new javax.swing.JTextField();
@@ -64,7 +71,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         saveButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
+        updateJPanel = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,7 +95,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 51));
 
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+
         jLabel1.setText("Create Citizen");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -107,7 +125,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
+
         jLabel2.setText("View Citizen");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -126,7 +155,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
+
         jLabel3.setText("Update Citizen");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -269,18 +309,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                 .addGap(99, 99, 99))
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout createJPanelLayout = new javax.swing.GroupLayout(createJPanel);
+        createJPanel.setLayout(createJPanelLayout);
+        createJPanelLayout.setHorizontalGroup(
+            createJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        createJPanelLayout.setVerticalGroup(
+            createJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab1", jPanel7);
+        jTabbedPane1.addTab("tab1", createJPanel);
 
         jPanel11.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -383,18 +423,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                 .addGap(99, 99, 99))
         );
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout viewJPanelLayout = new javax.swing.GroupLayout(viewJPanel);
+        viewJPanel.setLayout(viewJPanelLayout);
+        viewJPanelLayout.setHorizontalGroup(
+            viewJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        viewJPanelLayout.setVerticalGroup(
+            viewJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel8);
+        jTabbedPane1.addTab("tab2", viewJPanel);
 
         jPanel12.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -409,18 +449,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
             .addGap(0, 709, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout updateJPanelLayout = new javax.swing.GroupLayout(updateJPanel);
+        updateJPanel.setLayout(updateJPanelLayout);
+        updateJPanelLayout.setHorizontalGroup(
+            updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        updateJPanelLayout.setVerticalGroup(
+            updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab3", jPanel9);
+        jTabbedPane1.addTab("tab3", updateJPanel);
 
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 630, 740));
 
@@ -455,25 +495,25 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
             return;
         }
-        if(UserAccountDirectory.checkUsername(_username)) {
-            JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
-            return;
-        }
-        if (_role.equals(Role.admin)) {
-            Admin newAdmin = new Admin(_username, _password, _enterprise, _role);
-            UserDirectory.addUser(newAdmin);
-            System.out.println("Created admin");
-        }
-        if (_role.equals(Role.staff)) {
-            Staff newAdmin = new Staff(_username, _password, _enterprise, _role);
-            UserDirectory.addUser(newAdmin);
-            System.out.println("Created staff");
-        }
-        JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Created!", _username));
-        AdminHomePage home = new AdminHomePage();
-        home.populateTable();
-        home.show();
-        dispose();
+//        if(UserDirectory.checkUsername(_username)) {
+//            JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
+//            return;
+//        }
+//        if (_role.equals(Role.admin)) {
+//            Admin newAdmin = new Admin(_username, _password, _enterprise, _role);
+//            UserDirectory.addUser(newAdmin);
+//            System.out.println("Created admin");
+//        }
+//        if (_role.equals(Role.staff)) {
+//            Staff newAdmin = new Staff(_username, _password, _enterprise, _role);
+//            UserDirectory.addUser(newAdmin);
+//            System.out.println("Created staff");
+//        }
+//        JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Created!", _username));
+//        AdminHomePage home = new AdminHomePage();
+//        home.populateTable();
+//        home.show();
+//        dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void areaDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaDropdownActionPerformed
@@ -512,6 +552,36 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(1);    
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_jPanel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -556,6 +626,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> areaDropdown;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButton1;
+    private javax.swing.JPanel createJPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -578,16 +649,15 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton saveButton1;
     private javax.swing.JPasswordField secretKeyField;
     private javax.swing.JPasswordField secretKeyField1;
+    private javax.swing.JPanel updateJPanel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField usernameField1;
+    private javax.swing.JPanel viewJPanel;
     // End of variables declaration//GEN-END:variables
 }
