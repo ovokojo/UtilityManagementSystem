@@ -10,6 +10,7 @@ import Models.Utility.MaintenanceStaff;
 import Models.Utility.MaintenanceStaffDirectory;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class UtilityManager extends javax.swing.JFrame {
  ArrayList<MaintenanceRequest> allRequests= new MaintenanceRequestDirectory().getRequests();
  ArrayList<MaintenanceStaff> allStaff = new MaintenanceStaffDirectory().getStaff();
+ MaintenanceRequest activeRequest;
     /**
      * Creates new form UtilityManager
      */
@@ -75,6 +77,7 @@ public class UtilityManager extends javax.swing.JFrame {
          
          public void hideRequestUpdatePanel() {
                 requestDetailsPanel.setVisible(false);
+                createBillButton.setVisible(false);
     }
          public void showRequestUpdatePanel() {
                 requestDetailsPanel.setVisible(true);
@@ -96,10 +99,12 @@ public class UtilityManager extends javax.swing.JFrame {
         staffTab = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        billingTab = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         menuBarPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
-        utilityHomePanel = new javax.swing.JPanel();
+        requestsPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         requestsTable = new javax.swing.JTable();
@@ -110,10 +115,39 @@ public class UtilityManager extends javax.swing.JFrame {
         dropDownStatus = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        createBillButton = new javax.swing.JButton();
+        staffPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         staffTable = new javax.swing.JTable();
+        billingPanel = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        newBillPanel = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        hoursField = new javax.swing.JTextField();
+        rateField = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        billingRequestPanel = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        billingMeterNumberLabel = new javax.swing.JLabel();
+        billingRequestTypeLabel = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        billingStaffLabel = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        billingStaffRoleLabel = new javax.swing.JLabel();
+        billingStaffYearsLabel = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        billingDescriptionLabel = new javax.swing.JLabel();
+        newBillBackButton = new javax.swing.JButton();
+        calculateTotalButton = new javax.swing.JButton();
+        totalPanel = new javax.swing.JPanel();
+        totalBillLabel = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        submitBillButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +159,9 @@ public class UtilityManager extends javax.swing.JFrame {
         requestsTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 requestsTabMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                requestsTabMousePressed(evt);
             }
         });
 
@@ -143,15 +180,18 @@ public class UtilityManager extends javax.swing.JFrame {
             requestsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestsTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        sideBarPanel.add(requestsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 140, -1));
+        sideBarPanel.add(requestsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 30));
 
         staffTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 staffTabMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                staffTabMousePressed(evt);
             }
         });
 
@@ -171,13 +211,43 @@ public class UtilityManager extends javax.swing.JFrame {
             .addGroup(staffTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 140, 40));
+        sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 140, 30));
 
         jLabel4.setText("Welcome!");
         sideBarPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        billingTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                billingTabMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                billingTabMousePressed(evt);
+            }
+        });
+
+        jLabel10.setText("Billing");
+
+        javax.swing.GroupLayout billingTabLayout = new javax.swing.GroupLayout(billingTab);
+        billingTab.setLayout(billingTabLayout);
+        billingTabLayout.setHorizontalGroup(
+            billingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billingTabLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel10)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+        billingTabLayout.setVerticalGroup(
+            billingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billingTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        sideBarPanel.add(billingTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 140, 30));
 
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
@@ -197,12 +267,12 @@ public class UtilityManager extends javax.swing.JFrame {
         menuBarPanelLayout.setVerticalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarPanelLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(21, 21, 21))
         );
 
-        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));
+        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 30));
 
         jLabel5.setText("Requests");
 
@@ -228,6 +298,9 @@ public class UtilityManager extends javax.swing.JFrame {
         requestsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 requestsTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                requestsTableMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(requestsTable);
@@ -298,34 +371,49 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        javax.swing.GroupLayout utilityHomePanelLayout = new javax.swing.GroupLayout(utilityHomePanel);
-        utilityHomePanel.setLayout(utilityHomePanelLayout);
-        utilityHomePanelLayout.setHorizontalGroup(
-            utilityHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(utilityHomePanelLayout.createSequentialGroup()
+        createBillButton.setText("+ Create Bill");
+        createBillButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                createBillButtonMousePressed(evt);
+            }
+        });
+        createBillButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBillButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout requestsPanelLayout = new javax.swing.GroupLayout(requestsPanel);
+        requestsPanel.setLayout(requestsPanelLayout);
+        requestsPanelLayout.setHorizontalGroup(
+            requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(requestsPanelLayout.createSequentialGroup()
                 .addGap(315, 315, 315)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, utilityHomePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestsPanelLayout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
-                .addGroup(utilityHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
         );
-        utilityHomePanelLayout.setVerticalGroup(
-            utilityHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(utilityHomePanelLayout.createSequentialGroup()
+        requestsPanelLayout.setVerticalGroup(
+            requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(requestsPanelLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(createBillButton)
+                .addGap(25, 25, 25)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(108, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("tab1", utilityHomePanel);
+        tabbedPane.addTab("tab1", requestsPanel);
 
         jLabel6.setText("Staff");
 
@@ -342,23 +430,23 @@ public class UtilityManager extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(staffTable);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
+        staffPanel.setLayout(staffPanelLayout);
+        staffPanelLayout.setHorizontalGroup(
+            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(staffPanelLayout.createSequentialGroup()
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(staffPanelLayout.createSequentialGroup()
                         .addGap(335, 335, 335)
                         .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(staffPanelLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        staffPanelLayout.setVerticalGroup(
+            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(staffPanelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -366,7 +454,235 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addContainerGap(410, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("tab2", jPanel1);
+        tabbedPane.addTab("tab2", staffPanel);
+
+        jLabel11.setText("Billing");
+
+        javax.swing.GroupLayout billingPanelLayout = new javax.swing.GroupLayout(billingPanel);
+        billingPanel.setLayout(billingPanelLayout);
+        billingPanelLayout.setHorizontalGroup(
+            billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billingPanelLayout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabel11)
+                .addContainerGap(398, Short.MAX_VALUE))
+        );
+        billingPanelLayout.setVerticalGroup(
+            billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billingPanelLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel11)
+                .addContainerGap(563, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("tab3", billingPanel);
+
+        jLabel12.setText("Hours ");
+
+        jLabel13.setText("Rate");
+
+        jLabel14.setText("New Bill");
+
+        jLabel15.setText("Meter #");
+
+        jLabel17.setText("Type");
+
+        billingMeterNumberLabel.setText("0000000");
+
+        billingRequestTypeLabel.setText("None");
+
+        jLabel18.setText("Name");
+
+        billingStaffLabel.setText("None");
+
+        jLabel19.setText("Role");
+
+        billingStaffRoleLabel.setText("None");
+
+        billingStaffYearsLabel.setText("None");
+
+        jLabel20.setText("Experience Level");
+
+        jLabel16.setText("Description");
+
+        billingDescriptionLabel.setText("None");
+
+        javax.swing.GroupLayout billingRequestPanelLayout = new javax.swing.GroupLayout(billingRequestPanel);
+        billingRequestPanel.setLayout(billingRequestPanelLayout);
+        billingRequestPanelLayout.setHorizontalGroup(
+            billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(billingMeterNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(billingStaffLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(billingRequestTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(billingStaffRoleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(billingStaffYearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(billingDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        billingRequestPanelLayout.setVerticalGroup(
+            billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(billingMeterNumberLabel)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billingRequestPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(billingDescriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(billingRequestTypeLabel)))
+                        .addGap(23, 23, 23)))
+                .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(billingStaffLabel))
+                    .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(billingStaffRoleLabel))
+                    .addGroup(billingRequestPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(billingStaffYearsLabel)))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+
+        newBillBackButton.setText("Back");
+        newBillBackButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                newBillBackButtonMousePressed(evt);
+            }
+        });
+
+        calculateTotalButton.setText("Calculate Total");
+        calculateTotalButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                calculateTotalButtonMousePressed(evt);
+            }
+        });
+
+        totalBillLabel.setText("0");
+
+        jLabel23.setText("$");
+
+        jLabel21.setText("Total");
+
+        submitBillButton.setText("Submit");
+        submitBillButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                submitBillButtonMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout totalPanelLayout = new javax.swing.GroupLayout(totalPanel);
+        totalPanel.setLayout(totalPanelLayout);
+        totalPanelLayout.setHorizontalGroup(
+            totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, totalPanelLayout.createSequentialGroup()
+                .addGap(0, 41, Short.MAX_VALUE)
+                .addGroup(totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(submitBillButton)
+                    .addGroup(totalPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel23)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        totalPanelLayout.setVerticalGroup(
+            totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(totalPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalBillLabel)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel21))
+                .addGap(18, 18, 18)
+                .addComponent(submitBillButton)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout newBillPanelLayout = new javax.swing.GroupLayout(newBillPanel);
+        newBillPanel.setLayout(newBillPanelLayout);
+        newBillPanelLayout.setHorizontalGroup(
+            newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBillPanelLayout.createSequentialGroup()
+                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newBillPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(rateField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(newBillPanelLayout.createSequentialGroup()
+                                .addComponent(hoursField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(calculateTotalButton))
+                            .addComponent(jLabel12)))
+                    .addGroup(newBillPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(totalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(301, 301, 301))
+            .addGroup(newBillPanelLayout.createSequentialGroup()
+                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newBillPanelLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(newBillBackButton)
+                        .addGap(226, 226, 226)
+                        .addComponent(jLabel14))
+                    .addGroup(newBillPanelLayout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(billingRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(132, Short.MAX_VALUE))
+        );
+        newBillPanelLayout.setVerticalGroup(
+            newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newBillPanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(newBillBackButton))
+                .addGap(33, 33, 33)
+                .addComponent(billingRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hoursField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(calculateTotalButton))
+                .addGap(34, 34, 34)
+                .addComponent(totalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(206, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("tab4", newBillPanel);
 
         pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
 
@@ -386,26 +702,16 @@ public class UtilityManager extends javax.swing.JFrame {
 
     private void requestsTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTabMouseClicked
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(0);
+      
     }//GEN-LAST:event_requestsTabMouseClicked
 
     private void staffTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTabMouseClicked
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(1);
+       
     }//GEN-LAST:event_staffTabMouseClicked
 
     private void requestsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTableMouseClicked
         // TODO add your handling code here:
-        int tableSize = requestsTable.getRowCount();
-         int selectedRow = requestsTable.getSelectedRow();
-         System.out.println("Row");
-         System.out.println(selectedRow);
-         if (selectedRow >= 0 || selectedRow < tableSize) {
-            MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
-            dropDownStaff.setSelectedItem(selectedRequest.assignedTo.name);
-            dropDownStatus.setSelectedItem(selectedRequest.status);
-            showRequestUpdatePanel();
-         }
     }//GEN-LAST:event_requestsTableMouseClicked
 
     private void saveRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButtonActionPerformed
@@ -427,6 +733,107 @@ public class UtilityManager extends javax.swing.JFrame {
             populateRequestsTable();
          }
     }//GEN-LAST:event_saveRequestButtonActionPerformed
+
+    private void billingTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTabMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_billingTabMouseClicked
+
+    private void requestsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTableMousePressed
+        // TODO add your handling code here:
+         int tableSize = requestsTable.getRowCount();
+         int selectedRow = requestsTable.getSelectedRow();
+         System.out.println("Row");
+         System.out.println(selectedRow);
+         if (selectedRow >= 0 || selectedRow < tableSize) {
+            MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
+            dropDownStaff.setSelectedItem(selectedRequest.assignedTo.name);
+            dropDownStatus.setSelectedItem(selectedRequest.status);
+            showRequestUpdatePanel();
+            if ("Complete".equals(dropDownStatus.getSelectedItem().toString())) {
+                createBillButton.setVisible(true);
+            } else {
+                createBillButton.setVisible(false);
+            }
+         }
+    }//GEN-LAST:event_requestsTableMousePressed
+
+    private void requestsTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTabMousePressed
+        // TODO add your handling code here:
+          tabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_requestsTabMousePressed
+
+    private void staffTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTabMousePressed
+        // TODO add your handling code here:
+         tabbedPane.setSelectedIndex(1);
+    }//GEN-LAST:event_staffTabMousePressed
+
+    private void billingTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTabMousePressed
+        // TODO add your handling code here:
+         tabbedPane.setSelectedIndex(2);
+    }//GEN-LAST:event_billingTabMousePressed
+
+    private void createBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBillButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createBillButtonActionPerformed
+
+    private void createBillButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createBillButtonMousePressed
+        // TODO add your handling code here:
+        int selectedRow = requestsTable.getSelectedRow();
+        MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
+        activeRequest = selectedRequest;
+        billingMeterNumberLabel.setText(selectedRequest.meterNumber);
+        billingDescriptionLabel.setText(selectedRequest.description);
+        billingRequestTypeLabel.setText(selectedRequest.type);
+        billingStaffLabel.setText(selectedRequest.assignedTo.name);
+        billingStaffRoleLabel.setText(selectedRequest.assignedTo.title);
+        billingStaffYearsLabel.setText(selectedRequest.assignedTo.years.toString());
+        totalPanel.setVisible(false);
+        tabbedPane.setSelectedIndex(3);
+    }//GEN-LAST:event_createBillButtonMousePressed
+
+    private void newBillBackButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newBillBackButtonMousePressed
+        // TODO add your handling code here:
+        tabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_newBillBackButtonMousePressed
+
+    private void calculateTotalButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calculateTotalButtonMousePressed
+        // TODO add your handling code here:
+         String rate = rateField.getText();
+         String hours = hoursField.getText();
+          double hoursNum;
+          double rateNum;
+         // Validate rate & hours
+        if ("".equals(rate) || rate == null) {
+            JOptionPane.showMessageDialog(this, "Please enter rate", "Error", 0);
+            return;
+        }
+        if ("".equals(hours) || hours == null) {
+            JOptionPane.showMessageDialog(this, "Please enter hours", "Error", 0);
+            return;
+        }
+        try {
+            hoursNum = Double.parseDouble(hours);
+        } 
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid hours", "Error", 0);
+             return;
+        }
+        try {
+            rateNum = Double.parseDouble(rate);
+        } 
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid rate", "Error", 0);
+             return;
+        }
+        // Calculate total
+        double total = (hoursNum * rateNum);
+        totalBillLabel.setText(Double.toString(total));
+        totalPanel.setVisible(true);
+    }//GEN-LAST:event_calculateTotalButtonMousePressed
+
+    private void submitBillButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBillButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitBillButtonMousePressed
 
     /**
      * @param args the command line arguments
@@ -464,10 +871,35 @@ public class UtilityManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel billingDescriptionLabel;
+    private javax.swing.JLabel billingMeterNumberLabel;
+    private javax.swing.JPanel billingPanel;
+    private javax.swing.JPanel billingRequestPanel;
+    private javax.swing.JLabel billingRequestTypeLabel;
+    private javax.swing.JLabel billingStaffLabel;
+    private javax.swing.JLabel billingStaffRoleLabel;
+    private javax.swing.JLabel billingStaffYearsLabel;
+    private javax.swing.JPanel billingTab;
+    private javax.swing.JButton calculateTotalButton;
+    private javax.swing.JButton createBillButton;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
+    private javax.swing.JTextField hoursField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -475,19 +907,25 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel menuBarPanel;
+    private javax.swing.JButton newBillBackButton;
+    private javax.swing.JPanel newBillPanel;
     private javax.swing.JPanel pagePanel;
+    private javax.swing.JTextField rateField;
     private javax.swing.JPanel requestDetailsPanel;
+    private javax.swing.JPanel requestsPanel;
     private javax.swing.JPanel requestsTab;
     private javax.swing.JTable requestsTable;
     private javax.swing.JButton saveRequestButton;
     private javax.swing.JPanel sideBarPanel;
+    private javax.swing.JPanel staffPanel;
     private javax.swing.JPanel staffTab;
     private javax.swing.JTable staffTable;
+    private javax.swing.JButton submitBillButton;
     private javax.swing.JTabbedPane tabbedPane;
-    private javax.swing.JPanel utilityHomePanel;
+    private javax.swing.JLabel totalBillLabel;
+    private javax.swing.JPanel totalPanel;
     // End of variables declaration//GEN-END:variables
 }
