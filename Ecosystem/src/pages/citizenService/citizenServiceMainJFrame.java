@@ -580,7 +580,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(2);
+        jTabbedPane1.setSelectedIndex(2); 
     }//GEN-LAST:event_jPanel6MouseClicked
 
     /**
