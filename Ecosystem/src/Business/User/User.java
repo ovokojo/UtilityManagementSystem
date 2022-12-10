@@ -19,8 +19,24 @@ public class User {
     private String password;
     private Staff staff;
     private Role role;
+    public String meterNumber;
     private WorkQueue workQueue;
     private citizenInfo citizenInfo;
+    
+    public citizenInfo getCitizenInfo() {
+        return citizenInfo;
+    }
+
+    public void setCitizenInfo(citizenInfo citizenInfo) {
+        this.citizenInfo = citizenInfo;
+    }
+    public String getMeterNumber() {
+        return meterNumber;
+    }
+
+    public void setMeterNumber(String meterNumber) {
+        this.meterNumber = meterNumber;
+    }
     
     public User() {
         workQueue = new WorkQueue();

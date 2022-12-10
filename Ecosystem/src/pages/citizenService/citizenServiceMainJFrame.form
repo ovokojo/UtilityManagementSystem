@@ -262,12 +262,12 @@
                                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="meterNumberlbl" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="secretKeyField" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="meterNumberField" alignment="0" max="32767" attributes="0"/>
                                           <Component id="usernameField" alignment="0" max="32767" attributes="0"/>
                                           <Component id="areaDropdown" alignment="0" max="32767" attributes="0"/>
                                           <Component id="saveButton" alignment="0" max="32767" attributes="0"/>
@@ -292,8 +292,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="secretKeyField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="meterNumberField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="meterNumberlbl" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -350,9 +350,9 @@
                         <Property name="text" type="java.lang.String" value="Username"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel5">
+                    <Component class="javax.swing.JLabel" name="meterNumberlbl">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="secreteKey"/>
+                        <Property name="text" type="java.lang.String" value="Meter Number"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="backButton">
@@ -365,7 +365,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="usernameField">
                     </Component>
-                    <Component class="javax.swing.JPasswordField" name="secretKeyField">
+                    <Component class="javax.swing.JPasswordField" name="meterNumberField">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
                       <Properties>

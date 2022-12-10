@@ -3,65 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models.muncipality;
+import Business.User.User;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 /**
  *
  * @author vatsalkapadia
  */
-public class citizenInfo {
-    private House house;
-    private String secreteKey;
-    private String username;
-    private String housingArea;
-    private String addlone;
-    private String addltwo;
+public class citizenInfo extends User {
+    private static HashMap<citizenInfo, ArrayList<House>> encounters = new HashMap<citizenInfo,ArrayList<House>>();
+    private static ArrayList<House> infoArray = new ArrayList<House>();
+
+    public static HashMap<citizenInfo, ArrayList<House>> getEncounters() {
+        return encounters;
+    }
     
-public citizenInfo(String name, String key , String area, String aone, String atwo) {
-    this.username = name;
-    this.secreteKey = key;
-    this.housingArea = area;
-    this.addlone = aone ;
-    this.addltwo = atwo ;
-}
+    public static void setEncounters(HashMap<citizenInfo, ArrayList<House>> encounters) {
+        citizenInfo.encounters = encounters;
+    }
+    
 
-    public String getSecreteKey() {
-        return secreteKey;
+    public static ArrayList<House> getVsArray() {
+        return infoArray;
     }
 
-    public void setSecreteKey(String secreteKey) {
-        this.secreteKey = secreteKey;
+    public static void setVsArray(ArrayList<House> vsArray) {
+        citizenInfo.infoArray = vsArray;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getHousingArea() {
-        return housingArea;
-    }
-
-    public void setHousingArea(String housingArea) {
-        this.housingArea = housingArea;
-    }
-
-    public String getAddlone() {
-        return addlone;
-    }
-
-    public void setAddlone(String addlone) {
-        this.addlone = addlone;
-    }
-
-    public String getAddltwo() {
-        return addltwo;
-    }
-
-    public void setAddltwo(String addltwo) {
-        this.addltwo = addltwo;
+    
+    public static void addVitalsigns(House House)
+    {
+        infoArray.add(House);
     }
     
 }

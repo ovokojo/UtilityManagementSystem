@@ -12,5 +12,30 @@ public class House {
     public String addressOne;
     public String addressTwo;
     public String cityArea;
-    public String meterNumber;
+
+    public String getAddressOne() {
+        return addressOne;
+    }
+
+    public void setAddressOne(String addressOne) {
+        this.addressOne = addressOne;
+    }
+
+    public String getAddressTwo() {
+        return addressTwo;
+    }
+
+    public void setAddressTwo(String addressTwo) {
+        this.addressTwo = addressTwo;
+    }
+
+    public String getCityArea() {
+        return cityArea;
+    }
+
+    public void setCityArea(String cityArea) {
+        this.cityArea = cityArea;
+    }
+    
+    
 }

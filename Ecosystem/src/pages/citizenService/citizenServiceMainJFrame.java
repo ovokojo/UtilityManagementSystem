@@ -10,6 +10,11 @@ import Business.Enterprise.Enterprise;
 import Business.Role.Role;
 import Business.Staff.Staff;
 import Business.User.UserDirectory;
+import Models.muncipality.House;
+import Models.muncipality.citizenInfo;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -48,10 +53,10 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         areaDropdown = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        meterNumberlbl = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         usernameField = new javax.swing.JTextField();
-        secretKeyField = new javax.swing.JPasswordField();
+        meterNumberField = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -225,7 +230,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Username");
 
-        jLabel5.setText("secreteKey");
+        meterNumberlbl.setText("Meter Number");
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -267,11 +272,11 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel5)
+                            .addComponent(meterNumberlbl)
                             .addComponent(jLabel8))
                         .addGap(39, 39, 39)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(secretKeyField)
+                            .addComponent(meterNumberField)
                             .addComponent(usernameField)
                             .addComponent(areaDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -290,8 +295,8 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(secretKeyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(meterNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(meterNumberlbl))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(areaDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -480,8 +485,33 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        boolean flag = false;
+        
+        flag = fireValidations();
+        
+        citizenInfo citizenInfo;
+        boolean exists;
+        House House;
+        
+        
+        citizenInfo = new citizenInfo();
+        ArrayList<House> arr = new ArrayList<House>();
+        Map<citizenInfo, ArrayList<House>> history = citizenInfo.getEncounters();
+        exists = false;
+        
+        
+        if (flag) {
+            for ( citizenInfo ci : history.keySet()) {
+                if (ci.getMeterNumber() == meterNumberField.getText()) {
+                    exists = true;
+                    arr = history.get(ci);
+                    citizenInfo = ci;
+                }
+            }
+        
+        
         String _username = usernameField.getText();
-        String _password = secretKeyField.getText();
+        String _password = meterNumberField.getText();
         String _enterprise =  areaDropdown.getSelectedItem().toString();
         String _addline1 = addressL1Field.getText();
         String _addline2 = addressL1Field1.getText();
@@ -616,6 +646,70 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                 new citizenServiceMainJFrame().setVisible(true);
             }
         });
+        
+        
+    private boolean fireValidations() {
+        boolean valid = true;
+
+        if (!usernameField.getText().matches("^[a-zA-Z]*$") || (usernameField.getText() == null) || (usernameField.getText().length() == 0)) {
+            usernameField.setBackground(Color.red);
+            valid = false;
+        } else {
+            usernameField.setBackground(Color.white);
+        }
+        
+//        if (!txtPatientID.getText().matches("^[0-9]+$") || (txtPatientID.getText() == null) || (txtPatientID.getText().length() == 0)) {
+//            txtPatientID.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            txtPatientID.setBackground(Color.white);
+//        }
+//
+//        if (!txtPatientDob.getText().matches("^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$") || (txtPatientDob.getText() == null) || (txtPatientDob.getText().length() == 0)) {
+//            txtPatientDob.setBackground(Color.red);
+//            valid = false;
+//            JOptionPane.showMessageDialog(this, "Please enter date in DD/MM/YYYY format");
+//        } else {
+//            txtPatientDob.setBackground(Color.white);
+//        }
+//
+//        if (!txtPatientAge.getText().matches("^[0-9]{1,3}$") || (txtPatientAge.getText().length() == 0)) {
+//            txtPatientAge.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            txtPatientAge.setBackground(Color.white);
+//        }
+//        
+//        if (!txtCommunityName.getText().matches("^[a-zA-Z]*$") || (txtCommunityName.getText() == null) || (txtCommunityName.getText().length() == 0)) {
+//            txtCommunityName.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            txtCommunityName.setBackground(Color.white);
+//        }
+//        
+//        if (!txtCommunityID.getText().matches("^[0-9]+$") || (txtCommunityID.getText() == null) || (txtCommunityID.getText().length() == 0)) {
+//            txtCommunityID.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            txtCommunityID.setBackground(Color.white);
+//        }
+//        
+//        if (!txtCity.getText().matches("^[a-zA-Z]*$") || (txtCity.getText() == null) || (txtCity.getText().length() == 0)) {
+//            txtCity.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            txtCity.setBackground(Color.white);
+//        }
+//        
+//        if (!txtHouseNo.getText().matches("^[a-zA-Z0-9]*$") || (txtHouseNo.getText() == null) || (txtHouseNo.getText().length() == 0)) {
+//            txtHouseNo.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            txtHouseNo.setBackground(Color.white);
+//        }
+        
+        return valid;
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -635,7 +729,6 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -651,9 +744,10 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField meterNumberField;
+    private javax.swing.JLabel meterNumberlbl;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton saveButton1;
-    private javax.swing.JPasswordField secretKeyField;
     private javax.swing.JPasswordField secretKeyField1;
     private javax.swing.JPanel updateJPanel;
     private javax.swing.JTextField usernameField;
