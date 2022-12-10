@@ -547,7 +547,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void areaDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaDropdownActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: 
     }//GEN-LAST:event_areaDropdownActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
