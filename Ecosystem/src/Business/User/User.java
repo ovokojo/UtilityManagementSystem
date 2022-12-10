@@ -8,6 +8,7 @@ import Business.Role.Role;
 import Business.Staff.Staff;
 import Business.Enterprise.Enterprise;
 import Business.Queue.WorkQueue;
+import Models.muncipality.citizenInfo;
 
 /**
  *
@@ -19,6 +20,7 @@ public class User {
     private Staff staff;
     private Role role;
     private WorkQueue workQueue;
+    private citizenInfo citizenInfo;
     
     public User() {
         workQueue = new WorkQueue();

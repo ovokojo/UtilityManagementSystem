@@ -9,6 +9,7 @@ package Models.muncipality;
  * @author vatsalkapadia
  */
 public class citizenInfo {
+    private House house;
     private String secreteKey;
     private String username;
     private String housingArea;
