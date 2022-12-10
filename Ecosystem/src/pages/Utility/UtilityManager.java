@@ -104,7 +104,7 @@ public class UtilityManager extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         requestsTable = new javax.swing.JTable();
         requestDetailsPanel = new javax.swing.JPanel();
-        saveReqeustButton = new javax.swing.JButton();
+        saveRequestButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         dropDownStaff = new javax.swing.JComboBox<>();
         dropDownStatus = new javax.swing.JComboBox<>();
@@ -240,7 +240,12 @@ public class UtilityManager extends javax.swing.JFrame {
             requestsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        saveReqeustButton.setText("Save");
+        saveRequestButton.setText("Save");
+        saveRequestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveRequestButtonActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Maintenance Request");
 
@@ -273,7 +278,7 @@ public class UtilityManager extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(requestDetailsPanelLayout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(saveReqeustButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(saveRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         requestDetailsPanelLayout.setVerticalGroup(
@@ -289,7 +294,7 @@ public class UtilityManager extends javax.swing.JFrame {
                     .addComponent(dropDownStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropDownStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(saveReqeustButton)
+                .addComponent(saveRequestButton)
                 .addGap(27, 27, 27))
         );
 
@@ -403,6 +408,26 @@ public class UtilityManager extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_requestsTableMouseClicked
 
+    private void saveRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButtonActionPerformed
+        // TODO add your handling code here:
+         int tableSize = requestsTable.getRowCount();
+         int selectedRow = requestsTable.getSelectedRow();
+         if (selectedRow >= 0 || selectedRow < tableSize) {
+            MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
+            String status = dropDownStatus.getSelectedItem().toString();
+            String staffName = dropDownStaff.getSelectedItem().toString();
+            MaintenanceStaff selectedStaff = null;
+            for (MaintenanceStaff staff : allStaff) {
+               if (staffName.equals(staff.name)) {
+                   selectedStaff = staff;
+               }
+           }
+            selectedRequest.setAssignedTo(selectedStaff);
+            selectedRequest.setStatus(status);
+            populateRequestsTable();
+         }
+    }//GEN-LAST:event_saveRequestButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -458,7 +483,7 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JPanel requestDetailsPanel;
     private javax.swing.JPanel requestsTab;
     private javax.swing.JTable requestsTable;
-    private javax.swing.JButton saveReqeustButton;
+    private javax.swing.JButton saveRequestButton;
     private javax.swing.JPanel sideBarPanel;
     private javax.swing.JPanel staffTab;
     private javax.swing.JTable staffTable;
