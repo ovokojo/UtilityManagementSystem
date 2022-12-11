@@ -5,7 +5,7 @@
 package Business.Enterprise;
 
 import java.util.ArrayList;
-import Business.Role.Role;
+import Business.Role.RoleType;
 
 /**
  *
@@ -18,7 +18,7 @@ public class BankEnterprise extends Enterprise{
     }
     
     @Override
-    public ArrayList<Role> getSupportedRole() {
+    public ArrayList<RoleType> getSupportedRole() {
         return null;
     }
 }

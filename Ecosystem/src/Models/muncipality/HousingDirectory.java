@@ -2,19 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Models.Utility;
-import java.util.UUID;
+package Models.muncipality;
 
-// Generate a random UUID
-
+import java.util.ArrayList;
 
 /**
  *
  * @author thomaskojoaddaquay
  */
-public class UtilityBill {
-    public MaintenanceRequest request;
-    public double hours;
-    public double rate;
-    public String status; // Unpaid / Paid
+public class HousingDirectory {
+    private ArrayList<House> houses;
 }

@@ -9,7 +9,7 @@ import java.text.MessageFormat;
 import javax.swing.JOptionPane;
 import models.Admin;
 import Business.Enterprise.Enterprise;
-import Business.Role.Role;
+import Business.Role.RoleType;
 import Business.Staff.Staff;
 import Business.User.UserDirectory;
 
@@ -138,12 +138,12 @@ public class NewUserPage extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
             return;
         }
-        if (_role.equals(Role.admin)) {
+        if (_role.equals(RoleType.admin)) {
             Admin newAdmin = new Admin(_username, _password, _enterprise, _role);
             UserDirectory.addUser(newAdmin);
             System.out.println("Created admin");
         }
-        if (_role.equals(Role.staff)) {
+        if (_role.equals(RoleType.staff)) {
             Staff newAdmin = new Staff(_username, _password, _enterprise, _role);
             UserDirectory.addUser(newAdmin);
             System.out.println("Created staff");

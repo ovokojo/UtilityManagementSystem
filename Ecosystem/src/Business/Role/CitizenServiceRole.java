@@ -14,7 +14,7 @@ import Business.User.User;
  *
  * @author liuyanzi
  */
-public class CitizenServiceRole extends Role {
+public class CitizenServiceRole extends RoleType {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {

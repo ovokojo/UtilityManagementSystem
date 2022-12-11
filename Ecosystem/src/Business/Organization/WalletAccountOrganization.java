@@ -5,7 +5,7 @@
 package Business.Organization;
 
 import java.util.ArrayList;
-import Business.Role.Role;
+import Business.Role.RoleType;
 import Business.Role.WalletAccountManager;
 
 /**
@@ -19,8 +19,8 @@ public class WalletAccountOrganization  extends Organization{
     }
     
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roles = new ArrayList();
+    public ArrayList<RoleType> getSupportedRole() {
+        ArrayList<RoleType> roles = new ArrayList();
         roles.add(new WalletAccountManager());
         return roles;
     }

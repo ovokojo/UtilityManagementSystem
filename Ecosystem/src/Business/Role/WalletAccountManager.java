@@ -14,7 +14,7 @@ import Business.User.User;
  *
  * @author liuyanzi
  */
-public class WalletAccountManager extends Role {
+public class WalletAccountManager extends RoleType {
     
        @Override
     public JPanel createWorkArea(JPanel userProcessContainer, User account, Organization organization, Enterprise enterprise, EcoSystem business) {

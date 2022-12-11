@@ -5,28 +5,38 @@
 package pages.citizenService;
 
 import javax.swing.JOptionPane;
-//import models.Admin;
-import Business.Enterprise.Enterprise;
-import Business.Role.Role;
-import Business.Staff.Staff;
-import Business.User.UserDirectory;
-import Models.muncipality.House;
-import Models.muncipality.citizenInfo;
-import java.awt.Color;
+import Business.Role.RoleType;
+import Business.User.User;
+import Models.muncipality.CitizenInfo;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author vatsalkapadia
  */
 public class citizenServiceMainJFrame extends javax.swing.JFrame {
-
+ArrayList<User> mockCitizenUserList = new ArrayList();
     /**
      * Creates new form citizenServiceMainJFrame
      */
     public citizenServiceMainJFrame() {
         initComponents();
+        populateCitizenTable();
+    }
+    
+    public void populateCitizenTable() {
+        DefaultTableModel model = (DefaultTableModel) citizensInHousingTable.getModel();
+        model.setRowCount(0);
+                for (User user : mockCitizenUserList)  {
+                    Object[] row = new Object[3];
+                        row[0] = user;
+                        row[1] = user.getCitizenInfo().getSsn();
+                        row[2] = user.getCitizenInfo().getPhone();
+                        model.addRow(row);
+                }
     }
 
     /**
@@ -47,21 +57,25 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        createJPanel = new javax.swing.JPanel();
+        createUserJPanel = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        saveButton = new javax.swing.JButton();
-        areaDropdown = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        meterNumberlbl = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         usernameField = new javax.swing.JTextField();
-        meterNumberField = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        addressL1Field = new javax.swing.JTextField();
-        addressL1Field1 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        passwordField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        ssnField = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        phoneField = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        citizenBirthChooser = new com.toedter.calendar.JDateChooser();
+        saveUserButton = new javax.swing.JButton();
+        nameField = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
         viewJPanel = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         addressL1Field2 = new javax.swing.JTextField();
@@ -78,6 +92,18 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         updateJPanel = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
+        createHousejPanel = new javax.swing.JPanel();
+        addressL1Field1 = new javax.swing.JTextField();
+        saveButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        addressL1Field = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        areaDropdown = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        citizensInHousingTable = new javax.swing.JTable();
+        jTextField2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,10 +119,10 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 90));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 60));
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 51));
 
@@ -180,13 +206,43 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel3)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel3)
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setText("Register House");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel5)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel5)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -197,6 +253,7 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,30 +264,16 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 170, 710));
 
-        jPanel10.setBackground(new java.awt.Color(204, 255, 204));
-
-        saveButton.setText("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-
-        areaDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Seaport", "Beacon Hill", "North End", "Back Bay" }));
-        areaDropdown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                areaDropdownActionPerformed(evt);
-            }
-        });
+        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel4.setText("Username");
-
-        meterNumberlbl.setText("Meter Number");
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -239,23 +282,27 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Address Line 1");
+        jLabel14.setText("password");
 
-        jLabel7.setText("Housing Area");
+        jLabel15.setText("Social Security #");
 
-        jLabel8.setText("Address Line 2");
+        jLabel16.setText("Phone");
 
-        addressL1Field.addActionListener(new java.awt.event.ActionListener() {
+        jLabel17.setText("Birth Date");
+
+        saveUserButton.setText("Save");
+        saveUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                saveUserButtonMousePressed(evt);
+            }
+        });
+        saveUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressL1FieldActionPerformed(evt);
+                saveUserButtonActionPerformed(evt);
             }
         });
 
-        addressL1Field1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressL1Field1ActionPerformed(evt);
-            }
-        });
+        jLabel18.setText("Name");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -263,69 +310,90 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addGap(68, 68, 68)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(meterNumberlbl)
-                            .addComponent(jLabel8))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(meterNumberField)
-                            .addComponent(usernameField)
-                            .addComponent(areaDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addressL1Field)
-                            .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(181, Short.MAX_VALUE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(172, 172, 172)
+                                .addComponent(jLabel4)
+                                .addGap(68, 68, 68)
+                                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                            .addGap(174, 174, 174)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(ssnField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(citizenBirthChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel18)
+                            .addGap(68, 68, 68)
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(saveUserButton)))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(meterNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(meterNumberlbl))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(areaDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressL1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addComponent(saveButton)
-                .addGap(99, 99, 99))
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ssnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(citizenBirthChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
+                .addComponent(saveUserButton)
+                .addGap(146, 146, 146))
         );
 
-        javax.swing.GroupLayout createJPanelLayout = new javax.swing.GroupLayout(createJPanel);
-        createJPanel.setLayout(createJPanelLayout);
-        createJPanelLayout.setHorizontalGroup(
-            createJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout createUserJPanelLayout = new javax.swing.GroupLayout(createUserJPanel);
+        createUserJPanel.setLayout(createUserJPanelLayout);
+        createUserJPanelLayout.setHorizontalGroup(
+            createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        createJPanelLayout.setVerticalGroup(
-            createJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        createUserJPanelLayout.setVerticalGroup(
+            createUserJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab1", createJPanel);
+        jTabbedPane1.addTab("tab1", createUserJPanel);
 
         jPanel11.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -467,6 +535,116 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab3", updateJPanel);
 
+        addressL1Field1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressL1Field1ActionPerformed(evt);
+            }
+        });
+
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Address Line 2");
+
+        addressL1Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressL1FieldActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Address Line 1");
+
+        jLabel7.setText("Housing Area");
+
+        areaDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Seaport", "Beacon Hill", "North End", "Back Bay" }));
+        areaDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaDropdownActionPerformed(evt);
+            }
+        });
+
+        citizensInHousingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Name", "SSN", "Phone"
+            }
+        ));
+        jScrollPane1.setViewportView(citizensInHousingTable);
+
+        jTextField2.setText("Search");
+
+        jButton1.setText("search");
+
+        javax.swing.GroupLayout createHousejPanelLayout = new javax.swing.GroupLayout(createHousejPanel);
+        createHousejPanel.setLayout(createHousejPanelLayout);
+        createHousejPanelLayout.setHorizontalGroup(
+            createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createHousejPanelLayout.createSequentialGroup()
+                .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(66, 66, 66)
+                        .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(areaDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addressL1Field)
+                            .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(73, 73, 73))
+        );
+        createHousejPanelLayout.setVerticalGroup(
+            createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(132, 132, 132)
+                .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addComponent(areaDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(addressL1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42)
+                .addComponent(saveButton)
+                .addGap(139, 139, 139))
+        );
+
+        jTabbedPane1.addTab("tab4", createHousejPanel);
+
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 630, 740));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -485,46 +663,6 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        boolean flag = false;
-        
-        flag = fireValidations();
-        
-        citizenInfo citizenInfo;
-        boolean exists;
-        House House;
-        
-        
-        citizenInfo = new citizenInfo();
-        ArrayList<House> arr = new ArrayList<House>();
-        Map<citizenInfo, ArrayList<House>> history = citizenInfo.getEncounters();
-        exists = false;
-        
-        
-        if (flag) {
-            for ( citizenInfo ci : history.keySet()) {
-                if (ci.getMeterNumber() == meterNumberField.getText()) {
-                    exists = true;
-                    arr = history.get(ci);
-                    citizenInfo = ci;
-                }
-            }
-        
-        
-        String _username = usernameField.getText();
-        String _password = meterNumberField.getText();
-        String _enterprise =  areaDropdown.getSelectedItem().toString();
-        String _addline1 = addressL1Field.getText();
-        String _addline2 = addressL1Field1.getText();
-
-        // Validate fields
-        if ("".equals(_username) || _username == null) {
-            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
-            return;
-        }
-        if ("".equals(_password) || _password == null) {
-            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
-            return;
-        }
 //        if(UserDirectory.checkUsername(_username)) {
 //            JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
 //            return;
@@ -613,6 +751,50 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(2); 
     }//GEN-LAST:event_jPanel6MouseClicked
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void saveUserButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveUserButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveUserButtonMousePressed
+
+    private void saveUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUserButtonActionPerformed
+        // TODO add your handling code here:
+         // Create citizen info
+        String _name = nameField.getText();
+        String _ssn = ssnField.getText();
+        LocalDate _birthDate = citizenBirthChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String _phone = phoneField.getText();
+       String _username = usernameField.getText();
+        String _password = passwordField.getText();
+        // TODO: Complete validations: check null values,  ssn is unique
+         if ("".equals(_username) || _username == null) {
+            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
+            return;
+        }
+        if ("".equals(_password) || _password == null) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
+            return;
+        }
+       // Create citizen info
+        CitizenInfo citizen = new CitizenInfo(_name, _ssn, _birthDate, _phone );
+        // Create user info
+        User newUser = new User(_username, _password, RoleType.CitizenRole);
+        // update user to include citizen info
+        newUser.setCitizenInfo(citizen);
+       // update db
+        mockCitizenUserList.add(newUser);
+        // refresh table
+        populateCitizenTable();
+        // navigate to new page
+        jTabbedPane1.setSelectedIndex(3);
+    }//GEN-LAST:event_saveUserButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -648,15 +830,15 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
         });
         
         
-    private boolean fireValidations() {
-        boolean valid = true;
+//    private boolean fireValidations() {
+//        boolean valid = true;
 
-        if (!usernameField.getText().matches("^[a-zA-Z]*$") || (usernameField.getText() == null) || (usernameField.getText().length() == 0)) {
-            usernameField.setBackground(Color.red);
-            valid = false;
-        } else {
-            usernameField.setBackground(Color.white);
-        }
+//        if (!usernameField.getText().matches("^[a-zA-Z]*$") || (usernameField.getText() == null) || (usernameField.getText().length() == 0)) {
+//            usernameField.setBackground(Color.red);
+//            valid = false;
+//        } else {
+//            usernameField.setBackground(Color.white);
+//        }
         
 //        if (!txtPatientID.getText().matches("^[0-9]+$") || (txtPatientID.getText() == null) || (txtPatientID.getText().length() == 0)) {
 //            txtPatientID.setBackground(Color.red);
@@ -707,9 +889,10 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
 //        } else {
 //            txtHouseNo.setBackground(Color.white);
 //        }
-        
-        return valid;
-    
+//        
+//        return valid;
+//    
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -720,15 +903,25 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> areaDropdown;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButton1;
-    private javax.swing.JPanel createJPanel;
+    private com.toedter.calendar.JDateChooser citizenBirthChooser;
+    private javax.swing.JTable citizensInHousingTable;
+    private javax.swing.JPanel createHousejPanel;
+    private javax.swing.JPanel createUserJPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -742,13 +935,19 @@ public class citizenServiceMainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JPasswordField meterNumberField;
-    private javax.swing.JLabel meterNumberlbl;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField passwordField;
+    private javax.swing.JTextField phoneField;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton saveButton1;
+    private javax.swing.JButton saveUserButton;
     private javax.swing.JPasswordField secretKeyField1;
+    private javax.swing.JTextField ssnField;
     private javax.swing.JPanel updateJPanel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField usernameField1;

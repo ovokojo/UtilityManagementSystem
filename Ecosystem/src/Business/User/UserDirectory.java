@@ -4,7 +4,7 @@
  */
 package Business.User;
 
-import Business.Role.Role;
+import Business.Role.RoleType;
 import Business.Enterprise.Enterprise;
 import Business.Staff.Staff;
 import java.text.MessageFormat;
@@ -26,7 +26,7 @@ public class UserDirectory {
         return userAccountList;
     }
    
-     public User createNewUser(String username, String password, Staff staff, Role role){
+     public User createNewUser(String username, String password, Staff staff, RoleType role){
         User userAccount = new User();
         userAccount.setUsername(username);
         userAccount.setPassword(password);

@@ -7,7 +7,7 @@ package Business.Organization;
 import Business.Queue.WorkQueue;
 import Business.Staff.StaffDirectory;
 import java.util.ArrayList;
-import Business.Role.Role;
+import Business.Role.RoleType;
 import Business.User.UserDirectory;
 
 /**
@@ -56,7 +56,7 @@ public abstract class Organization {
         ++counter;
     }
 
-    public abstract ArrayList<Role> getSupportedRole();
+    public abstract ArrayList<RoleType> getSupportedRole();
 
     public UserDirectory getUserDirectory() {
         return userDirectory;
