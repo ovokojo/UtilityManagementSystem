@@ -19,12 +19,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MunicipalityPage extends javax.swing.JFrame {
 ArrayList<User> mockCitizenUserList = new ArrayList();
+User currentUser;
     /**
      * Creates new form citizenServiceMainJFrame
      */
-    public MunicipalityPage() {
+    public MunicipalityPage(User currentUser) {
+        this.currentUser = currentUser;
+        System.out.println("Current User:");
+        System.out.println(currentUser.getUsername());
         initComponents();
         populateCitizenTable();
+        if (currentUser.getRole().equals(RoleType.MunicipalityManager)) {
+            userMgmtPanel.setVisible(false);
+        }
     }
     
     public void populateCitizenTable() {
@@ -59,6 +66,8 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
         jLabel3 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        userMgmtPanel = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         createUserJPanel = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -153,7 +162,7 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -181,9 +190,9 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,9 +220,9 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel3)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -234,16 +243,35 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel5)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel5)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel19.setText("user mgmt");
+
+        javax.swing.GroupLayout userMgmtPanelLayout = new javax.swing.GroupLayout(userMgmtPanel);
+        userMgmtPanel.setLayout(userMgmtPanelLayout);
+        userMgmtPanelLayout.setHorizontalGroup(
+            userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userMgmtPanelLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel19)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        userMgmtPanelLayout.setVerticalGroup(
+            userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userMgmtPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel19)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -254,6 +282,7 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(userMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,11 +291,13 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(userMgmtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 170, 710));
@@ -920,6 +951,7 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -951,6 +983,7 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
     private javax.swing.JPasswordField secretKeyField1;
     private javax.swing.JTextField ssnField;
     private javax.swing.JPanel updateJPanel;
+    private javax.swing.JPanel userMgmtPanel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField usernameField1;
     private javax.swing.JPanel viewJPanel;

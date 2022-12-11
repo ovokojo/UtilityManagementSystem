@@ -18,6 +18,7 @@ public class UserDirectory {
     initializeSysAdmin();
     initializeMunicipalityAdmin();
      initializeUtilityAdmin();
+     initializeMunicipalityMgr();
     }
     
 
@@ -70,21 +71,28 @@ public class UserDirectory {
         private void initializeSysAdmin() {
         String username = "sys";
         String password = "sys";
-        String role = RoleType.SystemAdminRole;
+        String role = RoleType.SystemAdmin;
         User sys = createNewUser(username, password, role);
         allUsers.add(sys);
     }
      private void initializeMunicipalityAdmin() {
+        String username = "govta";
+        String password = "govta";
+        String role = RoleType.MunicipalityAdmin;
+        User gov = createNewUser(username, password, role);
+        allUsers.add(gov);
+    }
+       private void initializeMunicipalityMgr() {
         String username = "govt";
         String password = "govt";
-        String role = RoleType.CitizenServiceRole;
+        String role = RoleType.MunicipalityManager;
         User gov = createNewUser(username, password, role);
         allUsers.add(gov);
     }
      private void initializeUtilityAdmin() {
         String username = "util";
         String password = "util";
-        String role = RoleType.UtilityBillingRole;
+        String role = RoleType.UtilityAdmin;
         User util = createNewUser(username, password, role);
         allUsers.add(util);
     }

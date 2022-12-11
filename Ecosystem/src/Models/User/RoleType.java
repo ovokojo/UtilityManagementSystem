@@ -15,16 +15,15 @@ import Models.User.User;
  * @author thomaskojoaddaquay
  */
 public  class RoleType { 
-    static public String AdminRole = "AdminRole";
-    static public String BankAccountManagerRole = "BankAccountManager";
-    static public String CitizenRole = "CitizenRole";
-    static public String CitizenServiceRole = "CitizenServiceRole";
-    static public String HouseServiceRole = "HouseServiceRole";
-    static public String UtilityElectricRole = "UtilityElectricRole";
-    static public String UtilityMaintenanceRole = "UtilityMaintenanceRole";
-    static public String UtilityBillingRole = "UtilityBillingRole";
-    static public String WalletAccountManager = "WalletAccountManager";
-    static public String WalletCustomerAdviosr = "WalletCustomerAdviosr";
-    static public String WalletServiceUpdateRole = "WalletServiceUpdateRole";
-    static public String SystemAdminRole = "SystemAdminRole";
+    static public String SystemAdmin = "SystemAdmin";
+    static public String BankAdmin = "BankAdmin";
+    static public String BankManager = "BankManager";
+    static public String BankCustomerService = "BankCustomerService";
+    static public String WalletAdmin = "WalletAdmin";
+    static public String WalletManager = "WalletManager";
+    static public String MunicipalityAdmin = "GovtAdminRole";
+    static public String MunicipalityManager = "GovtManager";
+    static public String UtilityAdmin = "UtilityAdmin";
+    static public String UtilityManager= "UtilityManager";
+    static public String Customer = "Customer";
 }

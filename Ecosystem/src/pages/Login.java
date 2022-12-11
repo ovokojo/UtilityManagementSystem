@@ -107,19 +107,19 @@ public class Login extends javax.swing.JFrame {
         // Check role of user, then navigate appropriate JFrame
         // TODO: Correct roles for enterprises
         User currentUser = users.getActiveUser();
-        if (currentUser.getRole().equals(RoleType.SystemAdminRole)) {
+        if (currentUser.getRole().equals(RoleType.SystemAdmin)) {
         // TODO: Navigate to system admin JFrame
             SystemAdminPage home = new SystemAdminPage();
             home.show();
             dispose();
         }
-       if (currentUser.getRole().equals(RoleType.CitizenServiceRole)) {
+       if (currentUser.getRole().equals(RoleType.MunicipalityAdmin) || currentUser.getRole().equals(RoleType.MunicipalityManager)) {
         // TODO: Navigate to system admin JFrame
-            MunicipalityPage home = new MunicipalityPage();
+            MunicipalityPage home = new MunicipalityPage(currentUser);
             home.show();
             dispose();
         }
-         if (currentUser.getRole().equals(RoleType.UtilityBillingRole)) {
+         if (currentUser.getRole().equals(RoleType.UtilityAdmin) || currentUser.getRole().equals(RoleType.UtilityManager)) {
         // TODO: Navigate to system admin JFrame
             UtilityManager home = new UtilityManager();
             home.show();
