@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 public class House {
 
-    public House(String addressOne, String addressTwo, String cityArea, String houseId) {
+    public House(String addressOne, String addressTwo, String cityArea) {
         UUID uuid = UUID.randomUUID();
         this.addressOne = addressOne;
         this.addressTwo = addressTwo;
