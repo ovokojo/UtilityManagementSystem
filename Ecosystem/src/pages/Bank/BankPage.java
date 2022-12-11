@@ -12,6 +12,7 @@ import Models.Bank.BankServiceStaff;
 import Models.Bank.BankServiceStaffDirectory;
 import Models.User.RoleType;
 import Models.User.User;
+import Models.User.UserDirectory;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +25,7 @@ public class BankPage extends javax.swing.JFrame {
  ArrayList<BankServiceRequest> allRequests= new BankServiceRequestDirectory().getRequests();
  ArrayList<BankServiceStaff> allStaff = new BankServiceStaffDirectory().getStaff();
  ArrayList<BankAccount> allAccount = new BankAccountDirectory().getAccount();
- 
+ ArrayList<User> allUser = new UserDirectory().getAllUsers();
  BankServiceRequest activeRequest;
  private User currentUser;
 
@@ -49,18 +50,22 @@ public class BankPage extends javax.swing.JFrame {
         populateRequestsTable();
         populateStaffTable();
         populateBankAccountTable();
-        
+        populateBankUserTable();
         setStaffDropDownOptions();
         hideRequestUpdatePanel();
-        
         }
         if (currentUser.getRole().equals(RoleType.BankManager)) {
         populateRequestsTable();
         populateStaffTable();
+        populateBankAccountTable();
         setStaffDropDownOptions();
         hideRequestUpdatePanel();
-        
-            userMgmtPanel.setVisible(false);
+        userMgmtPanel.setVisible(false);
+        }
+        if (currentUser.getRole().equals(RoleType.BankCustomerService)) {
+        populateRequestsTable();
+       
+        userMgmtPanel.setVisible(false);
         }
        
     }
@@ -104,6 +109,18 @@ public class BankPage extends javax.swing.JFrame {
                         model.addRow(row);
                 }
     }
+     public void populateBankUserTable() {
+        DefaultTableModel model = (DefaultTableModel) bankUserTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active Bank User:");
+                for (User user : allUser)  {
+                    Object[] row = new Object[3];
+                        row[0] = user.getUsername();
+                        row[1] = user.getPassword();
+                        row[2] = user.getRole();
+                        model.addRow(row);
+                }
+    }
     
     public void setStaffDropDownOptions(){
          dropDownStaff.setModel(new DefaultComboBoxModel(_getStaffNames()));
@@ -126,6 +143,22 @@ public class BankPage extends javax.swing.JFrame {
          public void showRequestUpdatePanel() {
                 requestDetailsPanel.setVisible(true);
     }
+         
+     public void setStatusofRequestDropDownOptions(){
+         dropDownRequestStatus.setModel(new DefaultComboBoxModel(_getRequestStatus()));
+         }
+         
+         public String[] _getRequestStatus() {
+            ArrayList<String> status = new ArrayList<String>();
+        status.add("pending");
+        status.add("processing");
+        status.add("resolved");
+        
+         String[] dropdownStatus = status.toArray(new String[status.size()]);
+         return dropdownStatus;
+         }
+         
+         
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,6 +179,8 @@ public class BankPage extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         userMgmtPanel = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
+        customerServiceTab = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         menuBarPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
@@ -172,6 +207,14 @@ public class BankPage extends javax.swing.JFrame {
         bankUserScrollPane4 = new javax.swing.JScrollPane();
         bankUserTable = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
+        requestsPanel1 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        requestsTable1 = new javax.swing.JTable();
+        requestDetailsPanel1 = new javax.swing.JPanel();
+        saveRequestButton1 = new javax.swing.JButton();
+        dropDownRequestStatus = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -271,7 +314,7 @@ public class BankPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        sideBarPanel.add(billingTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 140, 30));
+        sideBarPanel.add(billingTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 140, 30));
 
         jLabel19.setText("User Management");
 
@@ -280,18 +323,49 @@ public class BankPage extends javax.swing.JFrame {
         userMgmtPanelLayout.setHorizontalGroup(
             userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userMgmtPanelLayout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         userMgmtPanelLayout.setVerticalGroup(
             userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userMgmtPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userMgmtPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        sideBarPanel.add(userMgmtPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 140, 40));
+        sideBarPanel.add(userMgmtPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 140, 40));
+
+        customerServiceTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerServiceTabMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                customerServiceTabMousePressed(evt);
+            }
+        });
+
+        jLabel11.setText("Customer Service");
+
+        javax.swing.GroupLayout customerServiceTabLayout = new javax.swing.GroupLayout(customerServiceTab);
+        customerServiceTab.setLayout(customerServiceTabLayout);
+        customerServiceTabLayout.setHorizontalGroup(
+            customerServiceTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerServiceTabLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel11)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        customerServiceTabLayout.setVerticalGroup(
+            customerServiceTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerServiceTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
+        sideBarPanel.add(customerServiceTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 140, 30));
 
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
@@ -587,6 +661,110 @@ public class BankPage extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab4", userManagementPanel);
 
+        jLabel12.setText("Requests to Me");
+
+        requestsTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Bank Account #", "Date", "Description", "Assigned To", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        requestsTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestsTable1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                requestsTable1MousePressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(requestsTable1);
+
+        saveRequestButton1.setText("Save");
+        saveRequestButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveRequestButton1ActionPerformed(evt);
+            }
+        });
+
+        dropDownRequestStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "In Progress", "Complete" }));
+        dropDownRequestStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropDownRequestStatusActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Status");
+
+        javax.swing.GroupLayout requestDetailsPanel1Layout = new javax.swing.GroupLayout(requestDetailsPanel1);
+        requestDetailsPanel1.setLayout(requestDetailsPanel1Layout);
+        requestDetailsPanel1Layout.setHorizontalGroup(
+            requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
+                .addGroup(requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(saveRequestButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(dropDownRequestStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(207, Short.MAX_VALUE))
+        );
+        requestDetailsPanel1Layout.setVerticalGroup(
+            requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(dropDownRequestStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
+                .addComponent(saveRequestButton1)
+                .addGap(27, 27, 27))
+        );
+
+        javax.swing.GroupLayout requestsPanel1Layout = new javax.swing.GroupLayout(requestsPanel1);
+        requestsPanel1.setLayout(requestsPanel1Layout);
+        requestsPanel1Layout.setHorizontalGroup(
+            requestsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(requestsPanel1Layout.createSequentialGroup()
+                .addGap(315, 315, 315)
+                .addComponent(jLabel12)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestsPanel1Layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addGroup(requestsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(requestDetailsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
+        );
+        requestsPanel1Layout.setVerticalGroup(
+            requestsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(requestsPanel1Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(requestDetailsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("tab5", requestsPanel1);
+
         pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -691,6 +869,30 @@ public class BankPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bankUserTableMousePressed
 
+    private void customerServiceTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerServiceTabMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerServiceTabMouseClicked
+
+    private void customerServiceTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerServiceTabMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerServiceTabMousePressed
+
+    private void requestsTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestsTable1MouseClicked
+
+    private void requestsTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTable1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestsTable1MousePressed
+
+    private void saveRequestButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveRequestButton1ActionPerformed
+
+    private void dropDownRequestStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropDownRequestStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropDownRequestStatusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -736,10 +938,15 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane bankUserScrollPane4;
     private javax.swing.JTable bankUserTable;
     private javax.swing.JPanel billingTab;
+    private javax.swing.JPanel customerServiceTab;
+    private javax.swing.JComboBox<String> dropDownRequestStatus;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
@@ -752,13 +959,18 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel pagePanel;
     private javax.swing.JPanel requestDetailsPanel;
+    private javax.swing.JPanel requestDetailsPanel1;
     private javax.swing.JPanel requestsPanel;
+    private javax.swing.JPanel requestsPanel1;
     private javax.swing.JPanel requestsTab;
     private javax.swing.JTable requestsTable;
+    private javax.swing.JTable requestsTable1;
     private javax.swing.JButton saveRequestButton;
+    private javax.swing.JButton saveRequestButton1;
     private javax.swing.JPanel sideBarPanel;
     private javax.swing.JPanel staffPanel;
     private javax.swing.JPanel staffTab;
