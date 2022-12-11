@@ -6,7 +6,7 @@ package Business.System;
 
 import Business.Organization.Organization;
 import Models.User.RoleType;
-import Business.Role.SystemAdminRole;
+//import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
 
 /**
@@ -46,7 +46,7 @@ public class EcoSystem extends Organization {
     @Override
     public ArrayList<RoleType> getSupportedRole() {
         ArrayList<RoleType> roleList = new ArrayList<RoleType>();
-        roleList.add(new SystemAdminRole());
+        //roleList.add(new SystemAdminRole());
         return roleList;
     }
 
@@ -64,13 +64,13 @@ public class EcoSystem extends Organization {
     }
 
    public boolean IsUserUnique(String userName){
-        if(!this.getUserDirectory().IsUsernameUnique(userName)){
+        //if(!this.getUserDirectory().IsUsernameUnique(userName)){
             return false;
-        }
-        for(Network network:networkList){
-            
-        }
-        return true;
+//        }
+//        for(Network network:networkList){
+//            
+//        }
+//        return true;
     }
-   
+//   
 }

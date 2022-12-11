@@ -72,9 +72,25 @@ private User currentUser;
                         row[0] = user;
                         row[1] = user.getCitizenInfo().getSsn();
                         row[2] = user.getCitizenInfo().getPhone();
-                        row[3] = user.getCitizenInfo().getHouse().getCityArea();
-                        row[4] = user.getCitizenInfo().getHouse().getAddressOne();
-                        row[5] = user.getCitizenInfo().getHouse().getAddressTwo();
+                        if ((user.getCitizenInfo().getHouse().getCityArea()) == null){
+                         row[3] ="" ;
+                        } else {
+                            row[3] = user.getCitizenInfo().getHouse().getCityArea();
+                        }
+                        
+                        
+                        if ((user.getCitizenInfo().getHouse().getAddressOne())== null){
+                         row[4] ="" ;
+                        } else {
+                            row[4] = user.getCitizenInfo().getHouse().getAddressOne();
+                        }
+                        
+                         if ((user.getCitizenInfo().getHouse().getAddressTwo())== null){
+                         row[5] ="" ;
+                        } else {
+                            row[5] = user.getCitizenInfo().getHouse().getAddressTwo();
+                        }
+                        
                         row[6] = user.getCitizenInfo().getHouse().getHouseId();
                         model.addRow(row);
                 }
@@ -986,6 +1002,7 @@ private User currentUser;
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
@@ -1024,10 +1041,9 @@ private User currentUser;
        // update db
         mockCitizenUserList.add(newUser);
         // refresh table
-        populateCitizenHousingTable();
         populateCitizenInfoTable();
         // navigate to new page
-        jTabbedPane1.setSelectedIndex(3);
+        jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_saveUserButtonActionPerformed
 
     private void addressL1Field4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressL1Field4ActionPerformed
