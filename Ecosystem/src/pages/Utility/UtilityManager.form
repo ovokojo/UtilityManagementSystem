@@ -523,10 +523,10 @@
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="4">
+                            <Column editable="true" title="Username" type="java.lang.Object"/>
                             <Column editable="true" title="Name" type="java.lang.Object"/>
                             <Column editable="true" title="Title" type="java.lang.Object"/>
                             <Column editable="true" title="Phone" type="java.lang.Object"/>
-                            <Column editable="true" title="Years of Experience" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -805,8 +805,6 @@
                               <EmptySpace pref="30" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="billingStaffYearsLabel" min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="billingDescriptionLabel" min="-2" pref="188" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -851,11 +849,6 @@
                                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="billingStaffRoleLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="billingStaffYearsLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="50" max="32767" attributes="0"/>
@@ -902,16 +895,6 @@
                     <Component class="javax.swing.JLabel" name="billingStaffRoleLabel">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="None"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="billingStaffYearsLabel">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="None"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel20">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Experience Level"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel16">

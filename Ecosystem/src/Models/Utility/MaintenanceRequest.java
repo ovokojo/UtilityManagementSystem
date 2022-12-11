@@ -3,13 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models.Utility;
+import Models.User.StaffUser;
 
 /**
  *
  * @author thomaskojoaddaquay
  */
 public class MaintenanceRequest {
-    public MaintenanceRequest(String meterNumber, String date, String type, String description, MaintenanceStaff assignedTo, String status) {
+    public MaintenanceRequest(String meterNumber, String date, String type, String description, StaffUser assignedTo, String status) {
         this.meterNumber = meterNumber;
         this.date = date;
         this.type = type;
@@ -50,11 +51,11 @@ public class MaintenanceRequest {
         this.description = description;
     }
 
-    public MaintenanceStaff getAssignedTo() {
+    public StaffUser getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(MaintenanceStaff assignedTo) {
+    public void setAssignedTo(StaffUser assignedTo) {
         this.assignedTo = assignedTo;
     }
 
@@ -75,6 +76,6 @@ public class MaintenanceRequest {
     public String date;
     public String type;
     public String description;
-    public MaintenanceStaff assignedTo;
+    public StaffUser assignedTo;
     public String status;
 }

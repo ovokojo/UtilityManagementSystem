@@ -4,10 +4,10 @@
  */
 package Pages.Utility;
 
+import Models.User.StaffUser;
 import Models.Utility.MaintenanceRequest;
 import Models.Utility.MaintenanceRequestDirectory;
-import Models.Utility.MaintenanceStaff;
-import Models.Utility.MaintenanceStaffDirectory;
+import Models.Utility.UtilityStaffDirectory;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class UtilityManager extends javax.swing.JFrame {
  ArrayList<MaintenanceRequest> allRequests= new MaintenanceRequestDirectory().getRequests();
- ArrayList<MaintenanceStaff> allStaff = new MaintenanceStaffDirectory().getStaff();
+ ArrayList<StaffUser> allStaff = new UtilityStaffDirectory().getAllStaff();
  MaintenanceRequest activeRequest;
     /**
      * Creates new form UtilityManager
@@ -41,7 +41,7 @@ public class UtilityManager extends javax.swing.JFrame {
                         row[1] = request.date;
                         row[2] = request.type;
                         row[3] = request.description;
-                        row[4] = request.assignedTo.name;
+                        row[4] = request.assignedTo;
                         row[5] = request.status;
                         
                         model.addRow(row);
@@ -52,12 +52,12 @@ public class UtilityManager extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) staffTable.getModel();
         model.setRowCount(0);
          System.out.println("Active staff:");
-                for (MaintenanceStaff staff : allStaff)  {
+                for (StaffUser staff : allStaff)  {
                     Object[] row = new Object[4];
-                        row[0] = staff.name;
-                        row[1] = staff.title;
-                        row[2] = staff.phone;
-                        row[3] = staff.years.toString();
+                        row[0] = staff;
+                        row[1] = staff.getName();
+                        row[2] = staff.getTitle();
+                        row[3] = staff.getPhone();
                         model.addRow(row);
                 }
     }
@@ -67,9 +67,9 @@ public class UtilityManager extends javax.swing.JFrame {
          
          public String[] _getStaffNames() {
             ArrayList<String> names = new ArrayList<String>();
-         for (MaintenanceStaff staff: allStaff) {
+         for (StaffUser staff: allStaff) {
               names.add("Unassigned");
-             names.add(staff.name);
+             names.add(staff.getName());
          }
          String[] dropdownNames = names.toArray(new String[names.size()]);
          return dropdownNames;
@@ -140,8 +140,6 @@ public class UtilityManager extends javax.swing.JFrame {
         billingStaffLabel = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         billingStaffRoleLabel = new javax.swing.JLabel();
-        billingStaffYearsLabel = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         billingDescriptionLabel = new javax.swing.JLabel();
         newBillBackButton = new javax.swing.JButton();
@@ -429,7 +427,7 @@ public class UtilityManager extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Name", "Title", "Phone", "Years of Experience"
+                "Username", "Name", "Title", "Phone"
             }
         ));
         jScrollPane1.setViewportView(staffTable);
@@ -552,10 +550,6 @@ public class UtilityManager extends javax.swing.JFrame {
 
         billingStaffRoleLabel.setText("None");
 
-        billingStaffYearsLabel.setText("None");
-
-        jLabel20.setText("Experience Level");
-
         jLabel16.setText("Description");
 
         billingDescriptionLabel.setText("None");
@@ -580,8 +574,6 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(billingRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(billingStaffYearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20)
                     .addComponent(billingDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -615,11 +607,7 @@ public class UtilityManager extends javax.swing.JFrame {
                     .addGroup(billingRequestPanelLayout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(billingStaffRoleLabel))
-                    .addGroup(billingRequestPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(billingStaffYearsLabel)))
+                        .addComponent(billingStaffRoleLabel)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -786,9 +774,9 @@ public class UtilityManager extends javax.swing.JFrame {
             MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
             String status = dropDownStatus.getSelectedItem().toString();
             String staffName = dropDownStaff.getSelectedItem().toString();
-            MaintenanceStaff selectedStaff = null;
-            for (MaintenanceStaff staff : allStaff) {
-               if (staffName.equals(staff.name)) {
+            StaffUser selectedStaff = null;
+            for (StaffUser staff : allStaff) {
+               if (staffName.equals(staff.getName())) {
                    selectedStaff = staff;
                }
            }
@@ -810,7 +798,7 @@ public class UtilityManager extends javax.swing.JFrame {
          System.out.println(selectedRow);
          if (selectedRow >= 0 || selectedRow < tableSize) {
             MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
-            dropDownStaff.setSelectedItem(selectedRequest.assignedTo.name);
+            dropDownStaff.setSelectedItem(selectedRequest.assignedTo.getName());
             dropDownStatus.setSelectedItem(selectedRequest.status);
             showRequestUpdatePanel();
             if ("Complete".equals(dropDownStatus.getSelectedItem().toString())) {
@@ -848,9 +836,8 @@ public class UtilityManager extends javax.swing.JFrame {
         billingMeterNumberLabel.setText(selectedRequest.meterNumber);
         billingDescriptionLabel.setText(selectedRequest.description);
         billingRequestTypeLabel.setText(selectedRequest.type);
-        billingStaffLabel.setText(selectedRequest.assignedTo.name);
-        billingStaffRoleLabel.setText(selectedRequest.assignedTo.title);
-        billingStaffYearsLabel.setText(selectedRequest.assignedTo.years.toString());
+        billingStaffLabel.setText(selectedRequest.assignedTo.getName());
+        billingStaffRoleLabel.setText(selectedRequest.assignedTo.getTitle());
         totalPanel.setVisible(false);
         tabbedPane.setSelectedIndex(3);
     }//GEN-LAST:event_createBillButtonMousePressed
@@ -950,7 +937,6 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JLabel billingRequestTypeLabel;
     private javax.swing.JLabel billingStaffLabel;
     private javax.swing.JLabel billingStaffRoleLabel;
-    private javax.swing.JLabel billingStaffYearsLabel;
     private javax.swing.JPanel billingTab;
     private javax.swing.JButton calculateTotalButton;
     private javax.swing.JButton createBillButton;
@@ -969,7 +955,6 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
