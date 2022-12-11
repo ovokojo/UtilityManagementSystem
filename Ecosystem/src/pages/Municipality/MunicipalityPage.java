@@ -19,17 +19,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MunicipalityPage extends javax.swing.JFrame {
 ArrayList<User> mockCitizenUserList = new ArrayList();
-User currentUser;
+private User currentUser;
     /**
      * Creates new form citizenServiceMainJFrame
      */
-    public MunicipalityPage(User currentUser) {
-        this.currentUser = currentUser;
-        System.out.println("Current User:");
-        System.out.println(currentUser.getUsername());
+    public MunicipalityPage() {
         initComponents();
         populateCitizenTable();
-        if (currentUser.getRole().equals(RoleType.MunicipalityManager)) {
+        // If not admin, hide user management tab
+    }
+    // How to set current user & modify page based on user role
+    public void setCurrentUser(User user) {
+        currentUser = user;
+        System.out.println("Current User:");
+        System.out.println(currentUser.getUsername());
+        // hide tab based on role
+        if (!currentUser.getRole().equals(RoleType.MunicipalityAdmin)) {
             userMgmtPanel.setVisible(false);
         }
     }
@@ -816,7 +821,7 @@ User currentUser;
        // Create citizen info
         CitizenInfo citizen = new CitizenInfo(_name, _ssn, _birthDate, _phone );
         // Create user info
-        User newUser = new User(_username, _password, RoleType.CitizenRole);
+        User newUser = new User(_username, _password, RoleType.Customer);
         // update user to include citizen info
         newUser.setCitizenInfo(citizen);
        // update db
@@ -836,25 +841,6 @@ User currentUser;
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

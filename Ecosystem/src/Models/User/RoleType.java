@@ -22,7 +22,8 @@ public  class RoleType {
     static public String WalletAdmin = "WalletAdmin";
     static public String WalletManager = "WalletManager";
     static public String MunicipalityAdmin = "GovtAdminRole";
-    static public String MunicipalityManager = "GovtManager";
+    static public String MunicipalityCitizenManager = "CitizenManager";
+    static public String MunicipalityHousingManager = "HousingManager";
     static public String UtilityAdmin = "UtilityAdmin";
     static public String UtilityManager= "UtilityManager";
     static public String Customer = "Customer";

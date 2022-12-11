@@ -8,7 +8,6 @@ import Models.User.RoleType;
 import Models.User.User;
 import javax.swing.JOptionPane;
 import Models.User.UserDirectory;
-import java.util.ArrayList;
 import Pages.Municipality.MunicipalityPage;
 import Pages.SystemAdmin.SystemAdminPage;
 import Pages.Utility.UtilityManager;
@@ -113,9 +112,12 @@ public class Login extends javax.swing.JFrame {
             home.show();
             dispose();
         }
-       if (currentUser.getRole().equals(RoleType.MunicipalityAdmin) || currentUser.getRole().equals(RoleType.MunicipalityManager)) {
+       if (currentUser.getRole().equals(RoleType.MunicipalityAdmin) 
+               || currentUser.getRole().equals(RoleType.MunicipalityCitizenManager)
+               || currentUser.getRole().equals(RoleType.MunicipalityHousingManager)) {
         // TODO: Navigate to system admin JFrame
-            MunicipalityPage home = new MunicipalityPage(currentUser);
+            MunicipalityPage home = new MunicipalityPage();
+            home.setCurrentUser(currentUser);
             home.show();
             dispose();
         }

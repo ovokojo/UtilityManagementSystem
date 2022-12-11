@@ -18,7 +18,8 @@ public class UserDirectory {
     initializeSysAdmin();
     initializeMunicipalityAdmin();
      initializeUtilityAdmin();
-     initializeMunicipalityMgr();
+     initializeMunicipalityCitizenMgr();
+     initializeMunicipalityHousingMgr();
     }
     
 
@@ -82,10 +83,17 @@ public class UserDirectory {
         User gov = createNewUser(username, password, role);
         allUsers.add(gov);
     }
-       private void initializeMunicipalityMgr() {
-        String username = "govt";
-        String password = "govt";
-        String role = RoleType.MunicipalityManager;
+       private void initializeMunicipalityCitizenMgr() {
+        String username = "citi";
+        String password = "citi";
+        String role = RoleType.MunicipalityCitizenManager;
+        User gov = createNewUser(username, password, role);
+        allUsers.add(gov);
+    }
+      private void initializeMunicipalityHousingMgr() {
+        String username = "hous";
+        String password = "hous";
+        String role = RoleType.MunicipalityHousingManager;
         User gov = createNewUser(username, password, role);
         allUsers.add(gov);
     }
