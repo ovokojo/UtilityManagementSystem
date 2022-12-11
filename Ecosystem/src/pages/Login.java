@@ -11,6 +11,7 @@ import Models.User.UserDirectory;
 import Pages.Municipality.MunicipalityPage;
 import Pages.SystemAdmin.SystemAdminPage;
 import Pages.Utility.UtilityManager;
+import pages.Bank.BankPage;
 
 /**
  *
@@ -124,6 +125,12 @@ public class Login extends javax.swing.JFrame {
          if (currentUser.getRole().equals(RoleType.UtilityAdmin) || currentUser.getRole().equals(RoleType.UtilityManager)) {
         // TODO: Navigate to system admin JFrame
             UtilityManager home = new UtilityManager();
+            home.show();
+            dispose();
+        }
+          if (currentUser.getRole().equals(RoleType.BankAdmin) || currentUser.getRole().equals(RoleType.BankManager)) {
+        // TODO: Navigate to system admin JFrame
+            BankPage home = new BankPage();
             home.show();
             dispose();
         }

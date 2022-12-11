@@ -20,6 +20,9 @@ public class UserDirectory {
      initializeUtilityAdmin();
      initializeMunicipalityCitizenMgr();
      initializeMunicipalityHousingMgr();
+     initializeBankAdmin();
+     initializeBankMgr();
+     
     }
     
 
@@ -103,5 +106,19 @@ public class UserDirectory {
         String role = RoleType.UtilityAdmin;
         User util = createNewUser(username, password, role);
         allUsers.add(util);
+    }
+     private void initializeBankAdmin() {
+        String username = "banka";
+        String password = "banka";
+        String role = RoleType.BankAdmin;
+        User bankAdmin = createNewUser(username, password, role);
+        allUsers.add(bankAdmin);
+    }
+      private void initializeBankMgr() {
+        String username = "bank";
+        String password = "bank";
+        String role = RoleType.BankManager;
+        User bankmgr = createNewUser(username, password, role);
+        allUsers.add(bankmgr);
     }
 }

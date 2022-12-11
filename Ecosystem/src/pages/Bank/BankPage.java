@@ -4,10 +4,14 @@
  */
 package pages.Bank;
 
+import Models.Bank.BankAccount;
+import Models.Bank.BankAccountDirectory;
 import Models.Bank.BankServiceRequest;
 import Models.Bank.BankServiceRequestDirectory;
 import Models.Bank.BankServiceStaff;
 import Models.Bank.BankServiceStaffDirectory;
+import Models.User.RoleType;
+import Models.User.User;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -16,21 +20,51 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author liuyanzi
  */
-public class BankManager extends javax.swing.JFrame {
+public class BankPage extends javax.swing.JFrame {
  ArrayList<BankServiceRequest> allRequests= new BankServiceRequestDirectory().getRequests();
  ArrayList<BankServiceStaff> allStaff = new BankServiceStaffDirectory().getStaff();
+ ArrayList<BankAccount> allAccount = new BankAccountDirectory().getAccount();
+ 
  BankServiceRequest activeRequest;
+ private User currentUser;
 
     /**
      * Creates new form BankManager
      */
-    public BankManager() {
+    public BankPage() {
         initComponents();
+        populateRequestsTable();
+        populateStaffTable();
+        populateBankAccountTable();
+        setStaffDropDownOptions();
+        hideRequestUpdatePanel();
+    }
+    
+    public void setCurrentUser(User user) {
+        currentUser = user;
+        System.out.println("Current User:");
+        System.out.println(currentUser.getUsername());
+        // hide tab based on role
+        if (!currentUser.getRole().equals(RoleType.BankAdmin)) {
+        populateRequestsTable();
+        populateStaffTable();
+        populateBankAccountTable();
+        
+        setStaffDropDownOptions();
+        hideRequestUpdatePanel();
+        
+        }
+        if (currentUser.getRole().equals(RoleType.BankManager)) {
         populateRequestsTable();
         populateStaffTable();
         setStaffDropDownOptions();
         hideRequestUpdatePanel();
+        
+            userMgmtPanel.setVisible(false);
+        }
+       
     }
+    
     public void populateRequestsTable() {
         DefaultTableModel model = (DefaultTableModel) requestsTable.getModel();
         model.setRowCount(0);
@@ -48,7 +82,7 @@ public class BankManager extends javax.swing.JFrame {
     }
 
     public void populateStaffTable() {
-        DefaultTableModel model = (DefaultTableModel) staffTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) bankStaffTable.getModel();
         model.setRowCount(0);
          System.out.println("Active staff:");
                 for (BankServiceStaff staff : allStaff)  {
@@ -56,6 +90,17 @@ public class BankManager extends javax.swing.JFrame {
                         row[0] = staff.name;
                         row[1] = staff.title;
                         row[2] = staff.years.toString();
+                        model.addRow(row);
+                }
+    }
+     public void populateBankAccountTable() {
+        DefaultTableModel model = (DefaultTableModel) bankAccountTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active account:");
+                for (BankAccount account : allAccount)  {
+                    Object[] row = new Object[2];
+                        row[0] = account.getAccountNumber();
+                        row[1] = account.getBalance();
                         model.addRow(row);
                 }
     }
@@ -99,6 +144,8 @@ public class BankManager extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         billingTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        userMgmtPanel = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
         menuBarPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
@@ -115,12 +162,16 @@ public class BankManager extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         staffPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        staffTable = new javax.swing.JTable();
-        billingPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        requestsTable1 = new javax.swing.JTable();
+        bankStaffScrollPane1 = new javax.swing.JScrollPane();
+        bankStaffTable = new javax.swing.JTable();
+        accountListPanel = new javax.swing.JPanel();
+        bankAccountScrollPane3 = new javax.swing.JScrollPane();
+        bankAccountTable = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
+        userManagementPanel = new javax.swing.JPanel();
+        bankUserScrollPane4 = new javax.swing.JScrollPane();
+        bankUserTable = new javax.swing.JTable();
+        jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,6 +272,26 @@ public class BankManager extends javax.swing.JFrame {
         );
 
         sideBarPanel.add(billingTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 140, 30));
+
+        jLabel19.setText("User Management");
+
+        javax.swing.GroupLayout userMgmtPanelLayout = new javax.swing.GroupLayout(userMgmtPanel);
+        userMgmtPanel.setLayout(userMgmtPanelLayout);
+        userMgmtPanelLayout.setHorizontalGroup(
+            userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userMgmtPanelLayout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        userMgmtPanelLayout.setVerticalGroup(
+            userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userMgmtPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        sideBarPanel.add(userMgmtPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 140, 40));
 
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
@@ -367,7 +438,7 @@ public class BankManager extends javax.swing.JFrame {
 
         jLabel6.setText("Staff");
 
-        staffTable.setModel(new javax.swing.table.DefaultTableModel(
+        bankStaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -378,7 +449,7 @@ public class BankManager extends javax.swing.JFrame {
                 "Name", "Title", "Year of Experience"
             }
         ));
-        jScrollPane1.setViewportView(staffTable);
+        bankStaffScrollPane1.setViewportView(bankStaffTable);
 
         javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
         staffPanel.setLayout(staffPanelLayout);
@@ -391,7 +462,7 @@ public class BankManager extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(staffPanelLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bankStaffScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         staffPanelLayout.setVerticalGroup(
@@ -400,13 +471,13 @@ public class BankManager extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bankStaffScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(406, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab2", staffPanel);
 
-        requestsTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bankAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -425,41 +496,96 @@ public class BankManager extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        requestsTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        bankAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                requestsTable1MouseClicked(evt);
+                bankAccountTableMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                requestsTable1MousePressed(evt);
+                bankAccountTableMousePressed(evt);
             }
         });
-        jScrollPane3.setViewportView(requestsTable1);
+        bankAccountScrollPane3.setViewportView(bankAccountTable);
 
         jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel24.setText("Account List");
 
-        javax.swing.GroupLayout billingPanelLayout = new javax.swing.GroupLayout(billingPanel);
-        billingPanel.setLayout(billingPanelLayout);
-        billingPanelLayout.setHorizontalGroup(
-            billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billingPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout accountListPanelLayout = new javax.swing.GroupLayout(accountListPanel);
+        accountListPanel.setLayout(accountListPanelLayout);
+        accountListPanelLayout.setHorizontalGroup(
+            accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountListPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
-        billingPanelLayout.setVerticalGroup(
-            billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billingPanelLayout.createSequentialGroup()
+        accountListPanelLayout.setVerticalGroup(
+            accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountListPanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(jLabel24)
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(389, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("tab3", billingPanel);
+        tabbedPane.addTab("tab3", accountListPanel);
+
+        bankUserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "User Name", "Password", "Role"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        bankUserTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bankUserTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bankUserTableMousePressed(evt);
+            }
+        });
+        bankUserScrollPane4.setViewportView(bankUserTable);
+
+        jLabel25.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel25.setText("User List");
+
+        javax.swing.GroupLayout userManagementPanelLayout = new javax.swing.GroupLayout(userManagementPanel);
+        userManagementPanel.setLayout(userManagementPanelLayout);
+        userManagementPanelLayout.setHorizontalGroup(
+            userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userManagementPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(bankUserScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+        userManagementPanelLayout.setVerticalGroup(
+            userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userManagementPanelLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jLabel25)
+                .addGap(29, 29, 29)
+                .addComponent(bankUserScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("tab4", userManagementPanel);
 
         pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
 
@@ -506,13 +632,13 @@ public class BankManager extends javax.swing.JFrame {
         tabbedPane.setSelectedIndex(2);
     }//GEN-LAST:event_billingTabMousePressed
 
-    private void requestsTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTable1MousePressed
+    private void bankAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankAccountTableMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_requestsTable1MousePressed
+    }//GEN-LAST:event_bankAccountTableMousePressed
 
-    private void requestsTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTable1MouseClicked
+    private void bankAccountTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankAccountTableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_requestsTable1MouseClicked
+    }//GEN-LAST:event_bankAccountTableMouseClicked
 
     private void saveRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButtonActionPerformed
         // TODO add your handling code here:
@@ -557,6 +683,14 @@ public class BankManager extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_requestsTableMouseClicked
 
+    private void bankUserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankUserTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankUserTableMouseClicked
+
+    private void bankUserTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankUserTableMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankUserTableMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -574,33 +708,42 @@ public class BankManager extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BankManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BankManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BankManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BankManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BankManager().setVisible(true);
+                new BankPage().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel billingPanel;
+    private javax.swing.JPanel accountListPanel;
+    private javax.swing.JScrollPane bankAccountScrollPane3;
+    private javax.swing.JTable bankAccountTable;
+    private javax.swing.JScrollPane bankStaffScrollPane1;
+    private javax.swing.JTable bankStaffTable;
+    private javax.swing.JScrollPane bankUserScrollPane4;
+    private javax.swing.JTable bankUserTable;
     private javax.swing.JPanel billingTab;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -608,21 +751,19 @@ public class BankManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel pagePanel;
     private javax.swing.JPanel requestDetailsPanel;
     private javax.swing.JPanel requestsPanel;
     private javax.swing.JPanel requestsTab;
     private javax.swing.JTable requestsTable;
-    private javax.swing.JTable requestsTable1;
     private javax.swing.JButton saveRequestButton;
     private javax.swing.JPanel sideBarPanel;
     private javax.swing.JPanel staffPanel;
     private javax.swing.JPanel staffTab;
-    private javax.swing.JTable staffTable;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JPanel userManagementPanel;
+    private javax.swing.JPanel userMgmtPanel;
     // End of variables declaration//GEN-END:variables
 }
