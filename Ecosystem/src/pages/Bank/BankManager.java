@@ -49,13 +49,11 @@ public class BankManager extends javax.swing.JFrame {
         dropDownStatus = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        createBillButton = new javax.swing.JButton();
         staffPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         staffTable = new javax.swing.JTable();
         billingPanel = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         requestsTable1 = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
@@ -139,16 +137,16 @@ public class BankManager extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Billing");
+        jLabel10.setText("Account Management");
 
         javax.swing.GroupLayout billingTabLayout = new javax.swing.GroupLayout(billingTab);
         billingTab.setLayout(billingTabLayout);
         billingTabLayout.setHorizontalGroup(
             billingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billingTabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
                 .addComponent(jLabel10)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         billingTabLayout.setVerticalGroup(
             billingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,17 +187,17 @@ public class BankManager extends javax.swing.JFrame {
 
         requestsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Meter #", "Date", "Type", "Description", "Assigned To", "Status"
+                "Bank Account #", "Date", "Description", "Assigned To", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -223,7 +221,7 @@ public class BankManager extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Maintenance Request");
+        jLabel7.setText("Bank Service Request");
 
         dropDownStaff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -274,18 +272,6 @@ public class BankManager extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        createBillButton.setText("+ Create Bill");
-        createBillButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                createBillButtonMousePressed(evt);
-            }
-        });
-        createBillButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createBillButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout requestsPanelLayout = new javax.swing.GroupLayout(requestsPanel);
         requestsPanel.setLayout(requestsPanelLayout);
         requestsPanelLayout.setHorizontalGroup(
@@ -298,8 +284,7 @@ public class BankManager extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
         );
         requestsPanelLayout.setVerticalGroup(
@@ -309,9 +294,7 @@ public class BankManager extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(createBillButton)
-                .addGap(25, 25, 25)
+                .addGap(60, 60, 60)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(110, Short.MAX_VALUE))
         );
@@ -322,13 +305,13 @@ public class BankManager extends javax.swing.JFrame {
 
         staffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Name", "Title", "Phone", "Years of Experience"
+                "Name", "Title"
             }
         ));
         jScrollPane1.setViewportView(staffTable);
@@ -359,21 +342,19 @@ public class BankManager extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab2", staffPanel);
 
-        jLabel11.setText("Billing");
-
         requestsTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Meter #", "Date", "Type", "Description", "Amount Due", "Status"
+                "Account#", "Balance"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -391,7 +372,7 @@ public class BankManager extends javax.swing.JFrame {
         jScrollPane3.setViewportView(requestsTable1);
 
         jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel24.setText("Total: ");
+        jLabel24.setText("Account List");
 
         javax.swing.GroupLayout billingPanelLayout = new javax.swing.GroupLayout(billingPanel);
         billingPanel.setLayout(billingPanelLayout);
@@ -400,10 +381,7 @@ public class BankManager extends javax.swing.JFrame {
             .addGroup(billingPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(billingPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(243, 243, 243)
-                        .addComponent(jLabel11))
+                    .addComponent(jLabel24)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
@@ -411,9 +389,7 @@ public class BankManager extends javax.swing.JFrame {
             billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billingPanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addGroup(billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel24))
+                .addComponent(jLabel24)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(389, Short.MAX_VALUE))
@@ -473,25 +449,6 @@ public class BankManager extends javax.swing.JFrame {
     private void requestsTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_requestsTable1MouseClicked
-
-    private void createBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBillButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_createBillButtonActionPerformed
-
-    private void createBillButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createBillButtonMousePressed
-        // TODO add your handling code here:
-        int selectedRow = requestsTable.getSelectedRow();
-        MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
-        activeRequest = selectedRequest;
-        billingMeterNumberLabel.setText(selectedRequest.meterNumber);
-        billingDescriptionLabel.setText(selectedRequest.description);
-        billingRequestTypeLabel.setText(selectedRequest.type);
-        billingStaffLabel.setText(selectedRequest.assignedTo.name);
-        billingStaffRoleLabel.setText(selectedRequest.assignedTo.title);
-        billingStaffYearsLabel.setText(selectedRequest.assignedTo.years.toString());
-        totalPanel.setVisible(false);
-        tabbedPane.setSelectedIndex(3);
-    }//GEN-LAST:event_createBillButtonMousePressed
 
     private void saveRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButtonActionPerformed
         // TODO add your handling code here:
@@ -574,12 +531,10 @@ public class BankManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel billingPanel;
     private javax.swing.JPanel billingTab;
-    private javax.swing.JButton createBillButton;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
