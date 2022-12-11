@@ -7,8 +7,8 @@ package Business.Organization;
 import Business.Queue.WorkQueue;
 
 import java.util.ArrayList;
-import Business.Role.RoleType;
-import Business.User.UserDirectory;
+import Models.User.RoleType;
+import Models.User.UserDirectory;
 
 /**
  *

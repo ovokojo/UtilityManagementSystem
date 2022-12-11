@@ -2,22 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pages.SystemAdmin;
+package Pages;
 
+import Models.User.RoleType;
+import Models.User.User;
 import javax.swing.JOptionPane;
-import Business.User.UserDirectory;
+import Models.User.UserDirectory;
+import java.util.ArrayList;
+import Pages.Municipality.MunicipalityPage;
+import Pages.SystemAdmin.SystemAdminPage;
+import Pages.Utility.UtilityManager;
 
 /**
  *
  * @author thomaskojoaddaquay
  */
-public class AdminLogin extends javax.swing.JFrame {
-
+public class Login extends javax.swing.JFrame {
+    UserDirectory users = new UserDirectory();
     /**
      * Creates new form AdminLogin
      */
-    public AdminLogin() {
-        UserDirectory users = new UserDirectory();
+    public Login() {
+        // TODO: Read users from database & store in UserDirectory
         initComponents();
     }
 
@@ -51,7 +57,7 @@ public class AdminLogin extends javax.swing.JFrame {
 
         usernameField.setText("sys");
 
-        passwordField.setText("admin");
+        passwordField.setText("sys");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,22 +93,39 @@ public class AdminLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
         String username = usernameField.getText();
         String password = passwordField.getText();
-        UserDirectory.checkUsername(username);
-        UserDirectory.checkPassword(username, password);
-                if (!UserDirectory.checkUsername(username)) {
+        // TODO: Complete validations for login; null values
+        if (!users.doesUsernameExist(username)) {
             JOptionPane.showMessageDialog(this, "Username does not exist. Please try again", "Error", 0);
             return;
         }
-        if (!UserDirectory.checkPassword(username, password)) {
+        if (!users.loginUser(username, password)) {
             JOptionPane.showMessageDialog(this, "Invalid Password. Please try again", "Error", 0);
             return;
         }
-         AdminHomePage home = new AdminHomePage();
-        home.show();
-        dispose();
+        // Check role of user, then navigate appropriate JFrame
+        // TODO: Correct roles for enterprises
+        User currentUser = users.getActiveUser();
+        if (currentUser.getRole().equals(RoleType.SystemAdminRole)) {
+        // TODO: Navigate to system admin JFrame
+            SystemAdminPage home = new SystemAdminPage();
+            home.show();
+            dispose();
+        }
+       if (currentUser.getRole().equals(RoleType.CitizenServiceRole)) {
+        // TODO: Navigate to system admin JFrame
+            MunicipalityPage home = new MunicipalityPage();
+            home.show();
+            dispose();
+        }
+         if (currentUser.getRole().equals(RoleType.UtilityBillingRole)) {
+        // TODO: Navigate to system admin JFrame
+            UtilityManager home = new UtilityManager();
+            home.show();
+            dispose();
+        }
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
@@ -122,20 +145,21 @@ public class AdminLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminLogin().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }

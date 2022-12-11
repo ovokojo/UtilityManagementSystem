@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Business.Role;
+package Models.User;
 
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.System.EcoSystem;
 import javax.swing.JPanel;
-import Business.User.User;
+import Models.User.User;
 
 /**
  *
  * @author thomaskojoaddaquay
  */
-public abstract class RoleType { 
+public  class RoleType { 
     static public String AdminRole = "AdminRole";
     static public String BankAccountManagerRole = "BankAccountManager";
     static public String CitizenRole = "CitizenRole";
@@ -26,4 +26,5 @@ public abstract class RoleType {
     static public String WalletAccountManager = "WalletAccountManager";
     static public String WalletCustomerAdviosr = "WalletCustomerAdviosr";
     static public String WalletServiceUpdateRole = "WalletServiceUpdateRole";
+    static public String SystemAdminRole = "SystemAdminRole";
 }

@@ -80,7 +80,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="admin"/>
+        <Property name="text" type="java.lang.String" value="sys"/>
       </Properties>
     </Component>
   </SubComponents>

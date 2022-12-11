@@ -5,7 +5,7 @@
 package Business.Queue;
 
 import java.util.Date;
-import Business.User.User;
+import Models.User.User;
 
 /**
  *

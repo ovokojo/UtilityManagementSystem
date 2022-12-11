@@ -4,10 +4,11 @@
  */
 package Business.Role;
 
+import Models.User.RoleType;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.System.EcoSystem;
-import Business.User.User;
+import Models.User.User;
 import javax.swing.JPanel;
 
 /**
