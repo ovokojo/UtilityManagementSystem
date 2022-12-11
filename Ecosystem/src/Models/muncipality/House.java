@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Models.Muncipality;
+package Models.muncipality;
 import java.util.UUID;
 
 // Generate a random UUID
@@ -20,10 +20,16 @@ public class House {
         this.cityArea = cityArea;
         this.houseId = uuid.toString();
     }
+    
     public String addressOne;
     public String addressTwo;
     public String cityArea;
     public String houseId;
+
+    public String getHouseId() {
+        return houseId;
+    }
+   
 
     public String getAddressOne() {
         return addressOne;

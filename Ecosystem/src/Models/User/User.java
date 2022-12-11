@@ -6,7 +6,7 @@ package Models.User;
 
 import Business.Enterprise.Enterprise;
 import Business.Queue.WorkQueue;
-import Models.Muncipality.CitizenInfo;
+import Models.muncipality.CitizenInfo;
 
 /**
  *

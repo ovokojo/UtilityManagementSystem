@@ -7,7 +7,8 @@ package pages.Municipality;
 import javax.swing.JOptionPane;
 import Models.User.RoleType;
 import Models.User.User;
-import Models.Muncipality.CitizenInfo;
+import Models.muncipality.CitizenInfo;
+import Models.muncipality.House;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ private User currentUser;
         DefaultTableModel model = (DefaultTableModel) citizensInInfoTable2.getModel();
         model.setRowCount(0);
                 for (User user : mockCitizenUserList)  {
-                    Object[] row = new Object[3];
+                    Object[] row = new Object[4];
                         row[0] = user;
                         row[1] = user.getCitizenInfo().getSsn();
                         row[2] = user.getCitizenInfo().getPhone();
@@ -74,6 +75,7 @@ private User currentUser;
                         row[3] = user.getCitizenInfo().getHouse().getCityArea();
                         row[4] = user.getCitizenInfo().getHouse().getAddressOne();
                         row[5] = user.getCitizenInfo().getHouse().getAddressTwo();
+                        row[6] = user.getCitizenInfo().getHouse().getHouseId();
                         model.addRow(row);
                 }
     }
@@ -150,7 +152,6 @@ private User currentUser;
         createHousejPanel = new javax.swing.JPanel();
         addressL1Field1 = new javax.swing.JTextField();
         saveHousingButton = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         addressL1Field = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -159,6 +160,7 @@ private User currentUser;
         citizensInHousingTable = new javax.swing.JTable();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -749,8 +751,6 @@ private User currentUser;
             }
         });
 
-        jLabel8.setText("Address Line 2");
-
         addressL1Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressL1FieldActionPerformed(evt);
@@ -770,13 +770,13 @@ private User currentUser;
 
         citizensInHousingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "SSN", "Phone", "Housing Area", "Add Line 1", "Add Line 2"
+                "Name", "SSN", "Phone", "Housing Area", "Add Line 1", "Add Line 2", "House Id"
             }
         ));
         jScrollPane1.setViewportView(citizensInHousingTable);
@@ -790,27 +790,12 @@ private User currentUser;
 
         jButton1.setText("search");
 
+        jLabel9.setText("Address Line 2");
+
         javax.swing.GroupLayout createHousejPanelLayout = new javax.swing.GroupLayout(createHousejPanel);
         createHousejPanel.setLayout(createHousejPanelLayout);
         createHousejPanelLayout.setHorizontalGroup(
             createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createHousejPanelLayout.createSequentialGroup()
-                .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(createHousejPanelLayout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(saveHousingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(createHousejPanelLayout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(66, 66, 66)
-                        .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(areaDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addressL1Field)
-                            .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(158, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -820,11 +805,28 @@ private User currentUser;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(createHousejPanelLayout.createSequentialGroup()
+                .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9))
+                        .addGap(66, 66, 66)
+                        .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(areaDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addressL1Field)
+                            .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(createHousejPanelLayout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(saveHousingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         createHousejPanelLayout.setVerticalGroup(
             createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
@@ -840,12 +842,13 @@ private User currentUser;
                         .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addressL1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                        .addGap(61, 61, 61))
+                    .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addressL1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(91, 91, 91)
                 .addComponent(saveHousingButton)
-                .addGap(139, 139, 139))
+                .addGap(85, 85, 85))
         );
 
         jTabbedPane1.addTab("tab4", createHousejPanel);
@@ -868,6 +871,39 @@ private User currentUser;
 
     private void saveHousingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveHousingButtonActionPerformed
         // TODO add your handling code here:
+         int tableSize = citizensInHousingTable.getRowCount();
+         int selectedRow = citizensInHousingTable.getSelectedRow();
+         if (selectedRow >= 0 || selectedRow < tableSize) {
+            DefaultTableModel model= (DefaultTableModel)citizensInHousingTable.getModel();
+            CitizenInfo citizen = (CitizenInfo) citizensInHousingTable.getValueAt(selectedRow, 0);
+            addressL1Field.setText( model.getValueAt(selectedRow, 4).toString());
+            addressL1Field1.setText(model.getValueAt(selectedRow, 5).toString());
+            String housingArea = areaDropdown.getSelectedItem().toString();
+            
+            String _adddressL1= addressL1Field.getText();
+            String _adddressL2= addressL1Field1.getText();
+            String _housingArea = areaDropdown.getSelectedItem().toString();
+            String _houseId= model.getValueAt(selectedRow, 6).toString();
+            
+            
+            House house = new House(_adddressL1, _adddressL2, _housingArea, _houseId);
+            citizen.setHouse(house);
+            //update db
+            
+            
+//            // Create citizen info
+//        CitizenInfo citizen = new CitizenInfo(_name, _ssn, _birthDate, _phone );
+//        // Create user info
+//        User newUser = new User(_username, _password, RoleType.Customer);
+//        // update user to include citizen info
+//        newUser.setCitizenInfo(citizen);
+//       // update db
+        //mockCitizenUserList.add(newUser);
+        // refresh table
+        populateCitizenInfoTable();
+            
+            populateCitizenHousingTable();
+         }
 //        if(UserDirectory.checkUsername(_username)) {
 //            JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
 //            return;
@@ -1132,7 +1168,7 @@ private User currentUser;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
