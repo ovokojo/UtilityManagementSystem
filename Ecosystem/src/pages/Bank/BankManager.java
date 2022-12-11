@@ -4,19 +4,83 @@
  */
 package pages.Bank;
 
+import Models.Bank.BankServiceRequest;
+import Models.Bank.BankServiceRequestDirectory;
+import Models.Bank.BankServiceStaff;
+import Models.Bank.BankServiceStaffDirectory;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author liuyanzi
  */
 public class BankManager extends javax.swing.JFrame {
+ ArrayList<BankServiceRequest> allRequests= new BankServiceRequestDirectory().getRequests();
+ ArrayList<BankServiceStaff> allStaff = new BankServiceStaffDirectory().getStaff();
+ BankServiceRequest activeRequest;
 
     /**
      * Creates new form BankManager
      */
     public BankManager() {
         initComponents();
+        populateRequestsTable();
+        populateStaffTable();
+        setStaffDropDownOptions();
+        hideRequestUpdatePanel();
+    }
+    public void populateRequestsTable() {
+        DefaultTableModel model = (DefaultTableModel) requestsTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active request:");
+                for (BankServiceRequest request : allRequests)  {
+                    Object[] row = new Object[5];
+                        row[0] = request;
+                        row[1] = request.date;
+                        row[2] = request.description;
+                        row[3] = request.assignedTo.name;
+                        row[4] = request.status;
+                        
+                        model.addRow(row);
+                }
     }
 
+    public void populateStaffTable() {
+        DefaultTableModel model = (DefaultTableModel) staffTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active staff:");
+                for (BankServiceStaff staff : allStaff)  {
+                    Object[] row = new Object[3];
+                        row[0] = staff.name;
+                        row[1] = staff.title;
+                        row[2] = staff.years.toString();
+                        model.addRow(row);
+                }
+    }
+    
+    public void setStaffDropDownOptions(){
+         dropDownStaff.setModel(new DefaultComboBoxModel(_getStaffNames()));
+         }
+         
+         public String[] _getStaffNames() {
+            ArrayList<String> names = new ArrayList<String>();
+         for (BankServiceStaff staff: allStaff) {
+              names.add("Unassigned");
+             names.add(staff.name);
+         }
+         String[] dropdownNames = names.toArray(new String[names.size()]);
+         return dropdownNames;
+         }
+         
+         public void hideRequestUpdatePanel() {
+                requestDetailsPanel.setVisible(false);
+                
+    }
+         public void showRequestUpdatePanel() {
+                requestDetailsPanel.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -305,13 +369,13 @@ public class BankManager extends javax.swing.JFrame {
 
         staffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name", "Title"
+                "Name", "Title", "Year of Experience"
             }
         ));
         jScrollPane1.setViewportView(staffTable);
@@ -455,11 +519,11 @@ public class BankManager extends javax.swing.JFrame {
         int tableSize = requestsTable.getRowCount();
         int selectedRow = requestsTable.getSelectedRow();
         if (selectedRow >= 0 || selectedRow < tableSize) {
-            MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
+            BankServiceRequest selectedRequest = (BankServiceRequest) requestsTable.getValueAt(selectedRow, 0);
             String status = dropDownStatus.getSelectedItem().toString();
             String staffName = dropDownStaff.getSelectedItem().toString();
-            MaintenanceStaff selectedStaff = null;
-            for (MaintenanceStaff staff : allStaff) {
+            BankServiceStaff selectedStaff = null;
+            for (BankServiceStaff staff : allStaff) {
                 if (staffName.equals(staff.name)) {
                     selectedStaff = staff;
                 }
@@ -477,7 +541,7 @@ public class BankManager extends javax.swing.JFrame {
         System.out.println("Row");
         System.out.println(selectedRow);
         if (selectedRow >= 0 || selectedRow < tableSize) {
-            MaintenanceRequest selectedRequest = (MaintenanceRequest) requestsTable.getValueAt(selectedRow, 0);
+            BankServiceRequest selectedRequest = (BankServiceRequest) requestsTable.getValueAt(selectedRow, 0);
             dropDownStaff.setSelectedItem(selectedRequest.assignedTo.name);
             dropDownStatus.setSelectedItem(selectedRequest.status);
             showRequestUpdatePanel();

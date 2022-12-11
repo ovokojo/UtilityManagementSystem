@@ -4,6 +4,7 @@
  */
 package Business.Queue;
 
+import Models.Bank.BankServiceRequest;
 import java.util.ArrayList;
 
 /**
@@ -11,13 +12,13 @@ import java.util.ArrayList;
  * @author liuyanzi
  */
 public class WorkQueue {
-     private ArrayList<WorkRequest> workRequestList;
+     private ArrayList<BankServiceRequest> workRequestList;
 
     public WorkQueue() {
         workRequestList = new ArrayList();
     }
 
-    public ArrayList<WorkRequest> getWorkRequestList() {
+    public ArrayList<BankServiceRequest> getWorkRequestList() {
         return workRequestList;
     }
     
