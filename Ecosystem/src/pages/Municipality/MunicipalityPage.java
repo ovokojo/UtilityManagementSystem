@@ -43,10 +43,13 @@ private User currentUser;
             populateCitizenInfoTable();
         
             userMgmtPanel.setVisible(false);
+            registerHousesJpanel.setVisible(false);
         }
         if (currentUser.getRole().equals(RoleType.MunicipalityHousingManager)) {
            populateCitizenHousingTable();
-            userMgmtPanel.setVisible(false);
+            updateCitizenjPanel.setVisible(false);
+            viewCitizenjPanel5.setVisible(false);
+            createCitizenjPanel4.setVisible(false);
         
         }
     }
@@ -108,13 +111,13 @@ private User currentUser;
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        createCitizenjPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        viewCitizenjPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        updateCitizenjPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        registerHousesJpanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         userMgmtPanel = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -199,9 +202,12 @@ private User currentUser;
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 51));
 
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        createCitizenjPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
+                createCitizenjPanel4MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                createCitizenjPanel4MousePressed(evt);
             }
         });
 
@@ -210,28 +216,34 @@ private User currentUser;
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout createCitizenjPanel4Layout = new javax.swing.GroupLayout(createCitizenjPanel4);
+        createCitizenjPanel4.setLayout(createCitizenjPanel4Layout);
+        createCitizenjPanel4Layout.setHorizontalGroup(
+            createCitizenjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createCitizenjPanel4Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        createCitizenjPanel4Layout.setVerticalGroup(
+            createCitizenjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createCitizenjPanel4Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        viewCitizenjPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel5MouseClicked(evt);
+                viewCitizenjPanel5MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                viewCitizenjPanel5MousePressed(evt);
             }
         });
 
@@ -240,28 +252,34 @@ private User currentUser;
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout viewCitizenjPanel5Layout = new javax.swing.GroupLayout(viewCitizenjPanel5);
+        viewCitizenjPanel5.setLayout(viewCitizenjPanel5Layout);
+        viewCitizenjPanel5Layout.setHorizontalGroup(
+            viewCitizenjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewCitizenjPanel5Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        viewCitizenjPanel5Layout.setVerticalGroup(
+            viewCitizenjPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewCitizenjPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        updateCitizenjPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                updateCitizenjPanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateCitizenjPanelMousePressed(evt);
             }
         });
 
@@ -270,28 +288,34 @@ private User currentUser;
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout updateCitizenjPanelLayout = new javax.swing.GroupLayout(updateCitizenjPanel);
+        updateCitizenjPanel.setLayout(updateCitizenjPanelLayout);
+        updateCitizenjPanelLayout.setHorizontalGroup(
+            updateCitizenjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(updateCitizenjPanelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel3)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        updateCitizenjPanelLayout.setVerticalGroup(
+            updateCitizenjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(updateCitizenjPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        registerHousesJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
+                registerHousesJpanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                registerHousesJpanelMousePressed(evt);
             }
         });
 
@@ -300,26 +324,43 @@ private User currentUser;
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout registerHousesJpanelLayout = new javax.swing.GroupLayout(registerHousesJpanel);
+        registerHousesJpanel.setLayout(registerHousesJpanelLayout);
+        registerHousesJpanelLayout.setHorizontalGroup(
+            registerHousesJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerHousesJpanelLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        registerHousesJpanelLayout.setVerticalGroup(
+            registerHousesJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerHousesJpanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        userMgmtPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userMgmtPanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                userMgmtPanelMousePressed(evt);
+            }
+        });
+
         jLabel19.setText("user mgmt");
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel19MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout userMgmtPanelLayout = new javax.swing.GroupLayout(userMgmtPanel);
         userMgmtPanel.setLayout(userMgmtPanelLayout);
@@ -342,23 +383,23 @@ private User currentUser;
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(createCitizenjPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(viewCitizenjPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(updateCitizenjPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(registerHousesJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(userMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(234, 234, 234)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createCitizenjPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewCitizenjPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(updateCitizenjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerHousesJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(userMgmtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(141, Short.MAX_VALUE))
@@ -960,6 +1001,7 @@ private User currentUser;
 
     private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_backButton1ActionPerformed
 
     private void saveButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton1ActionPerformed
@@ -970,10 +1012,10 @@ private User currentUser;
         // TODO add your handling code here:
     }//GEN-LAST:event_birthDatejTextField1ActionPerformed
 
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+    private void createCitizenjPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createCitizenjPanel4MouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jPanel4MouseClicked
+    }//GEN-LAST:event_createCitizenjPanel4MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
@@ -990,25 +1032,25 @@ private User currentUser;
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+    private void viewCitizenjPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewCitizenjPanel5MouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);    
-    }//GEN-LAST:event_jPanel5MouseClicked
+    }//GEN-LAST:event_viewCitizenjPanel5MouseClicked
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void updateCitizenjPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCitizenjPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(2); 
-    }//GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_updateCitizenjPanelMouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+    private void registerHousesJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerHousesJpanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
-    }//GEN-LAST:event_jPanel7MouseClicked
+    }//GEN-LAST:event_registerHousesJpanelMouseClicked
 
     private void saveUserButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveUserButtonMousePressed
         // TODO add your handling code here:
@@ -1069,6 +1111,61 @@ private User currentUser;
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void createCitizenjPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createCitizenjPanel4MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_createCitizenjPanel4MousePressed
+
+    private void viewCitizenjPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewCitizenjPanel5MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_viewCitizenjPanel5MousePressed
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jLabel2MousePressed
+
+    private void updateCitizenjPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCitizenjPanelMousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_updateCitizenjPanelMousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_jLabel3MousePressed
+
+    private void registerHousesJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerHousesJpanelMousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3);
+    }//GEN-LAST:event_registerHousesJpanelMousePressed
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3);
+    }//GEN-LAST:event_jLabel5MousePressed
+
+    private void userMgmtPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMgmtPanelMousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_userMgmtPanelMousePressed
+
+    private void jLabel19MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_jLabel19MousePressed
+
+    private void userMgmtPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMgmtPanelMouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_userMgmtPanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1171,6 +1268,7 @@ private User currentUser;
     private javax.swing.JTable citizensInHousingTable;
     private javax.swing.JTable citizensInHousingTable1;
     private javax.swing.JTable citizensInInfoTable2;
+    private javax.swing.JPanel createCitizenjPanel4;
     private javax.swing.JPanel createHousejPanel;
     private javax.swing.JPanel createUserJPanel;
     private javax.swing.JLabel housingAreajLabel11;
@@ -1191,10 +1289,6 @@ private User currentUser;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1206,6 +1300,7 @@ private User currentUser;
     private javax.swing.JTextField phoneField;
     private javax.swing.JPasswordField phoneJField3;
     private javax.swing.JLabel phonejLabel16;
+    private javax.swing.JPanel registerHousesJpanel;
     private javax.swing.JButton saveButton1;
     private javax.swing.JButton saveButton2;
     private javax.swing.JButton saveHousingButton;
@@ -1216,6 +1311,7 @@ private User currentUser;
     private javax.swing.JLabel ssnjLabel12;
     private javax.swing.JLabel ssnjLabel13;
     private javax.swing.JLabel ssnjLabel15;
+    private javax.swing.JPanel updateCitizenjPanel;
     private javax.swing.JPanel updateJPanel;
     private javax.swing.JPanel userMgmtPanel;
     private javax.swing.JTextField usernameField;
@@ -1224,6 +1320,7 @@ private User currentUser;
     private javax.swing.JLabel usernamejLabel13;
     private javax.swing.JLabel usernamejLabel14;
     private javax.swing.JLabel usernamejLabel4;
+    private javax.swing.JPanel viewCitizenjPanel5;
     private javax.swing.JPanel viewJPanel;
     // End of variables declaration//GEN-END:variables
 }
