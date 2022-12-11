@@ -6,7 +6,6 @@ package Business.User;
 
 import Business.Role.RoleType;
 import Business.Enterprise.Enterprise;
-import Business.Staff.Staff;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
@@ -26,15 +25,14 @@ public class UserDirectory {
         return userAccountList;
     }
    
-     public User createNewUser(String username, String password, Staff staff, RoleType role){
-        User userAccount = new User();
-        userAccount.setUsername(username);
-        userAccount.setPassword(password);
-        userAccount.setStaff(staff);
-        userAccount.setRole(role);
-        userAccountList.add(userAccount);
-        return userAccount;
-    }
+//     public User createNewUser(String username, String password, RoleType role){
+//        User userAccount = new User();
+//        userAccount.setUsername(username);
+//        userAccount.setPassword(password);
+//        userAccount.setRole(role);
+//        userAccountList.add(userAccount);
+//        return userAccount;
+//    }
     
     public User removeUserAccount(User useraccount){
         userAccountList.remove(useraccount);

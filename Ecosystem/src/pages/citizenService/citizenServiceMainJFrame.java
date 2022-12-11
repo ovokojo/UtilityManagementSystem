@@ -757,6 +757,7 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void saveUserButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveUserButtonMousePressed

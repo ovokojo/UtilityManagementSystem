@@ -5,7 +5,7 @@
 package Business.Organization;
 
 import Business.Queue.WorkQueue;
-import Business.Staff.StaffDirectory;
+
 import java.util.ArrayList;
 import Business.Role.RoleType;
 import Business.User.UserDirectory;
@@ -18,7 +18,7 @@ public abstract class Organization {
 
     private String name;
     private WorkQueue workQueue;
-    private StaffDirectory staffDirectory;
+   
     private UserDirectory userDirectory;
     private int organizationID;
     private static int counter = 0;
@@ -50,7 +50,6 @@ public abstract class Organization {
     public Organization(String name) {
         this.name = name;
         workQueue = new WorkQueue();
-        staffDirectory = new StaffDirectory();
         userDirectory = new UserDirectory();
         organizationID = counter;
         ++counter;
@@ -66,9 +65,6 @@ public abstract class Organization {
         return organizationID;
     }
 
-    public StaffDirectory getStaffDirectory() {
-        return staffDirectory;
-    }
 
     public String getName() {
         return name;

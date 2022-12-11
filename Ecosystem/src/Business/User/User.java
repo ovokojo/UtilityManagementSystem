@@ -5,7 +5,6 @@
 package Business.User;
 
 import Business.Role.RoleType;
-import Business.Staff.Staff;
 import Business.Enterprise.Enterprise;
 import Business.Queue.WorkQueue;
 import Models.muncipality.CitizenInfo;
