@@ -4,7 +4,7 @@
  */
 package Business.Organization;
 
-import Business.Role.RoleType;
+import Models.User.RoleType;
 import Business.Role.WalletServiceUpdateRole;
 import java.util.ArrayList;
 

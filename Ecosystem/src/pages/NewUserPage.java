@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pages;
+package Pages;
 
-import pages.SystemAdmin.AdminHomePage;
+import Pages.SystemAdmin.SystemAdminPage;
 import java.text.MessageFormat;
 import javax.swing.JOptionPane;
 import models.Admin;
 import Business.Enterprise.Enterprise;
-import Business.Role.RoleType;
+import Models.User.RoleType;
 import Business.Staff.Staff;
-import Business.User.UserDirectory;
+import Models.User.UserDirectory;
 
 /**
  *
@@ -149,7 +149,7 @@ public class NewUserPage extends javax.swing.JFrame {
             System.out.println("Created staff");
         }
         JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Created!", _username));
-        AdminHomePage home = new AdminHomePage();
+        SystemAdminPage home = new SystemAdminPage();
         home.populateTable();
         home.show();
         dispose();

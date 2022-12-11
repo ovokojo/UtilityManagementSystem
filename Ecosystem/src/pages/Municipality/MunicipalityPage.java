@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pages.citizenService;
+package Pages.Municipality;
 
 import javax.swing.JOptionPane;
-import Business.Role.RoleType;
-import Business.User.User;
-import Models.muncipality.CitizenInfo;
+import Models.User.RoleType;
+import Models.User.User;
+import Models.Muncipality.CitizenInfo;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vatsalkapadia
  */
-public class citizenServiceMainJFrame extends javax.swing.JFrame {
+public class MunicipalityPage extends javax.swing.JFrame {
 ArrayList<User> mockCitizenUserList = new ArrayList();
     /**
      * Creates new form citizenServiceMainJFrame
      */
-    public citizenServiceMainJFrame() {
+    public MunicipalityPage() {
         initComponents();
         populateCitizenTable();
     }
@@ -813,20 +813,21 @@ ArrayList<User> mockCitizenUserList = new ArrayList();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(citizenServiceMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(citizenServiceMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(citizenServiceMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(citizenServiceMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MunicipalityPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new citizenServiceMainJFrame().setVisible(true);
+                new MunicipalityPage().setVisible(true);
             }
         });
         

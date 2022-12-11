@@ -2,23 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pages.SystemAdmin;
+package Pages.SystemAdmin;
 
 import javax.swing.table.DefaultTableModel;
-import Business.User.User;
-import Business.User.UserDirectory;
-import pages.NewUserPage;
+import Models.User.User;
+import Models.User.UserDirectory;
+import Pages.NewUserPage;
 
 /**
  *
  * @author thomaskojoaddaquay
  */
-public class AdminHomePage extends javax.swing.JFrame {
-
+public class SystemAdminPage extends javax.swing.JFrame {
+private UserDirectory users = new UserDirectory();
     /**
      * Creates new form AdminHomePage
      */
-    public AdminHomePage() {
+    public SystemAdminPage() {
         initComponents();
         populateTable();
     }
@@ -26,11 +26,10 @@ public class AdminHomePage extends javax.swing.JFrame {
      public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) UserTable.getModel();
         model.setRowCount(0);
-                for (User user : UserDirectory.getUsers())  {
-                    Object[] row = new Object[4];
+                for (User user : users.getAllUsers())  {
+                    Object[] row = new Object[2];
                         row[0] = user;
-                        row[1] = user.getEnterprise();
-                        row[2] = user.getRole();
+                        row[1] = user.getRole();
                     model.addRow(row);
                 }
     }
@@ -56,18 +55,18 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         UserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Username", "Enterprise", "Role"
+                "Username", "Role"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -136,20 +135,21 @@ public class AdminHomePage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminHomePage().setVisible(true);
+                new SystemAdminPage().setVisible(true);
             }
         });
     }

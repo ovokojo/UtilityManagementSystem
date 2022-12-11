@@ -6,7 +6,7 @@ package Business.Organization;
 
 import Business.Role.AdminRole;
 import java.util.ArrayList;
-import Business.Role.RoleType;
+import Models.User.RoleType;
 
 /**
  *

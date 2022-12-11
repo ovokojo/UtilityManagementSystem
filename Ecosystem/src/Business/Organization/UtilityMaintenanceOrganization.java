@@ -5,7 +5,7 @@
 package Business.Organization;
 
 import java.util.ArrayList;
-import Business.Role.RoleType;
+import Models.User.RoleType;
 import Business.Role.UtilityMaintenanceRole;
 
 /**

@@ -5,7 +5,7 @@
 package Business.System;
 
 import Business.Organization.Organization;
-import Business.Role.RoleType;
+import Models.User.RoleType;
 import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
 
