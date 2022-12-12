@@ -11,6 +11,7 @@ import Models.User.RoleType;
 import Models.User.StaffUser;
 import Models.User.User;
 import Models.User.UserDirectory;
+import Pages.Login;
 import static java.lang.String.valueOf;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -177,13 +178,13 @@ public class BankPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         staffTab = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         billingTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         userMgmtPanel = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         customerServiceTab = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        logoutBotton = new javax.swing.JButton();
         menuBarPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
@@ -241,9 +242,10 @@ public class BankPage extends javax.swing.JFrame {
 
         pagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sideBarPanel.setBackground(new java.awt.Color(51, 102, 0));
+        sideBarPanel.setBackground(new java.awt.Color(0, 0, 0));
         sideBarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        requestsTab.setBackground(new java.awt.Color(102, 102, 102));
         requestsTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 requestsTabMouseClicked(evt);
@@ -253,6 +255,7 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Inquiries");
 
         javax.swing.GroupLayout requestsTabLayout = new javax.swing.GroupLayout(requestsTab);
@@ -268,12 +271,13 @@ public class BankPage extends javax.swing.JFrame {
             requestsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestsTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        sideBarPanel.add(requestsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 30));
+        sideBarPanel.add(requestsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 140, 30));
 
+        staffTab.setBackground(new java.awt.Color(102, 102, 102));
         staffTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 staffTabMouseClicked(evt);
@@ -283,6 +287,7 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Staff");
 
         javax.swing.GroupLayout staffTabLayout = new javax.swing.GroupLayout(staffTab);
@@ -302,11 +307,9 @@ public class BankPage extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 140, 30));
+        sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 140, 30));
 
-        jLabel4.setText("Welcome!");
-        sideBarPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
+        billingTab.setBackground(new java.awt.Color(102, 102, 102));
         billingTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 billingTabMouseClicked(evt);
@@ -316,6 +319,8 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Account Management");
 
         javax.swing.GroupLayout billingTabLayout = new javax.swing.GroupLayout(billingTab);
@@ -337,6 +342,9 @@ public class BankPage extends javax.swing.JFrame {
 
         sideBarPanel.add(billingTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 140, 30));
 
+        userMgmtPanel.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("User Management");
 
         javax.swing.GroupLayout userMgmtPanelLayout = new javax.swing.GroupLayout(userMgmtPanel);
@@ -350,14 +358,14 @@ public class BankPage extends javax.swing.JFrame {
         );
         userMgmtPanelLayout.setVerticalGroup(
             userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userMgmtPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(userMgmtPanelLayout.createSequentialGroup()
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        sideBarPanel.add(userMgmtPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 140, 40));
+        sideBarPanel.add(userMgmtPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 140, 30));
 
+        customerServiceTab.setBackground(new java.awt.Color(102, 102, 102));
         customerServiceTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 customerServiceTabMouseClicked(evt);
@@ -367,6 +375,7 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Customer Service");
 
         javax.swing.GroupLayout customerServiceTabLayout = new javax.swing.GroupLayout(customerServiceTab);
@@ -386,11 +395,22 @@ public class BankPage extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        sideBarPanel.add(customerServiceTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 140, 30));
+        sideBarPanel.add(customerServiceTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 140, 30));
+
+        logoutBotton.setBackground(new java.awt.Color(0, 51, 51));
+        logoutBotton.setForeground(new java.awt.Color(255, 255, 255));
+        logoutBotton.setText("Logout");
+        logoutBotton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBottonActionPerformed(evt);
+            }
+        });
+        sideBarPanel.add(logoutBotton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
 
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
-        menuBarPanel.setBackground(new java.awt.Color(153, 153, 153));
+        menuBarPanel.setBackground(new java.awt.Color(0, 0, 0));
+        menuBarPanel.setPreferredSize(new java.awt.Dimension(766, 56));
 
         jLabel1.setText("Bank Dashboard");
 
@@ -411,10 +431,20 @@ public class BankPage extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 30));
+        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));
 
-        jLabel5.setText("Inquiries");
+        tabbedPane.setBackground(new java.awt.Color(0, 0, 0));
 
+        requestsPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("INQUIRIES");
+        jLabel5.setMaximumSize(new java.awt.Dimension(142, 23));
+        jLabel5.setMinimumSize(new java.awt.Dimension(142, 23));
+        jLabel5.setPreferredSize(new java.awt.Dimension(142, 23));
+
+        requestsTable.setBackground(new java.awt.Color(51, 51, 51));
         requestsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -444,6 +474,8 @@ public class BankPage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(requestsTable);
 
+        requestDetailsPanel.setBackground(new java.awt.Color(51, 51, 51));
+
         saveRequestButton.setText("Save");
         saveRequestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -451,14 +483,17 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Customer Inquiry");
 
         dropDownStaff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         dropDownStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "In Progress", "Complete" }));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Assigned To");
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Status");
 
         javax.swing.GroupLayout requestDetailsPanelLayout = new javax.swing.GroupLayout(requestDetailsPanel);
@@ -506,33 +541,38 @@ public class BankPage extends javax.swing.JFrame {
         requestsPanel.setLayout(requestsPanelLayout);
         requestsPanelLayout.setHorizontalGroup(
             requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestsPanelLayout.createSequentialGroup()
-                .addGap(315, 315, 315)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestsPanelLayout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
+            .addGroup(requestsPanelLayout.createSequentialGroup()
+                .addGap(315, 315, 315)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         requestsPanelLayout.setVerticalGroup(
             requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestsPanelLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel5)
+                .addGap(85, 85, 85)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Inquiries", requestsPanel);
 
+        staffPanel.setBackground(new java.awt.Color(53, 53, 53));
+
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Staff");
 
+        bankStaffTable.setBackground(new java.awt.Color(53, 53, 53));
         bankStaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -546,14 +586,21 @@ public class BankPage extends javax.swing.JFrame {
         ));
         bankStaffScrollPane1.setViewportView(bankStaffTable);
 
+        manageStaffPanel.setBackground(new java.awt.Color(53, 53, 53));
+
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Username");
 
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Password");
 
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Title");
 
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Phone");
 
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Name");
 
         updateStaffButton.setText("Update");
@@ -649,13 +696,16 @@ public class BankPage extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(bankStaffScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87))
         );
 
         tabbedPane.addTab("tab2", staffPanel);
 
+        accountListPanel.setBackground(new java.awt.Color(53, 53, 53));
+
+        bankAccountTable.setBackground(new java.awt.Color(53, 53, 53));
         bankAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -686,10 +736,15 @@ public class BankPage extends javax.swing.JFrame {
         bankAccountScrollPane3.setViewportView(bankAccountTable);
 
         jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Account List");
 
+        manageBankAccountPane.setBackground(new java.awt.Color(53, 53, 53));
+
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Account#");
 
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Balance");
 
         updateAccountButton.setText("Update");
@@ -763,9 +818,9 @@ public class BankPage extends javax.swing.JFrame {
         accountListPanelLayout.setVerticalGroup(
             accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountListPanelLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(88, 88, 88)
                 .addComponent(jLabel24)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(manageBankAccountPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -774,6 +829,9 @@ public class BankPage extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab3", accountListPanel);
 
+        userManagementPanel.setBackground(new java.awt.Color(53, 53, 53));
+
+        bankUserTable.setBackground(new java.awt.Color(53, 53, 53));
         bankUserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -804,6 +862,7 @@ public class BankPage extends javax.swing.JFrame {
         bankUserScrollPane4.setViewportView(bankUserTable);
 
         jLabel25.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("User List");
 
         javax.swing.GroupLayout userManagementPanelLayout = new javax.swing.GroupLayout(userManagementPanel);
@@ -829,8 +888,13 @@ public class BankPage extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab4", userManagementPanel);
 
+        requestsPanel1.setBackground(new java.awt.Color(53, 53, 53));
+
+        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Requests to Me");
 
+        requestsTable1.setBackground(new java.awt.Color(53, 53, 53));
         requestsTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -860,6 +924,8 @@ public class BankPage extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(requestsTable1);
 
+        requestDetailsPanel1.setBackground(new java.awt.Color(53, 53, 53));
+
         saveAssignedRequestButton.setText("Save");
         saveAssignedRequestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -874,6 +940,7 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Status");
 
         javax.swing.GroupLayout requestDetailsPanel1Layout = new javax.swing.GroupLayout(requestDetailsPanel1);
@@ -928,7 +995,7 @@ public class BankPage extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(requestDetailsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab5", requestsPanel1);
@@ -1137,6 +1204,13 @@ public class BankPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_editBalanceActionPerformed
 
+    private void logoutBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBottonActionPerformed
+        // TODO add your handling code here:
+        Login loginpg = new Login();
+        loginpg.show();
+        dispose();
+    }//GEN-LAST:event_logoutBottonActionPerformed
+
     public boolean validateUserEdit() {
         BankServiceStaffDirectory userList = new BankServiceStaffDirectory();
         String _username = editStaffUsername.getText();
@@ -1250,7 +1324,6 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1258,6 +1331,7 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton logoutBotton;
     private javax.swing.JPanel manageBankAccountPane;
     private javax.swing.JPanel manageStaffPanel;
     private javax.swing.JPanel menuBarPanel;
