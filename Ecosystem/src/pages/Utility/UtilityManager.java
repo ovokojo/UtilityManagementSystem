@@ -134,6 +134,7 @@ public class UtilityManager extends javax.swing.JFrame {
         editStaffTitle = new javax.swing.JTextField();
         editStaffPhone = new javax.swing.JTextField();
         editStaffPassword = new javax.swing.JPasswordField();
+        deleteStaffButton = new javax.swing.JButton();
         billingPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -472,42 +473,56 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        deleteStaffButton.setText("Delete");
+        deleteStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                deleteStaffButtonMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout manageStaffPanelLayout = new javax.swing.GroupLayout(manageStaffPanel);
         manageStaffPanel.setLayout(manageStaffPanelLayout);
         manageStaffPanelLayout.setHorizontalGroup(
             manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel25)
-                        .addGap(106, 106, 106)
+                        .addGap(95, 95, 95)
                         .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addGap(57, 57, 57)
-                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                                .addGap(43, 43, 43)
+                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(61, 61, 61)
+                                .addComponent(jLabel25)
+                                .addGap(106, 106, 106)
                                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(updateStaffButton))))
-                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel20)
+                                .addGap(57, 57, 57)
+                                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel22)
+                                            .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(deleteStaffButton))
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(updateStaffButton)))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         manageStaffPanelLayout.setVerticalGroup(
             manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
+                .addComponent(deleteStaffButton)
+                .addGap(3, 3, 3)
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(jLabel27)
@@ -525,9 +540,9 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(updateStaffButton)
-                .addContainerGap())
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
@@ -553,9 +568,9 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(28, 28, 28)
                 .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab2", staffPanel);
@@ -1021,6 +1036,13 @@ public class UtilityManager extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
         }
     }//GEN-LAST:event_updateStaffButtonMousePressed
+
+    private void deleteStaffButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffButtonMousePressed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", activeStaff.getName()));
+        allStaff.remove(activeStaff);
+        populateStaffTable();
+    }//GEN-LAST:event_deleteStaffButtonMousePressed
     
     public boolean validateUserEdit() {
         UtilityStaffDirectory userList = new UtilityStaffDirectory();
@@ -1108,6 +1130,7 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JPanel billingTab;
     private javax.swing.JButton calculateTotalButton;
     private javax.swing.JButton createBillButton;
+    private javax.swing.JButton deleteStaffButton;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
     private javax.swing.JTextField editStaffName;
