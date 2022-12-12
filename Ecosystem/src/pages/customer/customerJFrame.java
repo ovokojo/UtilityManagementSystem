@@ -73,6 +73,9 @@ public class customerJFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         bankingServicejPanel4 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         utilityServicejPanel5 = new javax.swing.JPanel();
         myProfileRedirectionjPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -262,15 +265,46 @@ public class customerJFrame extends javax.swing.JFrame {
 
         bankingServicejPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
+        jLabel17.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel17.setText("Balance");
+
+        jLabel18.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel18.setText("Bank Account #");
+
+        jButton2.setText("+ Request");
+
         javax.swing.GroupLayout bankingServicejPanel4Layout = new javax.swing.GroupLayout(bankingServicejPanel4);
         bankingServicejPanel4.setLayout(bankingServicejPanel4Layout);
         bankingServicejPanel4Layout.setHorizontalGroup(
             bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(52, 52, 52))
+            .addGroup(bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                    .addGap(64, 64, 64)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(452, Short.MAX_VALUE)))
         );
         bankingServicejPanel4Layout.setVerticalGroup(
             bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                .addGroup(bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(jButton2)))
+                .addContainerGap(321, Short.MAX_VALUE))
+            .addGroup(bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                    .addGap(61, 61, 61)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(385, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("tab1", bankingServicejPanel4);
@@ -641,6 +675,7 @@ public class customerJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField houseAreaMProfile;
     private javax.swing.JTextField houseIDMProfile;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -649,6 +684,8 @@ public class customerJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

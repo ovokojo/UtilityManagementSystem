@@ -436,7 +436,7 @@ public class BankPage extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));
+        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 30));
 
         tabbedPane.setBackground(new java.awt.Color(0, 0, 0));
 

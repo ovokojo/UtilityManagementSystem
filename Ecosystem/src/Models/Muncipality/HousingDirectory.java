@@ -12,4 +12,5 @@ import java.util.ArrayList;
  */
 public class HousingDirectory {
     private ArrayList<House> houses;
+    public static ArrayList<CitizenInfo> citizenHouses = new ArrayList();
 }
