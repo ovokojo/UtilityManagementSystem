@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models.User;
-import Models.muncipality.CitizenInfo;
-import java.time.LocalDate;
+import Database.Database;
+//import Models.muncipality.CitizenInfo;
+//import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -13,19 +14,18 @@ import java.util.ArrayList;
  */
 public class UserDirectory {
    private User activeUser;
-   public ArrayList<User> allUsers  = new ArrayList();
+   public ArrayList<User> allUsers  = Database.getUsers();
    
     public UserDirectory() {
         // sys admin
-    initializeSysAdmin();
-    initializeMunicipalityAdmin();
-     initializeUtilityAdmin();
-     initializeMunicipalityCitizenMgr();
-     initializeMunicipalityHousingMgr();
-     initializeBankAdmin();
-     initializeBankMgr();
-     initializeCustomerMgr();
-     
+//    initializeSysAdmin();
+//    initializeMunicipalityAdmin();
+//     initializeUtilityAdmin();
+//     initializeMunicipalityCitizenMgr();
+//     initializeMunicipalityHousingMgr();
+//     initializeBankAdmin();
+//     initializeBankMgr();
+//     initializeCustomerMgr();
     }
     
 
@@ -89,65 +89,65 @@ public class UserDirectory {
     }
     
     /// Create mock users 
-        private void initializeSysAdmin() {
-        String username = "sys";
-        String password = "sys";
-        String role = RoleType.SystemAdmin;
-        User sys = createNewUser(username, password, role);
-        allUsers.add(sys);
-    }
-     private void initializeMunicipalityAdmin() {
-        String username = "govta";
-        String password = "govta";
-        String role = RoleType.MunicipalityAdmin;
-        User gov = createNewUser(username, password, role);
-        allUsers.add(gov);
-    }
-       private void initializeMunicipalityCitizenMgr() {
-        String username = "citi";
-        String password = "citi";
-        String role = RoleType.MunicipalityCitizenManager;
-        User gov = createNewUser(username, password, role);
-        allUsers.add(gov);
-    }
-      private void initializeMunicipalityHousingMgr() {
-        String username = "hous";
-        String password = "hous";
-        String role = RoleType.MunicipalityHousingManager;
-        User gov = createNewUser(username, password, role);
-        allUsers.add(gov);
-    }
-     private void initializeUtilityAdmin() {
-        String username = "util";
-        String password = "util";
-        String role = RoleType.UtilityAdmin;
-        User util = createNewUser(username, password, role);
-        allUsers.add(util);
-    }
-     private void initializeBankAdmin() {
-        String username = "banka";
-        String password = "banka";
-        String role = RoleType.BankAdmin;
-        User bankAdmin = createNewUser(username, password, role);
-        allUsers.add(bankAdmin);
-    }
-      private void initializeBankMgr() {
-        String username = "bank";
-        String password = "bank";
-        String role = RoleType.BankManager;
-        User bankmgr = createNewUser(username, password, role);
-        allUsers.add(bankmgr);
-    }
-    private void initializeCustomerMgr() {
-        String username = "cus";
-        String password = "cus";
-        String name = "Janet Jackson";
-        String ssn = "8474647463";
-        String phone = "453-454-5958";
-        LocalDate dob =  LocalDate.of(1990, 10, 9);
-        CitizenInfo data = new CitizenInfo(name, ssn, dob,  phone);
-        User customer = createNewUser(username, password, RoleType.Customer);
-        customer.setCitizenInfo(data);
-        allUsers.add(customer);
-    }
+//        private void initializeSysAdmin() {
+//        String username = "sys";
+//        String password = "sys";
+//        String role = RoleType.SystemAdmin;
+//        User sys = createNewUser(username, password, role);
+//        allUsers.add(sys);
+//    }
+//     private void initializeMunicipalityAdmin() {
+//        String username = "govta";
+//        String password = "govta";
+//        String role = RoleType.MunicipalityAdmin;
+//        User gov = createNewUser(username, password, role);
+//        allUsers.add(gov);
+//    }
+//       private void initializeMunicipalityCitizenMgr() {
+//        String username = "citi";
+//        String password = "citi";
+//        String role = RoleType.MunicipalityCitizenManager;
+//        User gov = createNewUser(username, password, role);
+//        allUsers.add(gov);
+//    }
+//      private void initializeMunicipalityHousingMgr() {
+//        String username = "hous";
+//        String password = "hous";
+//        String role = RoleType.MunicipalityHousingManager;
+//        User gov = createNewUser(username, password, role);
+//        allUsers.add(gov);
+//    }
+//     private void initializeUtilityAdmin() {
+//        String username = "util";
+//        String password = "util";
+//        String role = RoleType.UtilityAdmin;
+//        User util = createNewUser(username, password, role);
+//        allUsers.add(util);
+//    }
+//     private void initializeBankAdmin() {
+//        String username = "banka";
+//        String password = "banka";
+//        String role = RoleType.BankAdmin;
+//        User bankAdmin = createNewUser(username, password, role);
+//        allUsers.add(bankAdmin);
+//    }
+//      private void initializeBankMgr() {
+//        String username = "bank";
+//        String password = "bank";
+//        String role = RoleType.BankManager;
+//        User bankmgr = createNewUser(username, password, role);
+//        allUsers.add(bankmgr);
+//    }
+//    private void initializeCustomerMgr() {
+//        String username = "cus";
+//        String password = "cus";
+//        String name = "Janet Jackson";
+//        String ssn = "8474647463";
+//        String phone = "453-454-5958";
+//        LocalDate dob =  LocalDate.of(1990, 10, 9);
+//        CitizenInfo data = new CitizenInfo(name, ssn, dob,  phone);
+//        User customer = createNewUser(username, password, RoleType.Customer);
+//        customer.setCitizenInfo(data);
+//        allUsers.add(customer);
+//    }
 }
