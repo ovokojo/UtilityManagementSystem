@@ -6,7 +6,6 @@ package Models.Utility;
 
 import Models.User.RoleType;
 import Models.User.StaffUser;
-import Models.User.User;
 import Models.User.UserDirectory;
 import java.util.ArrayList;
 
@@ -27,4 +26,26 @@ public class UtilityStaffDirectory extends UserDirectory {
         public ArrayList<StaffUser> getAllStaff() {
         return allStaff;
     }
+        
+        public boolean isUsernameUnique(String username) {
+            for (StaffUser user : allStaff) {
+                if (user.getUsername().equals(username)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+         public boolean isUsernameUpdateValid(StaffUser currentUser, String username) {
+             boolean isValid = true;
+             if (currentUser.getUsername().equals(username)) {
+                    return isValid;
+                }
+             for (StaffUser user : allStaff) {
+                if (user.getUsername().equals(username)) {
+                    isValid = false;
+                    return isValid;
+                }
+            }
+            return isValid;
+        }
 }

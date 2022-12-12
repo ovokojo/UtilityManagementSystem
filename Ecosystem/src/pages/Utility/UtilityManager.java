@@ -8,6 +8,7 @@ import Models.User.StaffUser;
 import Models.Utility.MaintenanceRequest;
 import Models.Utility.MaintenanceRequestDirectory;
 import Models.Utility.UtilityStaffDirectory;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class UtilityManager extends javax.swing.JFrame {
  ArrayList<MaintenanceRequest> allRequests= new MaintenanceRequestDirectory().getRequests();
  ArrayList<StaffUser> allStaff = new UtilityStaffDirectory().getAllStaff();
  MaintenanceRequest activeRequest;
+ StaffUser activeStaff;
     /**
      * Creates new form UtilityManager
      */
@@ -120,6 +122,18 @@ public class UtilityManager extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         staffTable = new javax.swing.JTable();
+        manageStaffPanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        updateStaffButton = new javax.swing.JButton();
+        editStaffName = new javax.swing.JTextField();
+        editStaffUsername = new javax.swing.JTextField();
+        editStaffTitle = new javax.swing.JTextField();
+        editStaffPhone = new javax.swing.JTextField();
+        editStaffPassword = new javax.swing.JPasswordField();
         billingPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -149,7 +163,6 @@ public class UtilityManager extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         submitBillButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -430,7 +443,92 @@ public class UtilityManager extends javax.swing.JFrame {
                 "Username", "Name", "Title", "Phone"
             }
         ));
+        staffTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                staffTableMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(staffTable);
+
+        jLabel20.setText("Username");
+
+        jLabel22.setText("Password");
+
+        jLabel25.setText("Title");
+
+        jLabel26.setText("Phone");
+
+        jLabel27.setText("Name");
+
+        updateStaffButton.setText("Update");
+        updateStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateStaffButtonMousePressed(evt);
+            }
+        });
+        updateStaffButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStaffButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manageStaffPanelLayout = new javax.swing.GroupLayout(manageStaffPanel);
+        manageStaffPanel.setLayout(manageStaffPanelLayout);
+        manageStaffPanelLayout.setHorizontalGroup(
+            manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel25)
+                        .addGap(106, 106, 106)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(57, 57, 57)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(updateStaffButton))))
+                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+        manageStaffPanelLayout.setVerticalGroup(
+            manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(updateStaffButton)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
         staffPanel.setLayout(staffPanelLayout);
@@ -443,8 +541,10 @@ public class UtilityManager extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(staffPanelLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         staffPanelLayout.setVerticalGroup(
             staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,7 +553,9 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab2", staffPanel);
@@ -723,19 +825,6 @@ public class UtilityManager extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab4", newBillPanel);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
-        );
-
-        tabbedPane.addTab("tab5", jPanel1);
-
         pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -894,6 +983,85 @@ public class UtilityManager extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_requestsTable1MousePressed
 
+    private void staffTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTableMousePressed
+        // TODO add your handling code here:
+        int tableSize = staffTable.getRowCount();
+        int selectedRow = staffTable.getSelectedRow();
+            if (selectedRow >= 0 || selectedRow < tableSize) {
+                StaffUser selectedStaff = (StaffUser) staffTable.getValueAt(selectedRow, 0);
+                activeStaff = selectedStaff;
+                editStaffUsername.setText(selectedStaff.getUsername());
+                editStaffName.setText(selectedStaff.getName());
+                editStaffPhone.setText(selectedStaff.getPhone());
+                editStaffTitle.setText(selectedStaff.getTitle());
+                editStaffPassword.setText(selectedStaff.getPassword());
+         }       
+    }//GEN-LAST:event_staffTableMousePressed
+
+    private void updateStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaffButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateStaffButtonActionPerformed
+
+    private void updateStaffButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffButtonMousePressed
+        // TODO add your handling code here:
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+        
+        boolean isValidUpdate = validateUserEdit() ;
+        if (isValidUpdate) {
+            activeStaff.setUsername(_username);
+            activeStaff.setName(_name);
+            activeStaff.setPhone(_phone);
+            activeStaff.setTitle(_title);
+            activeStaff.setPassword(_password);
+            populateStaffTable();
+            JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
+        }
+    }//GEN-LAST:event_updateStaffButtonMousePressed
+    
+    public boolean validateUserEdit() {
+        UtilityStaffDirectory userList = new UtilityStaffDirectory();
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+        
+                // Validate username
+        if ("".equals(_username) || _username == null) {
+            // JOptionPane.showMessageDialog(this, "Error: Name is required");
+            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
+            return false;
+        }
+         if (!userList.isUsernameUpdateValid(activeStaff, _username)) {
+              JOptionPane.showMessageDialog(this, "Username already taken", "Error", 0);
+             return false;
+        } 
+         // Validate name
+        if ("".equals(_name) || _name == null) {
+            JOptionPane.showMessageDialog(this, "Name is required", "Error", 0);
+            return false;
+        } 
+           // Validate Phone
+        if ("".equals(_phone) || _phone == null) {
+            JOptionPane.showMessageDialog(this, "Phone is required", "Error", 0);
+            return false;
+        }
+           // Validate Title
+        if ("".equals(_title) || _title == null) {
+            JOptionPane.showMessageDialog(this, "Title is required", "Error", 0);
+            return false;
+        }
+             // Validate Password
+        if ("".equals(_password) || _password == null) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -942,6 +1110,11 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JButton createBillButton;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
+    private javax.swing.JTextField editStaffName;
+    private javax.swing.JPasswordField editStaffPassword;
+    private javax.swing.JTextField editStaffPhone;
+    private javax.swing.JTextField editStaffTitle;
+    private javax.swing.JTextField editStaffUsername;
     private javax.swing.JTextField hoursField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -955,9 +1128,14 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -965,10 +1143,10 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel manageStaffPanel;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JButton newBillBackButton;
     private javax.swing.JPanel newBillPanel;
@@ -988,5 +1166,6 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JLabel totalBillLabel;
     private javax.swing.JPanel totalPanel;
+    private javax.swing.JButton updateStaffButton;
     // End of variables declaration//GEN-END:variables
 }
