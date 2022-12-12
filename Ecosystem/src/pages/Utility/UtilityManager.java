@@ -98,9 +98,9 @@ public class UtilityManager extends javax.swing.JFrame {
         sideBarPanel = new javax.swing.JPanel();
         requestsTab = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         staffTab = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         billingTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         menuBarPanel = new javax.swing.JPanel();
@@ -139,7 +139,6 @@ public class UtilityManager extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         requestsTable1 = new javax.swing.JTable();
-        jLabel24 = new javax.swing.JLabel();
         newBillPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -169,9 +168,10 @@ public class UtilityManager extends javax.swing.JFrame {
 
         pagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sideBarPanel.setBackground(new java.awt.Color(51, 102, 0));
+        sideBarPanel.setBackground(new java.awt.Color(0, 0, 0));
         sideBarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        requestsTab.setBackground(new java.awt.Color(102, 102, 102));
         requestsTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 requestsTabMouseClicked(evt);
@@ -181,6 +181,7 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Requests");
 
         javax.swing.GroupLayout requestsTabLayout = new javax.swing.GroupLayout(requestsTab);
@@ -194,7 +195,7 @@ public class UtilityManager extends javax.swing.JFrame {
         );
         requestsTabLayout.setVerticalGroup(
             requestsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestsTabLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestsTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                 .addContainerGap())
@@ -202,6 +203,11 @@ public class UtilityManager extends javax.swing.JFrame {
 
         sideBarPanel.add(requestsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 30));
 
+        jLabel4.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jLabel4.setText("Welcome!");
+        sideBarPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        staffTab.setBackground(new java.awt.Color(102, 102, 102));
         staffTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 staffTabMouseClicked(evt);
@@ -211,6 +217,7 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Staff");
 
         javax.swing.GroupLayout staffTabLayout = new javax.swing.GroupLayout(staffTab);
@@ -232,9 +239,7 @@ public class UtilityManager extends javax.swing.JFrame {
 
         sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 140, 30));
 
-        jLabel4.setText("Welcome!");
-        sideBarPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
+        billingTab.setBackground(new java.awt.Color(102, 102, 102));
         billingTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 billingTabMouseClicked(evt);
@@ -244,6 +249,7 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Billing");
 
         javax.swing.GroupLayout billingTabLayout = new javax.swing.GroupLayout(billingTab);
@@ -269,7 +275,7 @@ public class UtilityManager extends javax.swing.JFrame {
 
         menuBarPanel.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setText("Utility Dashboard");
+        jLabel1.setText("Utility Home");
 
         javax.swing.GroupLayout menuBarPanelLayout = new javax.swing.GroupLayout(menuBarPanel);
         menuBarPanel.setLayout(menuBarPanelLayout);
@@ -278,7 +284,7 @@ public class UtilityManager extends javax.swing.JFrame {
             .addGroup(menuBarPanelLayout.createSequentialGroup()
                 .addGap(316, 316, 316)
                 .addComponent(jLabel1)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         menuBarPanelLayout.setVerticalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,12 +294,25 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 30));
+        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));
 
+        requestsPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Requests");
 
+        requestsTable.setBackground(new java.awt.Color(51, 51, 51));
+        requestsTable.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        requestsTable.setForeground(new java.awt.Color(255, 255, 255));
         requestsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -329,6 +348,8 @@ public class UtilityManager extends javax.swing.JFrame {
             requestsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        requestDetailsPanel.setBackground(new java.awt.Color(51, 51, 51));
+
         saveRequestButton.setText("Save");
         saveRequestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,14 +357,17 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Maintenance Request");
 
         dropDownStaff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         dropDownStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "In Progress", "Complete" }));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Assigned To");
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Status");
 
         javax.swing.GroupLayout requestDetailsPanelLayout = new javax.swing.GroupLayout(requestDetailsPanel);
@@ -421,18 +445,25 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGap(95, 95, 95)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(createBillButton)
-                .addGap(25, 25, 25)
+                .addGap(34, 34, 34)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab1", requestsPanel);
 
+        staffPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Staff");
 
+        staffTable.setBackground(new java.awt.Color(51, 51, 51));
+        staffTable.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        staffTable.setForeground(new java.awt.Color(255, 255, 255));
         staffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -451,16 +482,29 @@ public class UtilityManager extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(staffTable);
 
+        manageStaffPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel20.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Username");
 
+        jLabel22.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Password");
 
+        jLabel25.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Title");
 
+        jLabel26.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Phone");
 
+        jLabel27.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Name");
 
+        updateStaffButton.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         updateStaffButton.setText("Update");
         updateStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -473,6 +517,7 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        deleteStaffButton.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         deleteStaffButton.setText("Delete");
         deleteStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -513,7 +558,7 @@ public class UtilityManager extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(deleteStaffButton))
                     .addGroup(manageStaffPanelLayout.createSequentialGroup()
-                        .addGap(238, 238, 238)
+                        .addGap(240, 240, 240)
                         .addComponent(updateStaffButton)))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
@@ -540,9 +585,9 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(updateStaffButton)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
@@ -552,14 +597,14 @@ public class UtilityManager extends javax.swing.JFrame {
             .addGroup(staffPanelLayout.createSequentialGroup()
                 .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(335, 335, 335)
-                        .addComponent(jLabel6))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(99, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGap(335, 335, 335)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         staffPanelLayout.setVerticalGroup(
             staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,13 +615,19 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab2", staffPanel);
 
+        billingPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel11.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel11.setText("Billing");
 
+        requestsTable1.setBackground(new java.awt.Color(51, 51, 51));
+        requestsTable1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        requestsTable1.setForeground(new java.awt.Color(255, 255, 255));
         requestsTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -614,9 +665,6 @@ public class UtilityManager extends javax.swing.JFrame {
             requestsTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel24.setText("Total: ");
-
         javax.swing.GroupLayout billingPanelLayout = new javax.swing.GroupLayout(billingPanel);
         billingPanel.setLayout(billingPanelLayout);
         billingPanelLayout.setHorizontalGroup(
@@ -625,8 +673,7 @@ public class UtilityManager extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(billingPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(243, 243, 243)
+                        .addGap(278, 278, 278)
                         .addComponent(jLabel11))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(99, Short.MAX_VALUE))
@@ -635,9 +682,7 @@ public class UtilityManager extends javax.swing.JFrame {
             billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billingPanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addGroup(billingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel24))
+                .addComponent(jLabel11)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(391, Short.MAX_VALUE))
@@ -645,30 +690,60 @@ public class UtilityManager extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab3", billingPanel);
 
+        newBillPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel12.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Hours ");
 
+        jLabel13.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Rate");
 
+        jLabel14.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("New Bill");
 
+        billingRequestPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel15.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Meter #");
 
+        jLabel17.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Type");
 
+        billingMeterNumberLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        billingMeterNumberLabel.setForeground(new java.awt.Color(255, 255, 255));
         billingMeterNumberLabel.setText("0000000");
 
+        billingRequestTypeLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        billingRequestTypeLabel.setForeground(new java.awt.Color(255, 255, 255));
         billingRequestTypeLabel.setText("None");
 
+        jLabel18.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Name");
 
+        billingStaffLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        billingStaffLabel.setForeground(new java.awt.Color(255, 255, 255));
         billingStaffLabel.setText("None");
 
+        jLabel19.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Role");
 
+        billingStaffRoleLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        billingStaffRoleLabel.setForeground(new java.awt.Color(255, 255, 255));
         billingStaffRoleLabel.setText("None");
 
+        jLabel16.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Description");
 
+        billingDescriptionLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        billingDescriptionLabel.setForeground(new java.awt.Color(255, 255, 255));
         billingDescriptionLabel.setText("None");
 
         javax.swing.GroupLayout billingRequestPanelLayout = new javax.swing.GroupLayout(billingRequestPanel);
@@ -742,10 +817,18 @@ public class UtilityManager extends javax.swing.JFrame {
             }
         });
 
+        totalPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        totalBillLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        totalBillLabel.setForeground(new java.awt.Color(255, 255, 255));
         totalBillLabel.setText("0");
 
+        jLabel23.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("$");
 
+        jLabel21.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Total");
 
         submitBillButton.setText("Submit");
@@ -760,7 +843,7 @@ public class UtilityManager extends javax.swing.JFrame {
         totalPanelLayout.setHorizontalGroup(
             totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, totalPanelLayout.createSequentialGroup()
-                .addGap(0, 41, Short.MAX_VALUE)
+                .addGap(0, 50, Short.MAX_VALUE)
                 .addGroup(totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(submitBillButton)
                     .addGroup(totalPanelLayout.createSequentialGroup()
@@ -768,7 +851,8 @@ public class UtilityManager extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jLabel23)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(totalBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         totalPanelLayout.setVerticalGroup(
             totalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -787,6 +871,17 @@ public class UtilityManager extends javax.swing.JFrame {
         newBillPanel.setLayout(newBillPanelLayout);
         newBillPanelLayout.setHorizontalGroup(
             newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newBillPanelLayout.createSequentialGroup()
+                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newBillPanelLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(newBillBackButton)
+                        .addGap(226, 226, 226)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(newBillPanelLayout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(billingRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(132, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBillPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -800,20 +895,11 @@ public class UtilityManager extends javax.swing.JFrame {
                                 .addComponent(hoursField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(calculateTotalButton))
-                            .addComponent(jLabel12)))
-                    .addComponent(totalPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(301, 301, 301))
-            .addGroup(newBillPanelLayout.createSequentialGroup()
-                .addGroup(newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(newBillPanelLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(newBillBackButton)
-                        .addGap(226, 226, 226)
-                        .addComponent(jLabel14))
-                    .addGroup(newBillPanelLayout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(billingRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                            .addComponent(jLabel12))
+                        .addGap(301, 301, 301))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newBillPanelLayout.createSequentialGroup()
+                        .addComponent(totalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(278, 278, 278))))
         );
         newBillPanelLayout.setVerticalGroup(
             newBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1155,7 +1241,6 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
