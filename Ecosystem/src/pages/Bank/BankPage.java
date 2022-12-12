@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pages.Bank;
-
 import Models.Bank.BankAccount;
 import Models.Bank.BankAccountDirectory;
 import Models.Bank.BankServiceRequest;
@@ -1038,11 +1036,6 @@ public class BankPage extends javax.swing.JFrame {
             dropDownStaff.setSelectedItem(selectedRequest.assignedTo);
             dropDownStatus.setSelectedItem(selectedRequest.status);
             showRequestUpdatePanel();
-            if ("Complete".equals(dropDownStatus.getSelectedItem().toString())) {
-                createBillButton.setVisible(true);
-            } else {
-                createBillButton.setVisible(false);
-            }
         }
     }//GEN-LAST:event_requestsTableMousePressed
 

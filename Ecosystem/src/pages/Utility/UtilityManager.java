@@ -104,7 +104,7 @@ public class UtilityManager extends javax.swing.JFrame {
         billingTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         menuBarPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JButton();
         tabbedPane = new javax.swing.JTabbedPane();
         requestsPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -273,25 +273,25 @@ public class UtilityManager extends javax.swing.JFrame {
 
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
-        menuBarPanel.setBackground(new java.awt.Color(153, 153, 153));
+        menuBarPanel.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setText("Utility Home");
+        logoutButton.setText("Logout");
 
         javax.swing.GroupLayout menuBarPanelLayout = new javax.swing.GroupLayout(menuBarPanel);
         menuBarPanel.setLayout(menuBarPanelLayout);
         menuBarPanelLayout.setHorizontalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuBarPanelLayout.createSequentialGroup()
-                .addGap(316, 316, 316)
-                .addComponent(jLabel1)
-                .addContainerGap(375, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarPanelLayout.createSequentialGroup()
+                .addContainerGap(674, Short.MAX_VALUE)
+                .addComponent(logoutButton)
+                .addGap(20, 20, 20))
         );
         menuBarPanelLayout.setVerticalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(21, 21, 21))
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(logoutButton)
+                .addGap(14, 14, 14))
         );
 
         pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));
@@ -1225,7 +1225,6 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JTextField editStaffTitle;
     private javax.swing.JTextField editStaffUsername;
     private javax.swing.JTextField hoursField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1254,6 +1253,7 @@ public class UtilityManager extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JPanel manageStaffPanel;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JButton newBillBackButton;
