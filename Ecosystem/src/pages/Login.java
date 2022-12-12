@@ -70,8 +70,6 @@ public class Login extends javax.swing.JFrame {
 
         passwordField.setText("sys");
         bgPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 150, -1));
-
-        bgLabel.setIcon(new javax.swing.ImageIcon("/Users/thomaskojoaddaquay/Desktop/UtilityManagementSystem/Ecosystem/assets/login-bg.jpg")); // NOI18N
         bgPanel.add(bgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
