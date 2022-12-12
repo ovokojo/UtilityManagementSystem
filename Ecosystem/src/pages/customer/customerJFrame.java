@@ -5,6 +5,8 @@
 package pages.customer;
 import Models.User.RoleType;
 import Models.User.User;
+import Models.muncipality.CitizenInfo;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +15,7 @@ import java.util.ArrayList;
  */
 public class customerJFrame extends javax.swing.JFrame {
     ArrayList<User> mockCitizenUserList = new ArrayList();
-    private User currentUser;
+    public static User currentUser;
     
 
     /**
@@ -21,6 +23,11 @@ public class customerJFrame extends javax.swing.JFrame {
      */
     public customerJFrame() {
         initComponents();
+        // Initialize user
+//         currentUser = new User("Test", "Test", RoleType.Customer);
+//         CitizenInfo data = new CitizenInfo("Test", "000", LocalDate.now(),  "0000000");
+//         currentUser.setCitizenInfo(data);
+         // Initialize ui
         nameLabel.setText(currentUser.getCitizenInfo().getName());
         notNamejTextField2.setText(currentUser.getCitizenInfo().getName());
         nameLabel1.setText(currentUser.getCitizenInfo().getName());
@@ -35,7 +42,7 @@ public class customerJFrame extends javax.swing.JFrame {
     }
     
     
-    public void setCurrentUser(User user) {
+    public static void setCurrentUser(User user) {
         currentUser = user;
         System.out.println("Current User:");
         System.out.println(currentUser.getUsername());

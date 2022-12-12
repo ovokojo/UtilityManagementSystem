@@ -253,7 +253,7 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Requests");
+        jLabel2.setText("Inquiries");
 
         javax.swing.GroupLayout requestsTabLayout = new javax.swing.GroupLayout(requestsTab);
         requestsTab.setLayout(requestsTabLayout);
@@ -262,7 +262,7 @@ public class BankPage extends javax.swing.JFrame {
             .addGroup(requestsTabLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel2)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         requestsTabLayout.setVerticalGroup(
             requestsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,7 +413,7 @@ public class BankPage extends javax.swing.JFrame {
 
         pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 30));
 
-        jLabel5.setText("Requests");
+        jLabel5.setText("Inquiries");
 
         requestsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -451,7 +451,7 @@ public class BankPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Bank Service Request");
+        jLabel7.setText("Customer Inquiry");
 
         dropDownStaff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -478,11 +478,11 @@ public class BankPage extends javax.swing.JFrame {
             .addGroup(requestDetailsPanelLayout.createSequentialGroup()
                 .addGroup(requestDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(requestDetailsPanelLayout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(requestDetailsPanelLayout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(saveRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(saveRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(requestDetailsPanelLayout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         requestDetailsPanelLayout.setVerticalGroup(
@@ -526,10 +526,10 @@ public class BankPage extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("tab1", requestsPanel);
+        tabbedPane.addTab("Inquiries", requestsPanel);
 
         jLabel6.setText("Staff");
 
@@ -934,6 +934,7 @@ public class BankPage extends javax.swing.JFrame {
         tabbedPane.addTab("tab5", requestsPanel1);
 
         pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
+        tabbedPane.getAccessibleContext().setAccessibleName("Requests");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

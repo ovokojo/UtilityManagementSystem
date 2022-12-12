@@ -9,8 +9,9 @@ import Models.User.User;
 import javax.swing.JOptionPane;
 import Models.User.UserDirectory;
 import Pages.Utility.UtilityManager;
-import pages.Bank.BankPage;
+
 import pages.Municipality.MunicipalityPage;
+import pages.customer.customerJFrame;
 
 /**
  *
@@ -102,6 +103,8 @@ public class Login extends javax.swing.JFrame {
         // Check role of user, then navigate appropriate JFrame
         // TODO: Correct roles for enterprises
         User currentUser = users.getActiveUser();
+        System.out.println("Got Active User");
+         
         if (currentUser.getRole().equals(RoleType.SystemAdmin)) {
             AdminPage home = new AdminPage();
             home.show();
@@ -121,12 +124,17 @@ public class Login extends javax.swing.JFrame {
             dispose();
         }
           if (currentUser.getRole().equals(RoleType.BankAdmin) || currentUser.getRole().equals(RoleType.BankManager)) {
-            BankPage home = new BankPage();
-            home.show();
+            // TODO : Fix bank page bug
             dispose();
         }
         // TODO: If customer, navigate to customer fram
-        
+         if (currentUser.getRole().equals(RoleType.Customer)) {
+            // TODO : Fix bank page bug
+            customerJFrame.setCurrentUser(currentUser);
+            customerJFrame home = new customerJFrame();
+            home.show();
+            dispose();
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

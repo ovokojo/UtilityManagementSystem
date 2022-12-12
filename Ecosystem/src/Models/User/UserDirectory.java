@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models.User;
+import Models.muncipality.CitizenInfo;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +24,7 @@ public class UserDirectory {
      initializeMunicipalityHousingMgr();
      initializeBankAdmin();
      initializeBankMgr();
+     initializeCustomerMgr();
      
     }
     
@@ -134,5 +137,17 @@ public class UserDirectory {
         String role = RoleType.BankManager;
         User bankmgr = createNewUser(username, password, role);
         allUsers.add(bankmgr);
+    }
+    private void initializeCustomerMgr() {
+        String username = "cus";
+        String password = "cus";
+        String name = "Janet Jackson";
+        String ssn = "8474647463";
+        String phone = "453-454-5958";
+        LocalDate dob =  LocalDate.of(1990, 10, 9);
+        CitizenInfo data = new CitizenInfo(name, ssn, dob,  phone);
+        User customer = createNewUser(username, password, RoleType.Customer);
+        customer.setCitizenInfo(data);
+        allUsers.add(customer);
     }
 }

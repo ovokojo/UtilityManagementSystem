@@ -12,14 +12,18 @@ import java.util.ArrayList;
  * @author liuyanzi
  */
 public class BankServiceRequestDirectory {
+
+    public BankServiceRequestDirectory() {
+        allRequests.add(new BankServiceRequest("0004321746", "11/29/2022", "Fraudulent transaction", _getStaff().get(0), "Complete"));
+    }
     public ArrayList<BankServiceRequest> allRequests = new ArrayList();
     public BankServiceStaffDirectory staffDirectory = new BankServiceStaffDirectory();
     
      public ArrayList<BankServiceRequest> getRequests() {
-    return allRequests;
+        return allRequests;
     }
     
     private ArrayList<StaffUser> _getStaff() {
-     return staffDirectory.getAllStaff();
+        return staffDirectory.getAllStaff();
     }
 }
