@@ -288,10 +288,10 @@ private User currentUser;
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 90, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 90));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -1297,14 +1297,26 @@ private User currentUser;
         });
         jScrollPane1.setViewportView(staffTable);
 
+        manageStaffPanel.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel20.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Username");
 
+        jLabel22.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Password");
 
+        jLabel25.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Title");
 
+        jLabel26.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Phone");
 
+        jLabel27.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Name");
 
         updateStaffButton.setText("Update");
