@@ -56,6 +56,20 @@ public class UserDirectory {
         return false;
     }
     
+       public boolean isUsernameUpdateValid(User currentUser, String username) {
+             boolean isValid = true;
+             if (currentUser.getUsername().equals(username)) {
+                    return isValid;
+                }
+             for (User user : allUsers) {
+                if (user.getUsername().equals(username)) {
+                    isValid = false;
+                    return isValid;
+                }
+            }
+            return isValid;
+        }
+    
     public boolean loginUser(String username, String password){
         boolean isValid = false;
         for (User user : allUsers)
