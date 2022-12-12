@@ -8,13 +8,16 @@ import Models.Bank.BankAccount;
 import Models.Bank.BankAccountDirectory;
 import Models.Bank.BankServiceRequest;
 import Models.Bank.BankServiceRequestDirectory;
-import Models.Bank.BankServiceStaff;
 import Models.Bank.BankServiceStaffDirectory;
 import Models.User.RoleType;
+import Models.User.StaffUser;
 import Models.User.User;
 import Models.User.UserDirectory;
+import static java.lang.String.valueOf;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,10 +26,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BankPage extends javax.swing.JFrame {
  ArrayList<BankServiceRequest> allRequests= new BankServiceRequestDirectory().getRequests();
- ArrayList<BankServiceStaff> allStaff = new BankServiceStaffDirectory().getStaff();
+ ArrayList<StaffUser> allStaff = new BankServiceStaffDirectory().getAllStaff();
  ArrayList<BankAccount> allAccount = new BankAccountDirectory().getAccount();
  ArrayList<User> allUser = new UserDirectory().getAllUsers();
  BankServiceRequest activeRequest;
+ StaffUser activeStaff;
  private User currentUser;
 
     /**
@@ -79,7 +83,7 @@ public class BankPage extends javax.swing.JFrame {
                         row[0] = request;
                         row[1] = request.date;
                         row[2] = request.description;
-                        row[3] = request.assignedTo.name;
+                        row[3] = request.assignedTo;
                         row[4] = request.status;
                         
                         model.addRow(row);
@@ -90,11 +94,12 @@ public class BankPage extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) bankStaffTable.getModel();
         model.setRowCount(0);
          System.out.println("Active staff:");
-                for (BankServiceStaff staff : allStaff)  {
-                    Object[] row = new Object[3];
-                        row[0] = staff.name;
-                        row[1] = staff.title;
-                        row[2] = staff.years.toString();
+                for (StaffUser staff : allStaff)  {
+                    Object[] row = new Object[4];
+                        row[0] = staff;
+                        row[1] = staff.getName();
+                        row[2] = staff.getTitle();
+                        row[3] = staff.getPhone();
                         model.addRow(row);
                 }
     }
@@ -128,9 +133,9 @@ public class BankPage extends javax.swing.JFrame {
          
          public String[] _getStaffNames() {
             ArrayList<String> names = new ArrayList<String>();
-         for (BankServiceStaff staff: allStaff) {
+         for (StaffUser staff: allStaff) {
               names.add("Unassigned");
-             names.add(staff.name);
+             names.add(staff.getName());
          }
          String[] dropdownNames = names.toArray(new String[names.size()]);
          return dropdownNames;
@@ -199,10 +204,28 @@ public class BankPage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         bankStaffScrollPane1 = new javax.swing.JScrollPane();
         bankStaffTable = new javax.swing.JTable();
+        manageStaffPanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        updateStaffButton = new javax.swing.JButton();
+        editStaffName = new javax.swing.JTextField();
+        editStaffUsername = new javax.swing.JTextField();
+        editStaffTitle = new javax.swing.JTextField();
+        editStaffPhone = new javax.swing.JTextField();
+        editStaffPassword = new javax.swing.JPasswordField();
         accountListPanel = new javax.swing.JPanel();
         bankAccountScrollPane3 = new javax.swing.JScrollPane();
         bankAccountTable = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
+        manageBankAccountPane = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        updateAccountButton = new javax.swing.JButton();
+        editAccountNumber = new javax.swing.JTextField();
+        editBalance = new javax.swing.JTextField();
         userManagementPanel = new javax.swing.JPanel();
         bankUserScrollPane4 = new javax.swing.JScrollPane();
         bankUserTable = new javax.swing.JTable();
@@ -212,7 +235,7 @@ public class BankPage extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         requestsTable1 = new javax.swing.JTable();
         requestDetailsPanel1 = new javax.swing.JPanel();
-        saveRequestButton1 = new javax.swing.JButton();
+        saveAssignedRequestButton = new javax.swing.JButton();
         dropDownRequestStatus = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
 
@@ -514,29 +537,111 @@ public class BankPage extends javax.swing.JFrame {
 
         bankStaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Title", "Year of Experience"
+                "UserName", "Name", "Title", "Phone"
             }
         ));
         bankStaffScrollPane1.setViewportView(bankStaffTable);
+
+        jLabel20.setText("Username");
+
+        jLabel22.setText("Password");
+
+        jLabel26.setText("Title");
+
+        jLabel27.setText("Phone");
+
+        jLabel28.setText("Name");
+
+        updateStaffButton.setText("Update");
+        updateStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateStaffButtonMousePressed(evt);
+            }
+        });
+        updateStaffButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStaffButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manageStaffPanelLayout = new javax.swing.GroupLayout(manageStaffPanel);
+        manageStaffPanel.setLayout(manageStaffPanelLayout);
+        manageStaffPanelLayout.setHorizontalGroup(
+            manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel26)
+                        .addGap(106, 106, 106)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(57, 57, 57)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(updateStaffButton))))
+                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+        manageStaffPanelLayout.setVerticalGroup(
+            manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(updateStaffButton)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
         staffPanel.setLayout(staffPanelLayout);
         staffPanelLayout.setHorizontalGroup(
             staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(staffPanelLayout.createSequentialGroup()
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(335, 335, 335)
-                        .addComponent(jLabel6))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(bankStaffScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(staffPanelLayout.createSequentialGroup()
+                            .addGap(335, 335, 335)
+                            .addComponent(jLabel6))
+                        .addGroup(staffPanelLayout.createSequentialGroup()
+                            .addGap(94, 94, 94)
+                            .addComponent(bankStaffScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         staffPanelLayout.setVerticalGroup(
@@ -546,7 +651,9 @@ public class BankPage extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(bankStaffScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(406, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
         );
 
         tabbedPane.addTab("tab2", staffPanel);
@@ -583,6 +690,64 @@ public class BankPage extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel24.setText("Account List");
 
+        jLabel21.setText("Account#");
+
+        jLabel23.setText("Balance");
+
+        updateAccountButton.setText("Update");
+        updateAccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateAccountButtonMousePressed(evt);
+            }
+        });
+        updateAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateAccountButtonActionPerformed(evt);
+            }
+        });
+
+        editBalance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBalanceActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manageBankAccountPaneLayout = new javax.swing.GroupLayout(manageBankAccountPane);
+        manageBankAccountPane.setLayout(manageBankAccountPaneLayout);
+        manageBankAccountPaneLayout.setHorizontalGroup(
+            manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
+                .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(editAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23)
+                            .addComponent(editBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(updateAccountButton)))
+                .addContainerGap(183, Short.MAX_VALUE))
+        );
+        manageBankAccountPaneLayout.setVerticalGroup(
+            manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(updateAccountButton)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout accountListPanelLayout = new javax.swing.GroupLayout(accountListPanel);
         accountListPanel.setLayout(accountListPanelLayout);
         accountListPanelLayout.setHorizontalGroup(
@@ -591,7 +756,10 @@ public class BankPage extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(accountListPanelLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(manageBankAccountPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         accountListPanelLayout.setVerticalGroup(
@@ -601,7 +769,9 @@ public class BankPage extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addGap(29, 29, 29)
                 .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(manageBankAccountPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab3", accountListPanel);
@@ -692,10 +862,10 @@ public class BankPage extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(requestsTable1);
 
-        saveRequestButton1.setText("Save");
-        saveRequestButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveAssignedRequestButton.setText("Save");
+        saveAssignedRequestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveRequestButton1ActionPerformed(evt);
+                saveAssignedRequestButtonActionPerformed(evt);
             }
         });
 
@@ -716,7 +886,7 @@ public class BankPage extends javax.swing.JFrame {
                 .addGroup(requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(saveRequestButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(saveAssignedRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -732,7 +902,7 @@ public class BankPage extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(dropDownRequestStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
-                .addComponent(saveRequestButton1)
+                .addComponent(saveAssignedRequestButton)
                 .addGap(27, 27, 27))
         );
 
@@ -798,7 +968,17 @@ public class BankPage extends javax.swing.JFrame {
 
     private void staffTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTabMousePressed
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(1);
+        int tableSize = bankStaffTable.getRowCount();
+        int selectedRow = bankStaffTable.getSelectedRow();
+            if (selectedRow >= 0 || selectedRow < tableSize) {
+                StaffUser selectedStaff = (StaffUser) bankStaffTable.getValueAt(selectedRow, 0);
+                activeStaff = selectedStaff;
+                editStaffUsername.setText(selectedStaff.getUsername());
+                editStaffName.setText(selectedStaff.getName());
+                editStaffPhone.setText(selectedStaff.getPhone());
+                editStaffTitle.setText(selectedStaff.getTitle());
+                editStaffPassword.setText(selectedStaff.getPassword());
+         }       
     }//GEN-LAST:event_staffTabMousePressed
 
     private void billingTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTabMouseClicked
@@ -812,6 +992,15 @@ public class BankPage extends javax.swing.JFrame {
 
     private void bankAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankAccountTableMousePressed
         // TODO add your handling code here:
+         int tableSize = bankAccountTable.getRowCount();
+        int selectedRow = bankAccountTable.getSelectedRow();
+            if (selectedRow >= 0 || selectedRow < tableSize) {
+                BankAccount selectedAccount = (BankAccount) bankAccountTable.getValueAt(selectedRow, 0);
+                
+                editAccountNumber.setText(selectedAccount.getAccountNumber().toString());
+                editBalance.setText(valueOf(selectedAccount.getBalance()));
+               
+         }       
     }//GEN-LAST:event_bankAccountTableMousePressed
 
     private void bankAccountTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankAccountTableMouseClicked
@@ -826,9 +1015,9 @@ public class BankPage extends javax.swing.JFrame {
             BankServiceRequest selectedRequest = (BankServiceRequest) requestsTable.getValueAt(selectedRow, 0);
             String status = dropDownStatus.getSelectedItem().toString();
             String staffName = dropDownStaff.getSelectedItem().toString();
-            BankServiceStaff selectedStaff = null;
-            for (BankServiceStaff staff : allStaff) {
-                if (staffName.equals(staff.name)) {
+            StaffUser selectedStaff = null;
+            for (StaffUser staff : allStaff) {
+                if (staffName.equals(staff.getName())) {
                     selectedStaff = staff;
                 }
             }
@@ -846,7 +1035,7 @@ public class BankPage extends javax.swing.JFrame {
         System.out.println(selectedRow);
         if (selectedRow >= 0 || selectedRow < tableSize) {
             BankServiceRequest selectedRequest = (BankServiceRequest) requestsTable.getValueAt(selectedRow, 0);
-            dropDownStaff.setSelectedItem(selectedRequest.assignedTo.name);
+            dropDownStaff.setSelectedItem(selectedRequest.assignedTo);
             dropDownStatus.setSelectedItem(selectedRequest.status);
             showRequestUpdatePanel();
             if ("Complete".equals(dropDownStatus.getSelectedItem().toString())) {
@@ -885,14 +1074,115 @@ public class BankPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_requestsTable1MousePressed
 
-    private void saveRequestButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButton1ActionPerformed
+    private void saveAssignedRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAssignedRequestButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_saveRequestButton1ActionPerformed
+    }//GEN-LAST:event_saveAssignedRequestButtonActionPerformed
 
     private void dropDownRequestStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropDownRequestStatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dropDownRequestStatusActionPerformed
 
+    private void updateStaffButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffButtonMousePressed
+        // TODO add your handling code here:
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+
+        boolean isValidUpdate = validateUserEdit() ;
+        if (isValidUpdate) {
+            activeStaff.setUsername(_username);
+            activeStaff.setName(_name);
+            activeStaff.setPhone(_phone);
+            activeStaff.setTitle(_title);
+            activeStaff.setPassword(_password);
+            populateStaffTable();
+            JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
+        }
+    }//GEN-LAST:event_updateStaffButtonMousePressed
+
+    private void updateStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaffButtonActionPerformed
+        // TODO add your handling code here:
+         String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+        
+        boolean isValidUpdate = validateUserEdit() ;
+        if (isValidUpdate) {
+            activeStaff.setUsername(_username);
+            activeStaff.setName(_name);
+            activeStaff.setPhone(_phone);
+            activeStaff.setTitle(_title);
+            activeStaff.setPassword(_password);
+            populateStaffTable();
+            JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
+        }
+    }//GEN-LAST:event_updateStaffButtonActionPerformed
+
+    private void updateAccountButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateAccountButtonMousePressed
+        // TODO add your handling code here:
+        String _accountnumber = editAccountNumber.getText();
+        String _balance = editBalance.getText();
+       
+        
+    }//GEN-LAST:event_updateAccountButtonMousePressed
+
+    private void updateAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAccountButtonActionPerformed
+        // TODO add your handling code here:
+       
+         String _accountnumber = editAccountNumber.getText();
+        String _balance = editBalance.getText();
+       
+        
+    }//GEN-LAST:event_updateAccountButtonActionPerformed
+
+    private void editBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBalanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editBalanceActionPerformed
+
+    public boolean validateUserEdit() {
+        BankServiceStaffDirectory userList = new BankServiceStaffDirectory();
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+        
+                // Validate username
+        if ("".equals(_username) || _username == null) {
+            // JOptionPane.showMessageDialog(this, "Error: Name is required");
+            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
+            return false;
+        }
+         if (!userList.isUsernameUpdateValid(activeStaff, _username)) {
+              JOptionPane.showMessageDialog(this, "Username already taken", "Error", 0);
+             return false;
+        } 
+         // Validate name
+        if ("".equals(_name) || _name == null) {
+            JOptionPane.showMessageDialog(this, "Name is required", "Error", 0);
+            return false;
+        } 
+           // Validate Phone
+        if ("".equals(_phone) || _phone == null) {
+            JOptionPane.showMessageDialog(this, "Phone is required", "Error", 0);
+            return false;
+        }
+           // Validate Title
+        if ("".equals(_title) || _title == null) {
+            JOptionPane.showMessageDialog(this, "Title is required", "Error", 0);
+            return false;
+        }
+             // Validate Password
+        if ("".equals(_password) || _password == null) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -942,6 +1232,13 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> dropDownRequestStatus;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
+    private javax.swing.JTextField editAccountNumber;
+    private javax.swing.JTextField editBalance;
+    private javax.swing.JTextField editStaffName;
+    private javax.swing.JPasswordField editStaffPassword;
+    private javax.swing.JTextField editStaffPhone;
+    private javax.swing.JTextField editStaffTitle;
+    private javax.swing.JTextField editStaffUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -949,8 +1246,15 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -960,6 +1264,8 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel manageBankAccountPane;
+    private javax.swing.JPanel manageStaffPanel;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel pagePanel;
     private javax.swing.JPanel requestDetailsPanel;
@@ -969,12 +1275,14 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JPanel requestsTab;
     private javax.swing.JTable requestsTable;
     private javax.swing.JTable requestsTable1;
+    private javax.swing.JButton saveAssignedRequestButton;
     private javax.swing.JButton saveRequestButton;
-    private javax.swing.JButton saveRequestButton1;
     private javax.swing.JPanel sideBarPanel;
     private javax.swing.JPanel staffPanel;
     private javax.swing.JPanel staffTab;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JButton updateAccountButton;
+    private javax.swing.JButton updateStaffButton;
     private javax.swing.JPanel userManagementPanel;
     private javax.swing.JPanel userMgmtPanel;
     // End of variables declaration//GEN-END:variables

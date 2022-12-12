@@ -4,6 +4,7 @@
  */
 package Models.Bank;
 
+import Models.User.StaffUser;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ public class BankServiceRequestDirectory {
     return allRequests;
     }
     
-    private ArrayList<BankServiceStaff> _getStaff() {
-     return staffDirectory.getStaff();
+    private ArrayList<StaffUser> _getStaff() {
+     return staffDirectory.getAllStaff();
     }
 }
