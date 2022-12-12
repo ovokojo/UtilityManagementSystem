@@ -6,7 +6,9 @@ package pages.Municipality;
 
 import javax.swing.JOptionPane;
 import Models.User.RoleType;
+import Models.User.StaffUser;
 import Models.User.User;
+import Models.muncipality.muncipalityStaffDirectory;
 import Models.muncipality.CitizenInfo;
 import Models.muncipality.House;
 import java.text.MessageFormat;
@@ -21,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MunicipalityPage extends javax.swing.JFrame {
 ArrayList<User> mockCitizenUserList = new ArrayList();
+ArrayList<StaffUser> allStaff = new muncipalityStaffDirectory().getAllStaff();
+StaffUser activeStaff;
 private User currentUser;
     /**
      * Creates new form citizenServiceMainJFrame
@@ -28,15 +32,33 @@ private User currentUser;
     public MunicipalityPage() {
         initComponents();
         populateCitizenHousingTable();
+        populateStaffTable();
+        
         // If not admin, hide user management tab
     }
+    
+    
+    public void populateStaffTable() {
+        DefaultTableModel model = (DefaultTableModel) staffTable.getModel();
+        model.setRowCount(0);
+         System.out.println("Active staff:");
+                for (StaffUser staff : allStaff)  {
+                    Object[] row = new Object[4];
+                        row[0] = staff;
+                        row[1] = staff.getName();
+                        row[2] = staff.getTitle();
+                        row[3] = staff.getPhone();
+                        model.addRow(row);
+                }
+    }
+    
     // How to set current user & modify page based on user role
     public void setCurrentUser(User user) {
         currentUser = user;
         System.out.println("Current User:");
         System.out.println(currentUser.getUsername());
         // hide tab based on role
-        if (!currentUser.getRole().equals(RoleType.MunicipalityAdmin)) {
+        if (currentUser.getRole().equals(RoleType.MunicipalityAdmin)) {
         populateCitizenHousingTable();
         populateCitizenInfoTable();
         }
@@ -49,6 +71,7 @@ private User currentUser;
         }
         if (currentUser.getRole().equals(RoleType.MunicipalityHousingManager)) {
            populateCitizenHousingTable();
+            userMgmtPanel.setVisible(false);
             updateCitizenjPanel.setVisible(false);
             viewCitizenjPanel5.setVisible(false);
             createCitizenjPanel4.setVisible(false);
@@ -229,6 +252,22 @@ private User currentUser;
         viewHousingjPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         citizensInHousingTable2 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        staffTable = new javax.swing.JTable();
+        manageStaffPanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        updateStaffButton = new javax.swing.JButton();
+        editStaffName = new javax.swing.JTextField();
+        editStaffUsername = new javax.swing.JTextField();
+        editStaffTitle = new javax.swing.JTextField();
+        editStaffPhone = new javax.swing.JTextField();
+        editStaffPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -579,7 +618,7 @@ private User currentUser;
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(250, 250, 250)
                         .addComponent(saveUserButton)))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -688,7 +727,7 @@ private User currentUser;
                 .addComponent(backButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(0, 78, Short.MAX_VALUE)
+                .addGap(0, 114, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -769,7 +808,7 @@ private User currentUser;
                 .addGroup(viewJPanelLayout.createSequentialGroup()
                     .addGap(82, 82, 82)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(83, Short.MAX_VALUE)))
+                    .addContainerGap(119, Short.MAX_VALUE)))
         );
         viewJPanelLayout.setVerticalGroup(
             viewJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -863,7 +902,7 @@ private User currentUser;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(viewButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(0, 80, Short.MAX_VALUE)
+                        .addGap(0, 116, Short.MAX_VALUE)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(60, 60, 60))
             .addGroup(jPanel12Layout.createSequentialGroup()
@@ -974,7 +1013,7 @@ private User currentUser;
                 .addGroup(updateJPanelLayout.createSequentialGroup()
                     .addGap(70, 70, 70)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(70, Short.MAX_VALUE)))
+                    .addContainerGap(106, Short.MAX_VALUE)))
         );
         updateJPanelLayout.setVerticalGroup(
             updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1064,7 +1103,7 @@ private User currentUser;
                         .addComponent(saveHousingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
-                .addGap(0, 25, Short.MAX_VALUE)
+                .addGap(0, 61, Short.MAX_VALUE)
                 .addGroup(createHousejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createHousejPanelLayout.createSequentialGroup()
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1124,7 +1163,7 @@ private User currentUser;
             viewHousingjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewHousingjPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE))
         );
         viewHousingjPanel4Layout.setVerticalGroup(
             viewHousingjPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1135,6 +1174,134 @@ private User currentUser;
         );
 
         jTabbedPane1.addTab("tab5", viewHousingjPanel4);
+
+        jLabel12.setText("Admin");
+
+        staffTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Username", "Name", "Title", "Phone"
+            }
+        ));
+        staffTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                staffTableMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(staffTable);
+
+        jLabel20.setText("Username");
+
+        jLabel22.setText("Password");
+
+        jLabel25.setText("Title");
+
+        jLabel26.setText("Phone");
+
+        jLabel27.setText("Name");
+
+        updateStaffButton.setText("Update");
+        updateStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateStaffButtonMousePressed(evt);
+            }
+        });
+        updateStaffButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStaffButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout manageStaffPanelLayout = new javax.swing.GroupLayout(manageStaffPanel);
+        manageStaffPanel.setLayout(manageStaffPanelLayout);
+        manageStaffPanelLayout.setHorizontalGroup(
+            manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel25)
+                        .addGap(106, 106, 106)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(57, 57, 57)
+                        .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(updateStaffButton))))
+                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+        manageStaffPanelLayout.setVerticalGroup(
+            manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageStaffPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manageStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStaffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStaffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(updateStaffButton)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(jLabel12))
+                    .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(manageStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab6", jPanel4);
 
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 630, 740));
 
@@ -1172,17 +1339,7 @@ private User currentUser;
             
             
             //update db
-            
-            
-//            // Create citizen info
-//        CitizenInfo citizen = new CitizenInfo(_name, _ssn, _birthDate, _phone );
-//        // Create user info
-//        User newUser = new User(_username, _password, RoleType.Customer);
-//        // update user to include citizen info
-//        newUser.setCitizenInfo(citizen);
-//       // update db
-        //mockCitizenUserList.add(newUser);
-        // refresh table
+           
         
         
             
@@ -1394,17 +1551,17 @@ private User currentUser;
 
     private void userMgmtPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMgmtPanelMousePressed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_userMgmtPanelMousePressed
 
     private void jLabel19MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MousePressed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_jLabel19MousePressed
 
     private void userMgmtPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMgmtPanelMouseClicked
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_userMgmtPanelMouseClicked
 
     private void birthDatejTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDatejTextField1ActionPerformed
@@ -1444,12 +1601,12 @@ private User currentUser;
 
     private void viewHousesJpanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewHousesJpanel1MouseClicked
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(5);
+        jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_viewHousesJpanel1MouseClicked
 
     private void viewHousesJpanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewHousesJpanel1MousePressed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(5);
+        jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_viewHousesJpanel1MousePressed
 
     private void viewButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButton2ActionPerformed
@@ -1493,6 +1650,101 @@ private User currentUser;
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_deletejButton2ActionPerformed
 
+    private void staffTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTableMousePressed
+        // TODO add your handling code here:
+        int tableSize = staffTable.getRowCount();
+        int selectedRow = staffTable.getSelectedRow();
+        if (selectedRow >= 0 || selectedRow < tableSize) {
+            StaffUser selectedStaff = (StaffUser) staffTable.getValueAt(selectedRow, 0);
+            activeStaff = selectedStaff;
+            editStaffUsername.setText(selectedStaff.getUsername());
+            editStaffName.setText(selectedStaff.getName());
+            editStaffPhone.setText(selectedStaff.getPhone());
+            editStaffTitle.setText(selectedStaff.getTitle());
+            editStaffPassword.setText(selectedStaff.getPassword());
+        }
+    }//GEN-LAST:event_staffTableMousePressed
+
+    private void updateStaffButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffButtonMousePressed
+        // TODO add your handling code here:
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+
+//        boolean isValidUpdate = validateUserEdit() ;
+//        if (isValidUpdate) {
+//            activeStaff.setUsername(_username);
+//            activeStaff.setName(_name);
+//            activeStaff.setPhone(_phone);
+//            activeStaff.setTitle(_title);
+//            activeStaff.setPassword(_password);
+//            populateStaffTable();
+//            JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
+//        }
+    }//GEN-LAST:event_updateStaffButtonMousePressed
+
+    private void updateStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaffButtonActionPerformed
+        // TODO add your handling code here:
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+        
+        boolean isValidUpdate = validateUserEdit() ;
+        if (isValidUpdate) {
+            activeStaff.setUsername(_username);
+            activeStaff.setName(_name);
+            activeStaff.setPhone(_phone);
+            activeStaff.setTitle(_title);
+            activeStaff.setPassword(_password);
+            populateStaffTable();
+            JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
+    }//GEN-LAST:event_updateStaffButtonActionPerformed
+   
+    }
+        public boolean validateUserEdit() {
+        muncipalityStaffDirectory userList = new muncipalityStaffDirectory();
+        String _username = editStaffUsername.getText();
+        String _name = editStaffName.getText();
+        String _phone = editStaffPhone.getText();
+        String _title = editStaffTitle.getText();
+        String _password = editStaffPassword.getText();
+        
+                // Validate username
+        if ("".equals(_username) || _username == null) {
+            // JOptionPane.showMessageDialog(this, "Error: Name is required");
+            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
+            return false;
+        }
+         if (!userList.isUsernameUpdateValid(activeStaff, _username)) {
+              JOptionPane.showMessageDialog(this, "Username already taken", "Error", 0);
+             return false;
+        } 
+         // Validate name
+        if ("".equals(_name) || _name == null) {
+            JOptionPane.showMessageDialog(this, "Name is required", "Error", 0);
+            return false;
+        } 
+           // Validate Phone
+        if ("".equals(_phone) || _phone == null) {
+            JOptionPane.showMessageDialog(this, "Phone is required", "Error", 0);
+            return false;
+        }
+           // Validate Title
+        if ("".equals(_title) || _title == null) {
+            JOptionPane.showMessageDialog(this, "Title is required", "Error", 0);
+            return false;
+        }
+             // Validate Password
+        if ("".equals(_password) || _password == null) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -1508,6 +1760,8 @@ private User currentUser;
                 new MunicipalityPage().setVisible(true);
             }
         });
+        
+        
         
         
 //    private boolean fireValidations() {
@@ -1599,12 +1853,23 @@ private User currentUser;
     private javax.swing.JPanel createHousejPanel;
     private javax.swing.JPanel createUserJPanel;
     private javax.swing.JButton deletejButton2;
+    private javax.swing.JTextField editStaffName;
+    private javax.swing.JPasswordField editStaffPassword;
+    private javax.swing.JTextField editStaffPhone;
+    private javax.swing.JTextField editStaffTitle;
+    private javax.swing.JTextField editStaffUsername;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1618,6 +1883,8 @@ private User currentUser;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1626,6 +1893,7 @@ private User currentUser;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel manageStaffPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField nameField3;
     private javax.swing.JLabel namejLabel13;
@@ -1646,8 +1914,10 @@ private User currentUser;
     private javax.swing.JLabel ssnjLabel13;
     private javax.swing.JLabel ssnjLabel15;
     private javax.swing.JTextField ssnjTextField1;
+    private javax.swing.JTable staffTable;
     private javax.swing.JPanel updateCitizenjPanel;
     private javax.swing.JPanel updateJPanel;
+    private javax.swing.JButton updateStaffButton;
     private javax.swing.JPanel userMgmtPanel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField usernameField1;
