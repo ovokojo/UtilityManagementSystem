@@ -9,6 +9,7 @@ import Models.User.RoleType;
 import Models.User.User;
 import Models.muncipality.CitizenInfo;
 import Models.muncipality.House;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ private User currentUser;
         
             userMgmtPanel.setVisible(false);
             registerHousesJpanel.setVisible(false);
+            viewHousingjPanel4.setVisible(false);
         }
         if (currentUser.getRole().equals(RoleType.MunicipalityHousingManager)) {
            populateCitizenHousingTable();
@@ -65,6 +67,7 @@ private User currentUser;
                         row[3] = user.getCitizenInfo().getPhone();
                         row[4] = user.getCitizenInfo().getBirthDate();
                         model.addRow(row);
+                        
                 }
     }
     
@@ -79,6 +82,22 @@ private User currentUser;
                         row[3] = user.getCitizenInfo().getPhone();
                         row[4] = user.getCitizenInfo().getBirthDate();
                         model.addRow(row);
+                        
+                }
+    }
+     public void populateCitizenInfoUpdateTable() {
+        DefaultTableModel model = (DefaultTableModel) citizensInInfoTable5.getModel();
+        model.setRowCount(0);
+                for (User user : mockCitizenUserList)  {
+                    Object[] row = new Object[6];
+                        row[0] = user;
+                        row[1] = user.getCitizenInfo().getName();
+                        row[2] = user.getCitizenInfo().getSsn();
+                        row[3] = user.getCitizenInfo().getPhone();
+                        row[4] = user.getCitizenInfo().getBirthDate();
+                        row[5] = user.getPassword();
+                        model.addRow(row);
+                        
                 }
     }
       
@@ -175,18 +194,26 @@ private User currentUser;
         citizensInHousingTable1 = new javax.swing.JTable();
         updateJPanel = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
-        addressL1Field4 = new javax.swing.JTextField();
-        addressL1Field5 = new javax.swing.JTextField();
-        addL2jLabel10 = new javax.swing.JLabel();
-        housingAreajLabel11 = new javax.swing.JLabel();
-        addL1jLabel12 = new javax.swing.JLabel();
-        secretKeyField2 = new javax.swing.JPasswordField();
         usernameField2 = new javax.swing.JTextField();
         backButton2 = new javax.swing.JButton();
         ssnjLabel13 = new javax.swing.JLabel();
         usernamejLabel14 = new javax.swing.JLabel();
         saveButton2 = new javax.swing.JButton();
-        housingAreajTextField2 = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        citizensInInfoTable5 = new javax.swing.JTable();
+        viewButton2 = new javax.swing.JButton();
+        usernamejLabel16 = new javax.swing.JLabel();
+        usernameField3 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        BirthDatejLabel11 = new javax.swing.JLabel();
+        birthDatejTextField2 = new javax.swing.JTextField();
+        phonejTextField1 = new javax.swing.JTextField();
+        ssnjTextField1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        passjTextField1 = new javax.swing.JTextField();
+        deletejButton2 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        citizensInInfoTable4 = new javax.swing.JTable();
         createHousejPanel = new javax.swing.JPanel();
         addressL1Field1 = new javax.swing.JTextField();
         saveHousingButton = new javax.swing.JButton();
@@ -758,24 +785,6 @@ private User currentUser;
 
         jPanel12.setBackground(new java.awt.Color(204, 255, 204));
 
-        addressL1Field4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressL1Field4ActionPerformed(evt);
-            }
-        });
-
-        addressL1Field5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressL1Field5ActionPerformed(evt);
-            }
-        });
-
-        addL2jLabel10.setText("Address Line 2");
-
-        housingAreajLabel11.setText("Housing Area");
-
-        addL1jLabel12.setText("Address Line 1");
-
         backButton2.setText("Back");
         backButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -785,18 +794,60 @@ private User currentUser;
 
         ssnjLabel13.setText("SSN");
 
-        usernamejLabel14.setText("Username");
+        usernamejLabel14.setText("Name");
 
-        saveButton2.setText("Save");
+        saveButton2.setText("Update");
         saveButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButton2ActionPerformed(evt);
             }
         });
 
-        housingAreajTextField2.addActionListener(new java.awt.event.ActionListener() {
+        citizensInInfoTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Username", "Name", "SSN", "Phone", "Birth Date", "Password"
+            }
+        ));
+        jScrollPane7.setViewportView(citizensInInfoTable5);
+
+        viewButton2.setText("View");
+        viewButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                housingAreajTextField2ActionPerformed(evt);
+                viewButton2ActionPerformed(evt);
+            }
+        });
+
+        usernamejLabel16.setText("Username");
+
+        jLabel10.setText("Phone");
+
+        BirthDatejLabel11.setText("Birth Date");
+
+        birthDatejTextField2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        birthDatejTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                birthDatejTextField2ActionPerformed(evt);
+            }
+        });
+
+        phonejTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phonejTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Password");
+
+        deletejButton2.setText("Delete");
+        deletejButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletejButton2ActionPerformed(evt);
             }
         });
 
@@ -804,68 +855,135 @@ private User currentUser;
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 80, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(60, 60, 60))
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernamejLabel14)
-                            .addComponent(addL1jLabel12)
-                            .addComponent(housingAreajLabel11)
-                            .addComponent(ssnjLabel13)
-                            .addComponent(addL2jLabel10))
-                        .addGap(39, 39, 39)
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addGap(172, 172, 172)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel12Layout.createSequentialGroup()
+                                        .addComponent(usernamejLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(68, 68, 68))
+                                    .addGroup(jPanel12Layout.createSequentialGroup()
+                                        .addComponent(ssnjLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(77, 77, 77))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createSequentialGroup()
+                                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(usernamejLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(BirthDatejLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(secretKeyField2)
+                            .addComponent(birthDatejTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(usernameField2)
-                            .addComponent(saveButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addressL1Field5)
-                            .addComponent(addressL1Field4, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(housingAreajTextField2))))
-                .addContainerGap(181, Short.MAX_VALUE))
+                            .addComponent(usernameField3)
+                            .addComponent(phonejTextField1)
+                            .addComponent(ssnjTextField1)
+                            .addComponent(passjTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(saveButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(deletejButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(backButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(backButton2)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(viewButton2)
+                        .addGap(10, 10, 10)))
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usernameField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernamejLabel14))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ssnjLabel13)
+                            .addComponent(ssnjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usernameField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernamejLabel16))
+                        .addGap(54, 54, 54))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(phonejTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usernamejLabel14))
-                .addGap(41, 41, 41)
+                    .addComponent(jLabel11)
+                    .addComponent(passjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(secretKeyField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ssnjLabel13))
-                .addGap(38, 38, 38)
+                    .addComponent(birthDatejTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BirthDatejLabel11))
+                .addGap(52, 52, 52)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(housingAreajLabel11)
-                    .addComponent(housingAreajTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addL1jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressL1Field5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addL2jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressL1Field4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addComponent(saveButton2)
-                .addGap(99, 99, 99))
+                    .addComponent(saveButton2)
+                    .addComponent(deletejButton2))
+                .addGap(78, 78, 78))
         );
+
+        citizensInInfoTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Username", "Name", "SSN", "Phone", "Birth Date"
+            }
+        ));
+        jScrollPane6.setViewportView(citizensInInfoTable4);
 
         javax.swing.GroupLayout updateJPanelLayout = new javax.swing.GroupLayout(updateJPanel);
         updateJPanel.setLayout(updateJPanelLayout);
         updateJPanelLayout.setHorizontalGroup(
             updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(updateJPanelLayout.createSequentialGroup()
+                    .addGap(70, 70, 70)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(70, Short.MAX_VALUE)))
         );
         updateJPanelLayout.setVerticalGroup(
             updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(updateJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(updateJPanelLayout.createSequentialGroup()
+                    .addGap(278, 278, 278)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(279, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("tab3", updateJPanel);
@@ -1069,7 +1187,7 @@ private User currentUser;
         
             
             populateCitizenHousingTable();
-            jTabbedPane1.setSelectedIndex(5);
+            jTabbedPane1.setSelectedIndex(4);
             
          }
 //        if(UserDirectory.checkUsername(_username)) {
@@ -1182,30 +1300,53 @@ private User currentUser;
         mockCitizenUserList.add(newUser);
         // refresh table
         populateCitizenInfoTable();
+        populateCitizenInfoUpdateTable();
         populateCitizenInfoToHouseTable();
         // navigate to new page
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_saveUserButtonActionPerformed
-
-    private void addressL1Field4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressL1Field4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addressL1Field4ActionPerformed
-
-    private void addressL1Field5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressL1Field5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addressL1Field5ActionPerformed
 
     private void backButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_backButton2ActionPerformed
 
     private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton2ActionPerformed
-        // TODO add your handling code here:
+        int tableSize = citizensInInfoTable5.getRowCount();
+         int selectedRow = citizensInInfoTable5.getSelectedRow();
+         if (selectedRow >= 0 || selectedRow < tableSize) {
+            User userInfo = (User) citizensInInfoTable5.getValueAt(selectedRow, 0);
+            CitizenInfo citizen = userInfo.getCitizenInfo();
+            String _name = usernameField2.getText();
+            String _ssn = ssnjTextField1.getText();
+            String _phone = phonejTextField1.getText();
+            String _username = usernameField3.getText();
+            String _password = passjTextField1.getText();
+            
+            if ("".equals(_username) || _username == null) {
+            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
+            return;
+        }
+        if ("".equals(_password) || _password == null) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
+            return;
+        }
+            
+            userInfo.setUsername(_username);
+            userInfo.setPassword(_password);
+            citizen.setName(_name);
+            citizen.setSsn(_ssn);
+            citizen.setPhone(_phone);
+             JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Updated!", _name));
+        
+         
+        // refresh table
+        populateCitizenInfoTable();
+        populateCitizenInfoUpdateTable();
+        populateCitizenInfoToHouseTable();
+        // navigate to new page
+        jTabbedPane1.setSelectedIndex(1);  
+         }
     }//GEN-LAST:event_saveButton2ActionPerformed
-
-    private void housingAreajTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_housingAreajTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_housingAreajTextField2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -1311,6 +1452,47 @@ private User currentUser;
         jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_viewHousesJpanel1MousePressed
 
+    private void viewButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButton2ActionPerformed
+        // TODO add your handling code here:
+        int tableSize = citizensInInfoTable5.getRowCount();
+        int selectedRow = citizensInInfoTable5.getSelectedRow();
+        if (selectedRow >= 0 || selectedRow < tableSize) {
+            DefaultTableModel modelinfo= (DefaultTableModel)citizensInInfoTable5.getModel();
+            usernameField3.setText( modelinfo.getValueAt(selectedRow, 0).toString());
+            usernameField2.setText( modelinfo.getValueAt(selectedRow, 1).toString());
+            ssnjTextField1.setText( modelinfo.getValueAt(selectedRow, 2).toString());
+            phonejTextField1.setText( modelinfo.getValueAt(selectedRow, 3).toString());
+            birthDatejTextField2.setText(modelinfo.getValueAt(selectedRow, 4).toString());
+            passjTextField1.setText(modelinfo.getValueAt(selectedRow, 5).toString());
+        }
+        
+    }//GEN-LAST:event_viewButton2ActionPerformed
+
+    private void birthDatejTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDatejTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_birthDatejTextField2ActionPerformed
+
+    private void phonejTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phonejTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phonejTextField1ActionPerformed
+
+    private void deletejButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletejButton2ActionPerformed
+        // TODO add your handling code here:
+        int tableSize = citizensInInfoTable5.getRowCount();
+        int selectedRow = citizensInInfoTable5.getSelectedRow();
+        if (selectedRow >= 0 || selectedRow < tableSize) {
+            DefaultTableModel modelinfo= (DefaultTableModel)citizensInInfoTable5.getModel();
+            User userInfo = (User) citizensInInfoTable5.getValueAt(selectedRow, 0);
+            mockCitizenUserList.remove(userInfo);
+        }
+        
+        populateCitizenInfoTable();
+        populateCitizenInfoUpdateTable();
+        populateCitizenInfoToHouseTable();
+        // navigate to new page
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_deletejButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1395,31 +1577,32 @@ private User currentUser;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BirthDatejLabel10;
+    private javax.swing.JLabel BirthDatejLabel11;
     private javax.swing.JLabel NamejLabel;
-    private javax.swing.JLabel addL1jLabel12;
-    private javax.swing.JLabel addL2jLabel10;
     private javax.swing.JTextField addressL1Field;
     private javax.swing.JTextField addressL1Field1;
-    private javax.swing.JTextField addressL1Field4;
-    private javax.swing.JTextField addressL1Field5;
     private javax.swing.JComboBox<String> areaDropdown;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButton1;
     private javax.swing.JButton backButton2;
     private javax.swing.JLabel birthDatejLabel;
     private javax.swing.JTextField birthDatejTextField1;
+    private javax.swing.JTextField birthDatejTextField2;
     private com.toedter.calendar.JDateChooser citizenBirthChooser;
     private javax.swing.JTable citizensInHousingTable1;
     private javax.swing.JTable citizensInHousingTable2;
     private javax.swing.JTable citizensInInfoTable2;
     private javax.swing.JTable citizensInInfoTable3;
+    private javax.swing.JTable citizensInInfoTable4;
+    private javax.swing.JTable citizensInInfoTable5;
     private javax.swing.JPanel createCitizenjPanel4;
     private javax.swing.JPanel createHousejPanel;
     private javax.swing.JPanel createUserJPanel;
-    private javax.swing.JLabel housingAreajLabel11;
-    private javax.swing.JTextField housingAreajTextField2;
+    private javax.swing.JButton deletejButton2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1439,36 +1622,43 @@ private User currentUser;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField nameField3;
     private javax.swing.JLabel namejLabel13;
+    private javax.swing.JTextField passjTextField1;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordjLabel14;
     private javax.swing.JTextField phoneField;
     private javax.swing.JPasswordField phoneJField3;
     private javax.swing.JLabel phonejLabel16;
+    private javax.swing.JTextField phonejTextField1;
     private javax.swing.JPanel registerHousesJpanel;
     private javax.swing.JButton saveButton2;
     private javax.swing.JButton saveHousingButton;
     private javax.swing.JButton saveUserButton;
-    private javax.swing.JPasswordField secretKeyField2;
     private javax.swing.JTextField ssnField;
     private javax.swing.JPasswordField ssnField1;
     private javax.swing.JLabel ssnjLabel12;
     private javax.swing.JLabel ssnjLabel13;
     private javax.swing.JLabel ssnjLabel15;
+    private javax.swing.JTextField ssnjTextField1;
     private javax.swing.JPanel updateCitizenjPanel;
     private javax.swing.JPanel updateJPanel;
     private javax.swing.JPanel userMgmtPanel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField usernameField1;
     private javax.swing.JTextField usernameField2;
+    private javax.swing.JTextField usernameField3;
     private javax.swing.JLabel usernamejLabel14;
     private javax.swing.JLabel usernamejLabel15;
+    private javax.swing.JLabel usernamejLabel16;
     private javax.swing.JLabel usernamejLabel4;
     private javax.swing.JButton viewButton1;
+    private javax.swing.JButton viewButton2;
     private javax.swing.JPanel viewCitizenjPanel5;
     private javax.swing.JPanel viewHousesJpanel1;
     private javax.swing.JPanel viewHousingjPanel4;

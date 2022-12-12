@@ -5,6 +5,7 @@
 package Models.Bank;
 
 //import Business.Role.BankAdvisor;
+import Models.User.StaffUser;
 import java.util.Date;
 import Models.User.User;
 
@@ -17,9 +18,9 @@ public class BankServiceRequest {
     public String accountNumber;
     public String date;
     public String description;
-    public BankServiceStaff assignedTo;
+    public StaffUser assignedTo;
     public String status;
-     public BankServiceRequest(String accountNumber, String date,String description, BankServiceStaff assignedTo, String status) {
+     public BankServiceRequest(String accountNumber, String date,String description, StaffUser assignedTo, String status) {
         this.accountNumber = accountNumber;
         this.date = date;
         this.description = description;
@@ -51,11 +52,11 @@ public class BankServiceRequest {
         this.description = description;
     }
 
-    public BankServiceStaff getAssignedTo() {
+    public StaffUser getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(BankServiceStaff assignedTo) {
+    public void setAssignedTo(StaffUser assignedTo) {
         this.assignedTo = assignedTo;
     }
 
