@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Models.muncipality;
+package Models.Muncipality;
 import Models.User.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.HashMap;
 public class CitizenInfo {
     private String name;
     private String ssn;
-    private LocalDate birthDate;
+    private String birthDate;
     private String phone;
     private House house;
 
-    public CitizenInfo(String name, String ssn, LocalDate birthDate, String phone) {
+    public CitizenInfo(String name, String ssn, String birthDate, String phone) {
         this.name = name;
         this.ssn = ssn;
         this.birthDate = birthDate;
@@ -43,11 +43,11 @@ public class CitizenInfo {
         this.ssn = ssn;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

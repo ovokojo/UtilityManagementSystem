@@ -8,9 +8,9 @@ import Models.User.RoleType;
 import Models.User.User;
 import javax.swing.JOptionPane;
 import Models.User.UserDirectory;
+import Pages.Municipality.MunicipalityPage;
 import Pages.Utility.UtilityManager;
 
-import pages.Municipality.MunicipalityPage;
 import pages.customer.customerJFrame;
 
 /**

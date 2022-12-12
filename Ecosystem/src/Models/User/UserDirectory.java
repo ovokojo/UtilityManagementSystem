@@ -17,7 +17,7 @@ public class UserDirectory {
    public ArrayList<User> allUsers  = Database.getUsers();
    
     public UserDirectory() {
-        // sys admin
+        /// sys admin
 //    initializeSysAdmin();
 //    initializeMunicipalityAdmin();
 //     initializeUtilityAdmin();

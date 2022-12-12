@@ -2,18 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pages.Municipality;
+package Pages.Municipality;
 
+import Models.Muncipality.CitizenInfo;
 import javax.swing.JOptionPane;
 import Models.User.RoleType;
 import Models.User.StaffUser;
 import Models.User.User;
 import Models.muncipality.muncipalityStaffDirectory;
-import Models.muncipality.CitizenInfo;
-import Models.muncipality.House;
+import Models.Muncipality.House;
 import Pages.Login;
 import java.text.MessageFormat;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -1578,7 +1577,7 @@ private User currentUser;
          // Create citizen info
         String _name = nameField.getText();
         String _ssn = ssnField.getText();
-        LocalDate _birthDate = citizenBirthChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String _birthDate = citizenBirthChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString();
         String _phone = phoneField.getText();
        String _username = usernameField.getText();
         String _password = passwordField.getText();
