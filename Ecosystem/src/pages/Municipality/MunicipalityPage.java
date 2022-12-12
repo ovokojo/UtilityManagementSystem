@@ -6,6 +6,7 @@ package Pages.Municipality;
 
 import Database.Database;
 import Models.Muncipality.CitizenInfo;
+import Models.Muncipality.CitizenInfoDirectory;
 import javax.swing.JOptionPane;
 import Models.User.RoleType;
 import Models.User.StaffUser;
@@ -1308,6 +1309,7 @@ private User currentUser;
         // update user to include citizen info
         newUser.setCitizenInfo(citizen);
        // update db
+        CitizenInfoDirectory.citizenList.add(citizen);
         Database.createUser(newUser, citizen);
         mockCitizenUserList.add(newUser);
         // refresh table
@@ -1590,11 +1592,7 @@ private User currentUser;
             public void run() {
                 new MunicipalityPage().setVisible(true);
             }
-        });
-        
-        
-        
-        
+        });    
 //    private boolean fireValidations() {
 //        boolean valid = true;
 

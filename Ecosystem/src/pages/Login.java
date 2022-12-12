@@ -3,16 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Pages;
-
 import Models.User.RoleType;
 import Models.User.User;
 import javax.swing.JOptionPane;
 import Models.User.UserDirectory;
+import Pages.Bank.BankManagerPage;
 import Pages.Municipality.MunicipalityPage;
 import Pages.Utility.UtilityManager;
-
-import pages.customer.customerJFrame;
-
+import Pages.customer.customerJFrame;
 /**
  *
  * @author thomaskojoaddaquay
@@ -121,8 +119,10 @@ public class Login extends javax.swing.JFrame {
             home.show();
             dispose();
         }
-          if (currentUser.getRole().equals(RoleType.BankAdmin) || currentUser.getRole().equals(RoleType.BankManager)) {
-            // TODO : Fix bank page bug
+          if (currentUser.getRole().equals(RoleType.BankAdmin) || currentUser.getRole().equals(RoleType.BankManager) || currentUser.getRole().equals(RoleType.BankCustomerService)) {
+            BankManagerPage home = new BankManagerPage();
+            home.setCurrentUser(currentUser);
+            home.show();
             dispose();
         }
         // TODO: If customer, navigate to customer fram

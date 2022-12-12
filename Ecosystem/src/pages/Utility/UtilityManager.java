@@ -103,8 +103,8 @@ public class UtilityManager extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         billingTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        menuBarPanel = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
+        menuBarPanel = new javax.swing.JPanel();
         tabbedPane = new javax.swing.JTabbedPane();
         requestsPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -271,27 +271,22 @@ public class UtilityManager extends javax.swing.JFrame {
 
         sideBarPanel.add(billingTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 140, 30));
 
+        logoutButton.setText("Logout");
+        sideBarPanel.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, -1, -1));
+
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
         menuBarPanel.setBackground(new java.awt.Color(0, 0, 0));
-
-        logoutButton.setText("Logout");
 
         javax.swing.GroupLayout menuBarPanelLayout = new javax.swing.GroupLayout(menuBarPanel);
         menuBarPanel.setLayout(menuBarPanelLayout);
         menuBarPanelLayout.setHorizontalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarPanelLayout.createSequentialGroup()
-                .addContainerGap(674, Short.MAX_VALUE)
-                .addComponent(logoutButton)
-                .addGap(20, 20, 20))
+            .addGap(0, 760, Short.MAX_VALUE)
         );
         menuBarPanelLayout.setVerticalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarPanelLayout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(logoutButton)
-                .addGap(14, 14, 14))
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
         pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));

@@ -3,12 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models.Muncipality;
-import Models.User.User;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
+import java.util.Random;
 /**
  *
  * @author vatsalkapadia
@@ -19,12 +14,19 @@ public class CitizenInfo {
     private String birthDate;
     private String phone;
     private House house;
+    private int bankAccount;
+    private int bankBalance;
 
     public CitizenInfo(String name, String ssn, String birthDate, String phone) {
         this.name = name;
         this.ssn = ssn;
         this.birthDate = birthDate;
         this.phone = phone;
+        
+      Random random = new Random();
+      int rand = random.nextInt(100000)+999999;
+      this.bankAccount = rand;
+      this.bankBalance = 0;
     }
     
     public String getName() {
@@ -65,6 +67,22 @@ public class CitizenInfo {
 
     public void setHouse(House house) {
         this.house = house;
+    }
+    
+        public int getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(int bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public int getBankBalance() {
+        return bankBalance;
+    }
+
+    public void setBankBalance(int bankBalance) {
+        this.bankBalance = bankBalance;
     }
     
      @Override

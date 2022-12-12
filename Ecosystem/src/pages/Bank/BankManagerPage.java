@@ -2,19 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package Pages.Bank;
 import Models.Bank.BankAccount;
 import Models.Bank.BankAccountDirectory;
 import Models.Bank.BankServiceRequest;
 import Models.Bank.BankServiceRequestDirectory;
 import Models.Bank.BankServiceStaffDirectory;
+import Models.Muncipality.CitizenInfo;
+import Models.Muncipality.CitizenInfoDirectory;
 import Models.User.RoleType;
 import Models.User.StaffUser;
 import Models.User.User;
 import Models.User.UserDirectory;
 import Pages.Login;
-import static java.lang.String.valueOf;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author liuyanzi
  */
-public class BankPage extends javax.swing.JFrame {
+public class BankManagerPage extends javax.swing.JFrame {
  ArrayList<BankServiceRequest> allRequests= new BankServiceRequestDirectory().getRequests();
  ArrayList<StaffUser> allStaff = new BankServiceStaffDirectory().getAllStaff();
  ArrayList<BankAccount> allAccount = new BankAccountDirectory().getAccount();
@@ -35,42 +41,58 @@ public class BankPage extends javax.swing.JFrame {
     /**
      * Creates new form BankManager
      */
-    public BankPage() {
+    public BankManagerPage() {
         initComponents();
+        populateBankAccountTable();
         populateRequestsTable();
         populateStaffTable();
-        populateBankAccountTable();
         setStaffDropDownOptions();
-        hideRequestUpdatePanel();
+              // hide tab based on role 
     }
+    
+//    void createPieChart(){
+//        PieChart.Data data1 = new PieChart.Data("Label 1", 100);
+//        PieChart.Data data2 = new PieChart.Data("Label 2", 200);
+//        PieChart chart = new PieChart();
+//        ObservableList<PieChart.Data> pieChartData =
+//                FXCollections.observableArrayList(
+//                new PieChart.Data("Grapefruit", 13),
+//                new PieChart.Data("Oranges", 25),
+//                new PieChart.Data("Plums", 10),
+//                new PieChart.Data("Pears", 22),
+//                new PieChart.Data("Apples", 30));
+//        Scene scene = new Scene(chart, 400, 300);
+//    }
     
     public void setCurrentUser(User user) {
         currentUser = user;
+        updateRoleBasedUI();
         System.out.println("Current User:");
         System.out.println(currentUser.getUsername());
-        // hide tab based on role
-        if (!currentUser.getRole().equals(RoleType.BankAdmin)) {
-        populateRequestsTable();
-        populateStaffTable();
-        populateBankAccountTable();
-        populateBankUserTable();
-        setStaffDropDownOptions();
-        hideRequestUpdatePanel();
+    }
+    
+    void updateRoleBasedUI() {
+        String role = currentUser.getRole();
+       if (role.equals(RoleType.BankAdmin)) {
+            populateRequestsTable();
+            populateStaffTable();
+            populateBankAccountTable();
+            setStaffDropDownOptions();
+            tabbedPane.setSelectedIndex(2);
         }
-        if (currentUser.getRole().equals(RoleType.BankManager)) {
-        populateRequestsTable();
-        populateStaffTable();
-        populateBankAccountTable();
-        setStaffDropDownOptions();
-        hideRequestUpdatePanel();
-        userMgmtTab.setVisible(false);
+        if (role.equals(RoleType.BankManager)) {
+            populateRequestsTable();
+            populateStaffTable();
+            populateBankAccountTable();
+            setStaffDropDownOptions();
+            hideRequestUpdatePanel();
+            tabbedPane.setSelectedIndex(0);
         }
-        if (currentUser.getRole().equals(RoleType.BankCustomerService)) {
-        populateRequestsTable();
-       
-        userMgmtTab.setVisible(false);
-        }
-       
+        if (role.equals(RoleType.BankCustomerService)) {
+            populateRequestsTable();
+            accountsTabButton.setVisible(false);
+            tabbedPane.setSelectedIndex(1);
+        }  
     }
     
     public void populateRequestsTable() {
@@ -105,23 +127,12 @@ public class BankPage extends javax.swing.JFrame {
      public void populateBankAccountTable() {
         DefaultTableModel model = (DefaultTableModel) bankAccountTable.getModel();
         model.setRowCount(0);
-         System.out.println("Active account:");
-                for (BankAccount account : allAccount)  {
-                    Object[] row = new Object[2];
-                        row[0] = account.getAccountNumber();
-                        row[1] = account.getBalance();
-                        model.addRow(row);
-                }
-    }
-     public void populateBankUserTable() {
-        DefaultTableModel model = (DefaultTableModel) bankUserTable.getModel();
-        model.setRowCount(0);
-         System.out.println("Active Bank User:");
-                for (User user : allUser)  {
-                    Object[] row = new Object[3];
-                        row[0] = user.getUsername();
-                        row[1] = user.getPassword();
-                        row[2] = user.getRole();
+                for (CitizenInfo account : CitizenInfoDirectory.citizenList)  {
+                    Object[] row = new Object[4];
+                        row[0] = account.getBankAccount();
+                        row[1] = account.getBankBalance();
+                        row[2] = account.getName();
+                        row[3] = account.getPhone();
                         model.addRow(row);
                 }
     }
@@ -148,15 +159,11 @@ public class BankPage extends javax.swing.JFrame {
                 requestDetailsPanel.setVisible(true);
     }
          
-     public void setStatusofRequestDropDownOptions(){
-         dropDownRequestStatus.setModel(new DefaultComboBoxModel(_getRequestStatus()));
-         }
-         
          public String[] _getRequestStatus() {
             ArrayList<String> status = new ArrayList<String>();
-        status.add("pending");
-        status.add("processing");
-        status.add("resolved");
+        status.add("Pending");
+        status.add("Processing");
+        status.add("Resolved");
         
          String[] dropdownStatus = status.toArray(new String[status.size()]);
          return dropdownStatus;
@@ -178,16 +185,16 @@ public class BankPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         staffTab = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        accountMgtTab = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        userMgmtTab = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        customerServiceTab = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        accountsTabButton = new javax.swing.JPanel();
+        accountsTabLabel = new javax.swing.JLabel();
         logoutBotton = new javax.swing.JButton();
         menuBarPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tabbedPane = new javax.swing.JTabbedPane();
+        accountListPanel = new javax.swing.JPanel();
+        bankAccountScrollPane3 = new javax.swing.JScrollPane();
+        bankAccountTable = new javax.swing.JTable();
+        jLabel24 = new javax.swing.JLabel();
         requestsPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -215,28 +222,6 @@ public class BankPage extends javax.swing.JFrame {
         editStaffTitle = new javax.swing.JTextField();
         editStaffPhone = new javax.swing.JTextField();
         editStaffPassword = new javax.swing.JPasswordField();
-        accountListPanel = new javax.swing.JPanel();
-        bankAccountScrollPane3 = new javax.swing.JScrollPane();
-        bankAccountTable = new javax.swing.JTable();
-        jLabel24 = new javax.swing.JLabel();
-        manageBankAccountPane = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        updateAccountButton = new javax.swing.JButton();
-        editAccountNumber = new javax.swing.JTextField();
-        editBalance = new javax.swing.JTextField();
-        userManagementPanel = new javax.swing.JPanel();
-        bankUserScrollPane4 = new javax.swing.JScrollPane();
-        bankUserTable = new javax.swing.JTable();
-        jLabel25 = new javax.swing.JLabel();
-        requestsPanel1 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        assignedJTable = new javax.swing.JTable();
-        requestDetailsPanel1 = new javax.swing.JPanel();
-        saveAssignedRequestButton = new javax.swing.JButton();
-        dropDownRequestStatus = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -256,16 +241,21 @@ public class BankPage extends javax.swing.JFrame {
         });
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Inquiries");
+        jLabel2.setText("Customer Service");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout requestsTabLayout = new javax.swing.GroupLayout(requestsTab);
         requestsTab.setLayout(requestsTabLayout);
         requestsTabLayout.setHorizontalGroup(
             requestsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestsTabLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel2)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         requestsTabLayout.setVerticalGroup(
             requestsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,6 +279,11 @@ public class BankPage extends javax.swing.JFrame {
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Staff");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout staffTabLayout = new javax.swing.GroupLayout(staffTab);
         staffTab.setLayout(staffTabLayout);
@@ -307,100 +302,45 @@ public class BankPage extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 140, 30));
+        sideBarPanel.add(staffTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 140, 30));
 
-        accountMgtTab.setBackground(new java.awt.Color(102, 102, 102));
-        accountMgtTab.addMouseListener(new java.awt.event.MouseAdapter() {
+        accountsTabButton.setBackground(new java.awt.Color(102, 102, 102));
+        accountsTabButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                accountMgtTabMouseClicked(evt);
+                accountsTabButtonMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                accountMgtTabMousePressed(evt);
+                accountsTabButtonMousePressed(evt);
             }
         });
 
-        jLabel10.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Account Management");
+        accountsTabLabel.setBackground(new java.awt.Color(102, 102, 102));
+        accountsTabLabel.setForeground(new java.awt.Color(255, 255, 255));
+        accountsTabLabel.setText("Accounts");
+        accountsTabLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                accountsTabLabelMousePressed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout accountMgtTabLayout = new javax.swing.GroupLayout(accountMgtTab);
-        accountMgtTab.setLayout(accountMgtTabLayout);
-        accountMgtTabLayout.setHorizontalGroup(
-            accountMgtTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(accountMgtTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addContainerGap(8, Short.MAX_VALUE))
+        javax.swing.GroupLayout accountsTabButtonLayout = new javax.swing.GroupLayout(accountsTabButton);
+        accountsTabButton.setLayout(accountsTabButtonLayout);
+        accountsTabButtonLayout.setHorizontalGroup(
+            accountsTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountsTabButtonLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(accountsTabLabel)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
-        accountMgtTabLayout.setVerticalGroup(
-            accountMgtTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, accountMgtTabLayout.createSequentialGroup()
+        accountsTabButtonLayout.setVerticalGroup(
+            accountsTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, accountsTabButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addComponent(accountsTabLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        sideBarPanel.add(accountMgtTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 140, 30));
-
-        userMgmtTab.setBackground(new java.awt.Color(102, 102, 102));
-        userMgmtTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userMgmtTabMousePressed(evt);
-            }
-        });
-
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("User Management");
-
-        javax.swing.GroupLayout userMgmtTabLayout = new javax.swing.GroupLayout(userMgmtTab);
-        userMgmtTab.setLayout(userMgmtTabLayout);
-        userMgmtTabLayout.setHorizontalGroup(
-            userMgmtTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userMgmtTabLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        userMgmtTabLayout.setVerticalGroup(
-            userMgmtTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userMgmtTabLayout.createSequentialGroup()
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        sideBarPanel.add(userMgmtTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 140, 30));
-
-        customerServiceTab.setBackground(new java.awt.Color(102, 102, 102));
-        customerServiceTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                customerServiceTabMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                customerServiceTabMousePressed(evt);
-            }
-        });
-
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Customer Service");
-
-        javax.swing.GroupLayout customerServiceTabLayout = new javax.swing.GroupLayout(customerServiceTab);
-        customerServiceTab.setLayout(customerServiceTabLayout);
-        customerServiceTabLayout.setHorizontalGroup(
-            customerServiceTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customerServiceTabLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel11)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-        customerServiceTabLayout.setVerticalGroup(
-            customerServiceTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customerServiceTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(7, Short.MAX_VALUE))
-        );
-
-        sideBarPanel.add(customerServiceTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 140, 30));
+        sideBarPanel.add(accountsTabButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 140, 30));
 
         logoutBotton.setBackground(new java.awt.Color(0, 51, 51));
         logoutBotton.setForeground(new java.awt.Color(255, 255, 255));
@@ -440,16 +380,76 @@ public class BankPage extends javax.swing.JFrame {
 
         tabbedPane.setBackground(new java.awt.Color(0, 0, 0));
 
+        accountListPanel.setBackground(new java.awt.Color(53, 53, 53));
+
+        bankAccountTable.setBackground(new java.awt.Color(53, 53, 53));
+        bankAccountTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Account#", "Balance", "Name", "Phone"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        bankAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bankAccountTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bankAccountTableMousePressed(evt);
+            }
+        });
+        bankAccountScrollPane3.setViewportView(bankAccountTable);
+
+        jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Account List");
+
+        javax.swing.GroupLayout accountListPanelLayout = new javax.swing.GroupLayout(accountListPanel);
+        accountListPanel.setLayout(accountListPanelLayout);
+        accountListPanelLayout.setHorizontalGroup(
+            accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountListPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+        accountListPanelLayout.setVerticalGroup(
+            accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountListPanelLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel24)
+                .addGap(37, 37, 37)
+                .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(391, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("tab3", accountListPanel);
+
         requestsPanel.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("INQUIRIES");
+        jLabel5.setText("Customer Support Requests");
         jLabel5.setMaximumSize(new java.awt.Dimension(142, 23));
         jLabel5.setMinimumSize(new java.awt.Dimension(142, 23));
         jLabel5.setPreferredSize(new java.awt.Dimension(142, 23));
 
         requestsTable.setBackground(new java.awt.Color(51, 51, 51));
+        requestsTable.setForeground(new java.awt.Color(255, 255, 255));
         requestsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -553,16 +553,16 @@ public class BankPage extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
             .addGroup(requestsPanelLayout.createSequentialGroup()
-                .addGap(315, 315, 315)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(248, 248, 248)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         requestsPanelLayout.setVerticalGroup(
             requestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(requestsPanelLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(requestDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -713,303 +713,6 @@ public class BankPage extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab2", staffPanel);
 
-        accountListPanel.setBackground(new java.awt.Color(53, 53, 53));
-
-        bankAccountTable.setBackground(new java.awt.Color(53, 53, 53));
-        bankAccountTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Account#", "Balance"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        bankAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bankAccountTableMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bankAccountTableMousePressed(evt);
-            }
-        });
-        bankAccountScrollPane3.setViewportView(bankAccountTable);
-
-        jLabel24.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Account List");
-
-        manageBankAccountPane.setBackground(new java.awt.Color(53, 53, 53));
-
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Account#");
-
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Balance");
-
-        updateAccountButton.setText("Update");
-        updateAccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                updateAccountButtonMousePressed(evt);
-            }
-        });
-        updateAccountButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateAccountButtonActionPerformed(evt);
-            }
-        });
-
-        editBalance.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBalanceActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout manageBankAccountPaneLayout = new javax.swing.GroupLayout(manageBankAccountPane);
-        manageBankAccountPane.setLayout(manageBankAccountPaneLayout);
-        manageBankAccountPaneLayout.setHorizontalGroup(
-            manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
-                .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addComponent(editAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(57, 57, 57)
-                        .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(editBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(updateAccountButton)))
-                .addContainerGap(183, Short.MAX_VALUE))
-        );
-        manageBankAccountPaneLayout.setVerticalGroup(
-            manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageBankAccountPaneLayout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel23))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(manageBankAccountPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(updateAccountButton)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout accountListPanelLayout = new javax.swing.GroupLayout(accountListPanel);
-        accountListPanel.setLayout(accountListPanelLayout);
-        accountListPanelLayout.setHorizontalGroup(
-            accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(accountListPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel24)
-                    .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(accountListPanelLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(manageBankAccountPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
-        accountListPanelLayout.setVerticalGroup(
-            accountListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(accountListPanelLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jLabel24)
-                .addGap(18, 18, 18)
-                .addComponent(bankAccountScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(manageBankAccountPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
-        );
-
-        tabbedPane.addTab("tab3", accountListPanel);
-
-        userManagementPanel.setBackground(new java.awt.Color(53, 53, 53));
-
-        bankUserTable.setBackground(new java.awt.Color(53, 53, 53));
-        bankUserTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "User Name", "Password", "Role"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        bankUserTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bankUserTableMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bankUserTableMousePressed(evt);
-            }
-        });
-        bankUserScrollPane4.setViewportView(bankUserTable);
-
-        jLabel25.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("User List");
-
-        javax.swing.GroupLayout userManagementPanelLayout = new javax.swing.GroupLayout(userManagementPanel);
-        userManagementPanel.setLayout(userManagementPanelLayout);
-        userManagementPanelLayout.setHorizontalGroup(
-            userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userManagementPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel25)
-                    .addComponent(bankUserScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
-        userManagementPanelLayout.setVerticalGroup(
-            userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userManagementPanelLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jLabel25)
-                .addGap(29, 29, 29)
-                .addComponent(bankUserScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(389, Short.MAX_VALUE))
-        );
-
-        tabbedPane.addTab("tab4", userManagementPanel);
-
-        requestsPanel1.setBackground(new java.awt.Color(53, 53, 53));
-
-        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Requests to Me");
-
-        assignedJTable.setBackground(new java.awt.Color(53, 53, 53));
-        assignedJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Bank Account #", "Date", "Description", "Assigned To", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        assignedJTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                assignedJTableMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                assignedJTableMousePressed(evt);
-            }
-        });
-        jScrollPane3.setViewportView(assignedJTable);
-
-        requestDetailsPanel1.setBackground(new java.awt.Color(53, 53, 53));
-
-        saveAssignedRequestButton.setText("Save");
-        saveAssignedRequestButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveAssignedRequestButtonActionPerformed(evt);
-            }
-        });
-
-        dropDownRequestStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "In Progress", "Complete" }));
-        dropDownRequestStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dropDownRequestStatusActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Status");
-
-        javax.swing.GroupLayout requestDetailsPanel1Layout = new javax.swing.GroupLayout(requestDetailsPanel1);
-        requestDetailsPanel1.setLayout(requestDetailsPanel1Layout);
-        requestDetailsPanel1Layout.setHorizontalGroup(
-            requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
-                .addGroup(requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(saveAssignedRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)
-                        .addComponent(dropDownRequestStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(207, Short.MAX_VALUE))
-        );
-        requestDetailsPanel1Layout.setVerticalGroup(
-            requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestDetailsPanel1Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addGroup(requestDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(dropDownRequestStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
-                .addComponent(saveAssignedRequestButton)
-                .addGap(27, 27, 27))
-        );
-
-        javax.swing.GroupLayout requestsPanel1Layout = new javax.swing.GroupLayout(requestsPanel1);
-        requestsPanel1.setLayout(requestsPanel1Layout);
-        requestsPanel1Layout.setHorizontalGroup(
-            requestsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestsPanel1Layout.createSequentialGroup()
-                .addGap(315, 315, 315)
-                .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestsPanel1Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addGroup(requestsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(requestDetailsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
-        );
-        requestsPanel1Layout.setVerticalGroup(
-            requestsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestsPanel1Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(requestDetailsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
-        );
-
-        tabbedPane.addTab("tab5", requestsPanel1);
-
         pagePanel.add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 760, 670));
         tabbedPane.getAccessibleContext().setAccessibleName("Requests");
 
@@ -1034,7 +737,7 @@ public class BankPage extends javax.swing.JFrame {
 
     private void requestsTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTabMousePressed
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(0);
+        tabbedPane.setSelectedIndex(1);
     }//GEN-LAST:event_requestsTabMousePressed
 
     private void staffTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTabMouseClicked
@@ -1045,30 +748,22 @@ public class BankPage extends javax.swing.JFrame {
 
     private void staffTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTabMousePressed
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(1);
+        tabbedPane.setSelectedIndex(2);
              
     }//GEN-LAST:event_staffTabMousePressed
 
-    private void accountMgtTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMgtTabMouseClicked
+    private void accountsTabButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountsTabButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_accountMgtTabMouseClicked
+    }//GEN-LAST:event_accountsTabButtonMouseClicked
 
-    private void accountMgtTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMgtTabMousePressed
+    private void accountsTabButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountsTabButtonMousePressed
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(2);
-    }//GEN-LAST:event_accountMgtTabMousePressed
+        tabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_accountsTabButtonMousePressed
 
     private void bankAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankAccountTableMousePressed
         // TODO add your handling code here:
-         int tableSize = bankAccountTable.getRowCount();
-        int selectedRow = bankAccountTable.getSelectedRow();
-            if (selectedRow >= 0 || selectedRow < tableSize) {
-                BankAccount selectedAccount = (BankAccount) bankAccountTable.getValueAt(selectedRow, 0);
-                
-                editAccountNumber.setText(selectedAccount.getAccountNumber().toString());
-                editBalance.setText(valueOf(selectedAccount.getBalance()));
-               
-         }       
+           
     }//GEN-LAST:event_bankAccountTableMousePressed
 
     private void bankAccountTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankAccountTableMouseClicked
@@ -1113,40 +808,6 @@ public class BankPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_requestsTableMouseClicked
 
-    private void bankUserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankUserTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bankUserTableMouseClicked
-
-    private void bankUserTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankUserTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bankUserTableMousePressed
-
-    private void customerServiceTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerServiceTabMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customerServiceTabMouseClicked
-
-    private void customerServiceTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerServiceTabMousePressed
-        // TODO add your handling code here:
-         tabbedPane.setSelectedIndex(4);
-        
-    }//GEN-LAST:event_customerServiceTabMousePressed
-
-    private void assignedJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedJTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_assignedJTableMouseClicked
-
-    private void assignedJTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedJTableMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_assignedJTableMousePressed
-
-    private void saveAssignedRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAssignedRequestButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveAssignedRequestButtonActionPerformed
-
-    private void dropDownRequestStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropDownRequestStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dropDownRequestStatusActionPerformed
-
     private void updateStaffButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffButtonMousePressed
         // TODO add your handling code here:
         String _username = editStaffUsername.getText();
@@ -1187,27 +848,6 @@ public class BankPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateStaffButtonActionPerformed
 
-    private void updateAccountButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateAccountButtonMousePressed
-        // TODO add your handling code here:
-        String _accountnumber = editAccountNumber.getText();
-        String _balance = editBalance.getText();
-       
-        
-    }//GEN-LAST:event_updateAccountButtonMousePressed
-
-    private void updateAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAccountButtonActionPerformed
-        // TODO add your handling code here:
-       
-         String _accountnumber = editAccountNumber.getText();
-        String _balance = editBalance.getText();
-       
-        
-    }//GEN-LAST:event_updateAccountButtonActionPerformed
-
-    private void editBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBalanceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editBalanceActionPerformed
-
     private void logoutBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBottonActionPerformed
         // TODO add your handling code here:
         Login loginpg = new Login();
@@ -1230,11 +870,20 @@ public class BankPage extends javax.swing.JFrame {
          }  
     }//GEN-LAST:event_bankStaffTableMousePressed
 
-    private void userMgmtTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMgmtTabMousePressed
+    private void accountsTabLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountsTabLabelMousePressed
+        // TODO add your handling code here:\
+         tabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_accountsTabLabelMousePressed
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
-        tabbedPane.setSelectedIndex(3);
-        
-    }//GEN-LAST:event_userMgmtTabMousePressed
+        tabbedPane.setSelectedIndex(1);
+    }//GEN-LAST:event_jLabel2MousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        tabbedPane.setSelectedIndex(2);
+    }//GEN-LAST:event_jLabel3MousePressed
 
     public boolean validateUserEdit() {
         BankServiceStaffDirectory userList = new BankServiceStaffDirectory();
@@ -1285,67 +934,41 @@ public class BankPage extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BankPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BankPage().setVisible(true);
+                new BankManagerPage().setVisible(true);
             }
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accountListPanel;
-    private javax.swing.JPanel accountMgtTab;
-    private javax.swing.JTable assignedJTable;
+    private javax.swing.JPanel accountsTabButton;
+    private javax.swing.JLabel accountsTabLabel;
     private javax.swing.JScrollPane bankAccountScrollPane3;
     private javax.swing.JTable bankAccountTable;
     private javax.swing.JScrollPane bankStaffScrollPane1;
     private javax.swing.JTable bankStaffTable;
-    private javax.swing.JScrollPane bankUserScrollPane4;
-    private javax.swing.JTable bankUserTable;
-    private javax.swing.JPanel customerServiceTab;
-    private javax.swing.JComboBox<String> dropDownRequestStatus;
     private javax.swing.JComboBox<String> dropDownStaff;
     private javax.swing.JComboBox<String> dropDownStatus;
-    private javax.swing.JTextField editAccountNumber;
-    private javax.swing.JTextField editBalance;
     private javax.swing.JTextField editStaffName;
     private javax.swing.JPasswordField editStaffPassword;
     private javax.swing.JTextField editStaffPhone;
     private javax.swing.JTextField editStaffTitle;
     private javax.swing.JTextField editStaffUsername;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1356,27 +979,19 @@ public class BankPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton logoutBotton;
-    private javax.swing.JPanel manageBankAccountPane;
     private javax.swing.JPanel manageStaffPanel;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel pagePanel;
     private javax.swing.JPanel requestDetailsPanel;
-    private javax.swing.JPanel requestDetailsPanel1;
     private javax.swing.JPanel requestsPanel;
-    private javax.swing.JPanel requestsPanel1;
     private javax.swing.JPanel requestsTab;
     private javax.swing.JTable requestsTable;
-    private javax.swing.JButton saveAssignedRequestButton;
     private javax.swing.JButton saveRequestButton;
     private javax.swing.JPanel sideBarPanel;
     private javax.swing.JPanel staffPanel;
     private javax.swing.JPanel staffTab;
     private javax.swing.JTabbedPane tabbedPane;
-    private javax.swing.JButton updateAccountButton;
     private javax.swing.JButton updateStaffButton;
-    private javax.swing.JPanel userManagementPanel;
-    private javax.swing.JPanel userMgmtTab;
     // End of variables declaration//GEN-END:variables
 }

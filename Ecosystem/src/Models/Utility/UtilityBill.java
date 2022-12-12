@@ -16,5 +16,37 @@ public class UtilityBill {
     public MaintenanceRequest request;
     public double hours;
     public double rate;
-    public String status; // Unpaid / Paid
+    public String status;
+
+    public MaintenanceRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(MaintenanceRequest request) {
+        this.request = request;
+    }
+
+    public double getHours() {
+        return hours;
+    }
+
+    public void setHours(double hours) {
+        this.hours = hours;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

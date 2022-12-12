@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models.Utility;
+import Models.Muncipality.CitizenInfo;
 import Models.User.StaffUser;
 
 /**
@@ -10,6 +11,13 @@ import Models.User.StaffUser;
  * @author thomaskojoaddaquay
  */
 public class MaintenanceRequest {
+    public String meterNumber;
+    public String date;
+    public String type;
+    public String description;
+    public StaffUser assignedTo;
+    public String status;
+    
     public MaintenanceRequest(String meterNumber, String date, String type, String description, StaffUser assignedTo, String status) {
         this.meterNumber = meterNumber;
         this.date = date;
@@ -72,10 +80,12 @@ public class MaintenanceRequest {
      return meterNumber;
     }
     
-    public String meterNumber;
-    public String date;
-    public String type;
-    public String description;
-    public StaffUser assignedTo;
-    public String status;
+    public CitizenInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(CitizenInfo customerInfo) {
+        this.customerInfo = customerInfo;
+    }
+    public CitizenInfo customerInfo;
 }
