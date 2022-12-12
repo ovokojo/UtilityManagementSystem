@@ -61,7 +61,46 @@ public class Database {
               System.out.println("Exception");
         }   
         return users;
-    }   
+    }  
+        public static ArrayList<User> getCitizens() {
+        Connection conn = null;
+        ArrayList<User> users = new ArrayList();
+        try {
+            // Connect to db
+            conn = DriverManager.getConnection(url);
+            Statement statement = conn.createStatement();
+            System.out.println("Connected!");
+            try {
+                ResultSet _result =  statement.executeQuery(GET_USERS);
+                // Extract data from result set
+                while (_result.next()) {
+                    // Create user
+                    String username = _result.getString("username");
+                    String password = _result.getString("password");
+                    String role = _result.getString("role");
+                    User user = new User(username, password, role);
+                    users.add(user);
+                   if (role.equals(RoleType.Customer ) && _result.getString("name") != null) {
+                        String name = _result.getString("name");
+                         String ssn = _result.getString("ssn");
+                         String birthDate = _result.getString("birthDate");
+                         String phone = _result.getString("phone");
+                        CitizenInfo data = new CitizenInfo(name, ssn, birthDate, phone);
+                        user.setCitizenInfo(data);
+                    }
+                } 
+                conn.close();
+            } catch (SQLException ex) {
+                conn.close();
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+              System.out.println("Exception");
+        }   
+        return users;
+    } 
+        
         public static boolean createUser(User user, CitizenInfo info) {
             boolean isComplete = false;
             Connection conn = null;

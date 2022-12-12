@@ -42,7 +42,6 @@ private User currentUser;
         // If not admin, hide user management tab
     }
     
-    
     public void populateStaffTable() {
         DefaultTableModel model = (DefaultTableModel) staffTable.getModel();
         model.setRowCount(0);
@@ -99,13 +98,12 @@ private User currentUser;
         DefaultTableModel model = (DefaultTableModel) citizenRegistryTable.getModel();
         model.setRowCount(0);
                 for (User user : mockCitizenUserList)  {
-                    Object[] row = new Object[6];
+                    Object[] row = new Object[5];
                         row[0] = user;
                         row[1] = user.getCitizenInfo().getName();
                         row[2] = user.getCitizenInfo().getSsn();
                         row[3] = user.getCitizenInfo().getPhone();
                         row[4] = user.getCitizenInfo().getBirthDate();
-                        row[5] = user.getPassword();
                         model.addRow(row);
                         
                 }
@@ -155,6 +153,7 @@ private User currentUser;
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         newCitizenTab = new javax.swing.JPanel();
         newCitizenTabLabel = new javax.swing.JLabel();
@@ -171,10 +170,8 @@ private User currentUser;
         createUserJPanel = new javax.swing.JPanel();
         createCitizenTab = new javax.swing.JPanel();
         usernamejLabel4 = new javax.swing.JLabel();
-        backButton = new javax.swing.JButton();
         usernameField = new javax.swing.JTextField();
         passwordjLabel14 = new javax.swing.JLabel();
-        passwordField = new javax.swing.JTextField();
         ssnjLabel15 = new javax.swing.JLabel();
         ssnField = new javax.swing.JTextField();
         phonejLabel16 = new javax.swing.JLabel();
@@ -185,9 +182,9 @@ private User currentUser;
         nameField = new javax.swing.JTextField();
         NamejLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
         updateJPanel = new javax.swing.JPanel();
         updateCitizensTab = new javax.swing.JPanel();
-        backButton2 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         citizenRegistryTable = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
@@ -197,15 +194,13 @@ private User currentUser;
         usernamejLabel16 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        BirthDatejLabel11 = new javax.swing.JLabel();
         updateCitizenNameField = new javax.swing.JTextField();
         updateCitizenSsnField = new javax.swing.JTextField();
         updateUsernameField = new javax.swing.JTextField();
         updatePhoneField = new javax.swing.JTextField();
-        updatePasswordField = new javax.swing.JTextField();
-        updateBirthDateField = new javax.swing.JTextField();
-        saveButton2 = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
         deletejButton2 = new javax.swing.JButton();
+        updatePasswordField = new javax.swing.JPasswordField();
         createHousejPanel = new javax.swing.JPanel();
         addressL1Field1 = new javax.swing.JTextField();
         saveHousingButton = new javax.swing.JButton();
@@ -246,15 +241,23 @@ private User currentUser;
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
+        jLabel1.setText("Welcome!");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel1)
+                .addContainerGap(696, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 90));
@@ -501,15 +504,8 @@ private User currentUser;
         usernamejLabel4.setForeground(new java.awt.Color(255, 255, 255));
         usernamejLabel4.setText("Username");
 
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-
         passwordjLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        passwordjLabel14.setText("password");
+        passwordjLabel14.setText("Password");
 
         ssnjLabel15.setForeground(new java.awt.Color(255, 255, 255));
         ssnjLabel15.setText("Social Security #");
@@ -537,66 +533,58 @@ private User currentUser;
 
         jLabel13.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("CREATE CITIZEN");
+        jLabel13.setText("REGISTER CITIZEN");
 
         javax.swing.GroupLayout createCitizenTabLayout = new javax.swing.GroupLayout(createCitizenTab);
         createCitizenTab.setLayout(createCitizenTabLayout);
         createCitizenTabLayout.setHorizontalGroup(
             createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createCitizenTabLayout.createSequentialGroup()
-                .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(createCitizenTabLayout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(saveUserButton))
-                    .addGroup(createCitizenTabLayout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(jLabel13))
+                .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
                     .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(createCitizenTabLayout.createSequentialGroup()
-                            .addComponent(passwordjLabel14)
-                            .addGap(68, 68, 68)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createCitizenTabLayout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(createCitizenTabLayout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addComponent(usernamejLabel4)
-                                .addGap(68, 68, 68)
-                                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap()
+                            .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(createCitizenTabLayout.createSequentialGroup()
+                                    .addComponent(NamejLabel)
+                                    .addGap(68, 68, 68)
+                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(createCitizenTabLayout.createSequentialGroup()
+                                    .addComponent(usernamejLabel4)
+                                    .addGap(68, 68, 68)
+                                    .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(passwordField)))))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, createCitizenTabLayout.createSequentialGroup()
                             .addGap(174, 174, 174)
                             .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(createCitizenTabLayout.createSequentialGroup()
-                                    .addComponent(ssnjLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(ssnField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(createCitizenTabLayout.createSequentialGroup()
-                                    .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(createCitizenTabLayout.createSequentialGroup()
-                                            .addComponent(phonejLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                        .addGroup(createCitizenTabLayout.createSequentialGroup()
-                                            .addComponent(birthDatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(23, 23, 23)))
-                                    .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(citizenBirthChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(phoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))))
-                        .addGroup(createCitizenTabLayout.createSequentialGroup()
-                            .addComponent(NamejLabel)
-                            .addGap(68, 68, 68)
-                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(passwordjLabel14)
+                                .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(createCitizenTabLayout.createSequentialGroup()
+                                        .addComponent(ssnjLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ssnField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createCitizenTabLayout.createSequentialGroup()
+                                        .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(createCitizenTabLayout.createSequentialGroup()
+                                                .addComponent(phonejLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                            .addGroup(createCitizenTabLayout.createSequentialGroup()
+                                                .addComponent(birthDatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(23, 23, 23)))
+                                        .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(citizenBirthChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(phoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(saveUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         createCitizenTabLayout.setVerticalGroup(
             createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createCitizenTabLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(backButton)
-                .addGap(45, 45, 45)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NamejLabel))
@@ -604,7 +592,7 @@ private User currentUser;
                 .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernamejLabel4))
-                .addGap(27, 27, 27)
+                .addGap(21, 21, 21)
                 .addGroup(createCitizenTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordjLabel14))
@@ -640,24 +628,17 @@ private User currentUser;
 
         updateCitizensTab.setBackground(new java.awt.Color(51, 51, 51));
 
-        backButton2.setText("Back");
-        backButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButton2ActionPerformed(evt);
-            }
-        });
-
         citizenRegistryTable.setBackground(new java.awt.Color(51, 51, 51));
         citizenRegistryTable.setForeground(new java.awt.Color(255, 255, 255));
         citizenRegistryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Username", "Name", "SSN", "Phone", "Birth Date", "Password"
+                "Username", "Name", "SSN", "Phone", "Birth Date"
             }
         ));
         citizenRegistryTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -669,7 +650,7 @@ private User currentUser;
 
         jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("UPDATE CITIZEN");
+        jLabel15.setText("CITIZEN REGISTRY");
 
         updatePanel.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -688,26 +669,16 @@ private User currentUser;
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Password");
 
-        BirthDatejLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        BirthDatejLabel11.setText("Birth Date");
-
         updatePhoneField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatePhoneFieldActionPerformed(evt);
             }
         });
 
-        updateBirthDateField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        updateBirthDateField.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBirthDateFieldActionPerformed(evt);
-            }
-        });
-
-        saveButton2.setText("Update");
-        saveButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButton2ActionPerformed(evt);
+                updateButtonActionPerformed(evt);
             }
         });
 
@@ -715,6 +686,12 @@ private User currentUser;
         deletejButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deletejButton2ActionPerformed(evt);
+            }
+        });
+
+        updatePasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePasswordFieldActionPerformed(evt);
             }
         });
 
@@ -726,13 +703,9 @@ private User currentUser;
                 .addContainerGap()
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(BirthDatejLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updatePasswordField)
-                            .addComponent(updateBirthDateField)))
+                        .addComponent(jLabel11)
+                        .addGap(72, 72, 72)
+                        .addComponent(updatePasswordField))
                     .addGroup(updatePanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -747,8 +720,8 @@ private User currentUser;
                             .addComponent(updateUsernameField)
                             .addComponent(updateCitizenSsnField)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
-                        .addGap(0, 117, Short.MAX_VALUE)
-                        .addComponent(saveButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 123, Short.MAX_VALUE)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)))
                 .addGap(66, 66, 66))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
@@ -780,18 +753,15 @@ private User currentUser;
                         .addComponent(updateCitizenNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(updateCitizenSsnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
                     .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(updatePasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel11))
+                    .addGroup(updatePanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateBirthDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BirthDatejLabel11))))
-                .addGap(18, 18, 18)
-                .addComponent(saveButton2)
+                        .addComponent(updatePasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67)
+                .addComponent(updateButton)
                 .addGap(27, 27, 27))
         );
 
@@ -802,27 +772,21 @@ private User currentUser;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updateCitizensTabLayout.createSequentialGroup()
                 .addGroup(updateCitizensTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(updateCitizensTabLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162)
-                        .addComponent(jLabel15)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(updateCitizensTabLayout.createSequentialGroup()
-                        .addGap(0, 80, Short.MAX_VALUE)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(updateCitizensTabLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(updatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)))
+                        .addGap(71, 71, 71))
+                    .addGroup(updateCitizensTabLayout.createSequentialGroup()
+                        .addGap(0, 80, Short.MAX_VALUE)
+                        .addGroup(updateCitizensTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(60, 60, 60))
         );
         updateCitizensTabLayout.setVerticalGroup(
             updateCitizensTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updateCitizensTabLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(updateCitizensTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(backButton2)
-                    .addComponent(jLabel15))
+                .addGap(41, 41, 41)
+                .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1243,11 +1207,6 @@ private User currentUser;
         // TODO add your handling code here: 
     }//GEN-LAST:event_areaDropdownActionPerformed
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_backButtonActionPerformed
-
     private void addressL1FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressL1FieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressL1FieldActionPerformed
@@ -1289,12 +1248,21 @@ private User currentUser;
          // Create citizen info
         String _name = nameField.getText();
         String _ssn = ssnField.getText();
-        String _birthDate = citizenBirthChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString();
         String _phone = phoneField.getText();
        String _username = usernameField.getText();
         String _password = passwordField.getText();
-        // TODO: Complete validations: check null values,  ssn is unique
-         if ("".equals(_username) || _username == null) {
+         // Validate Name
+        if ("".equals(_name) || _name == null) {
+            JOptionPane.showMessageDialog(this, "Name is required", "Error", 0);
+            return;
+        }
+         // Validate ssn
+        if ("".equals(_ssn) || _ssn == null) {
+            JOptionPane.showMessageDialog(this, "SSN is required", "Error", 0);
+            return;
+        }
+        
+            if ("".equals(_username) || _username == null) {
             JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
             return;
         }
@@ -1302,6 +1270,22 @@ private User currentUser;
             JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
             return;
         }
+    
+           // Validate Phone
+        if ("".equals(_phone) || _phone == null) {
+            JOptionPane.showMessageDialog(this, "Phone is required", "Error", 0);
+            return;
+        }
+        if (!_phone.matches("^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$")) {
+            JOptionPane.showMessageDialog(this, "Phone is invalid", "Error", 0);
+            return;
+        }
+        // Validate Age
+        if (citizenBirthChooser.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Date of Birth is required", "Error", 0);
+            return;
+        }
+        String _birthDate = citizenBirthChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString();
        // Create citizen info
         CitizenInfo citizen = new CitizenInfo(_name, _ssn, _birthDate, _phone );
         // Create user info
@@ -1320,12 +1304,7 @@ private User currentUser;
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_saveUserButtonActionPerformed
 
-    private void backButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton2ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_backButton2ActionPerformed
-
-    private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton2ActionPerformed
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         int tableSize = citizenRegistryTable.getRowCount();
          int selectedRow = citizenRegistryTable.getSelectedRow();
          if (selectedRow >= 0 || selectedRow < tableSize) {
@@ -1337,6 +1316,17 @@ private User currentUser;
             String _username = updateUsernameField.getText();
             String _password = updatePasswordField.getText();
             
+                     // Validate Name
+        if ("".equals(_name) || _name == null) {
+            JOptionPane.showMessageDialog(this, "Name is required", "Error", 0);
+            return;
+        }
+         // Validate ssn
+        if ("".equals(_ssn) || _ssn == null) {
+            JOptionPane.showMessageDialog(this, "SSN is required", "Error", 0);
+            return;
+        }
+        
             if ("".equals(_username) || _username == null) {
             JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
             return;
@@ -1345,7 +1335,18 @@ private User currentUser;
             JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
             return;
         }
+    
+           // Validate Phone
+        if ("".equals(_phone) || _phone == null) {
+            JOptionPane.showMessageDialog(this, "Phone is required", "Error", 0);
+            return;
+        }
+        if (!_phone.matches("^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$")) {
+            JOptionPane.showMessageDialog(this, "Phone is invalid", "Error", 0);
+            return;
+        }
             
+        
             userInfo.setUsername(_username);
             userInfo.setPassword(_password);
             citizen.setName(_name);
@@ -1360,7 +1361,7 @@ private User currentUser;
         // navigate to new page
         jTabbedPane1.setSelectedIndex(1);  
          }
-    }//GEN-LAST:event_saveButton2ActionPerformed
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -1429,10 +1430,6 @@ private User currentUser;
         jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_viewHouseTabMousePressed
 
-    private void updateBirthDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBirthDateFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateBirthDateFieldActionPerformed
-
     private void updatePhoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePhoneFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updatePhoneFieldActionPerformed
@@ -1452,7 +1449,6 @@ private User currentUser;
         updateCitizenNameField.setText("");
         updateCitizenSsnField.setText("");
         updatePhoneField.setText("");
-        updateBirthDateField.setText("");
         updatePasswordField.setText("");
     }//GEN-LAST:event_deletejButton2ActionPerformed
 
@@ -1530,12 +1526,15 @@ private User currentUser;
             updateCitizenNameField.setText( modelinfo.getCitizenInfo().getName());
             updateCitizenSsnField.setText( modelinfo.getCitizenInfo().getSsn());
             updatePhoneField.setText( modelinfo.getCitizenInfo().getPhone());
-            updateBirthDateField.setText(modelinfo.getCitizenInfo().getBirthDate());
             updatePasswordField.setText(modelinfo.getPassword());
             
          }
         
     }//GEN-LAST:event_citizenRegistryTableMousePressed
+
+    private void updatePasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updatePasswordFieldActionPerformed
    
     
         public boolean validateUserEdit() {
@@ -1659,14 +1658,11 @@ private User currentUser;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BirthDatejLabel11;
     private javax.swing.JLabel NamejLabel;
     private javax.swing.JTable ViewHousingTable;
     private javax.swing.JTextField addressL1Field;
     private javax.swing.JTextField addressL1Field1;
     private javax.swing.JComboBox<String> areaDropdown;
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton backButton2;
     private javax.swing.JLabel birthDatejLabel;
     private com.toedter.calendar.JDateChooser citizenBirthChooser;
     private javax.swing.JLabel citizenRegistryLabel;
@@ -1683,6 +1679,7 @@ private User currentUser;
     private javax.swing.JTextField editStaffTitle;
     private javax.swing.JTextField editStaffUsername;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -1715,24 +1712,23 @@ private User currentUser;
     private javax.swing.JLabel newCitizenTabLabel;
     private javax.swing.JPanel newHouseTab;
     private javax.swing.JLabel newHouseTabLabel;
-    private javax.swing.JTextField passwordField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordjLabel14;
     private javax.swing.JTextField phoneField;
     private javax.swing.JLabel phonejLabel16;
-    private javax.swing.JButton saveButton2;
     private javax.swing.JButton saveHousingButton;
     private javax.swing.JButton saveUserButton;
     private javax.swing.JTextField ssnField;
     private javax.swing.JLabel ssnjLabel13;
     private javax.swing.JLabel ssnjLabel15;
     private javax.swing.JTable staffTable;
-    private javax.swing.JTextField updateBirthDateField;
+    private javax.swing.JButton updateButton;
     private javax.swing.JTextField updateCitizenNameField;
     private javax.swing.JTextField updateCitizenSsnField;
     private javax.swing.JPanel updateCitizensTab;
     private javax.swing.JPanel updateJPanel;
     private javax.swing.JPanel updatePanel;
-    private javax.swing.JTextField updatePasswordField;
+    private javax.swing.JPasswordField updatePasswordField;
     private javax.swing.JTextField updatePhoneField;
     private javax.swing.JButton updateStaffButton;
     private javax.swing.JTextField updateUsernameField;

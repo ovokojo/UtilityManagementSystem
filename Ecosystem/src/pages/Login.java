@@ -40,6 +40,7 @@ public class Login extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
         bgLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +69,12 @@ public class Login extends javax.swing.JFrame {
 
         passwordField.setText("sys");
         bgPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 150, -1));
+
+        bgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pages/login-bg.jpg"))); // NOI18N
         bgPanel.add(bgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+
+        jLabel3.setText("jLabel3");
+        bgPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,6 +182,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel bgPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField usernameField;

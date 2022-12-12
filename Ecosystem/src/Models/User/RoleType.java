@@ -24,18 +24,18 @@ public  class RoleType {
     static public String Customer = "Customer";
     
     // Enterprises
-    static public String BankEnterprise = "BBE Bank";
-    static public String UtilityEnterprise = "Charles Utilities";
-    static public String HousingEnterprise = "Boston Housing";
-    static public String CitizenEnterprise = "Boston Citizen Services";
+    static public String BankEnterprise = "Bank";
+    static public String UtilityEnterprise = "Utiliity";
+    static public String HousingEnterprise = "Housing Services";
+    static public String CitizenEnterprise = "Citizen Services";
     
     
     public static String[] getAllEnterpriseTypes() {
         ArrayList<String> allEnts = new ArrayList();
-        allEnts.add("BBE Bank");
-        allEnts.add("Charles Utilities");
-        allEnts.add("Boston Housing");
-        allEnts.add("Boston Citizen Services");   
+        allEnts.add("Bank");
+        allEnts.add("Utiliity");
+        allEnts.add("Housing Services");
+        allEnts.add("Citizen Services");   
         String[] ents = allEnts.toArray(new String[allEnts.size()]);
         return ents;
     }

@@ -65,8 +65,6 @@ public class customerJFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         utilityTabButton = new javax.swing.JPanel();
         utilityTabLabel = new javax.swing.JLabel();
-        billingTabButton = new javax.swing.JPanel();
-        billingTabLabel = new javax.swing.JLabel();
         profileTabButton = new javax.swing.JPanel();
         profileTabLabel = new javax.swing.JLabel();
         logoutjButton2 = new javax.swing.JButton();
@@ -99,7 +97,6 @@ public class customerJFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -107,7 +104,6 @@ public class customerJFrame extends javax.swing.JFrame {
         usernameMProfile = new javax.swing.JTextField();
         nameMProfile = new javax.swing.JTextField();
         ssnMProfile = new javax.swing.JTextField();
-        dobMProfile = new javax.swing.JTextField();
         houseIDMProfile = new javax.swing.JTextField();
         houseAreaMProfile = new javax.swing.JTextField();
         houseAddL1MProfile = new javax.swing.JTextField();
@@ -129,7 +125,7 @@ public class customerJFrame extends javax.swing.JFrame {
         });
 
         utilityTabLabel.setForeground(new java.awt.Color(255, 255, 255));
-        utilityTabLabel.setText("Utility Services");
+        utilityTabLabel.setText("Rating");
         utilityTabLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 utilityTabLabelMousePressed(evt);
@@ -141,49 +137,16 @@ public class customerJFrame extends javax.swing.JFrame {
         utilityTabButtonLayout.setHorizontalGroup(
             utilityTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(utilityTabButtonLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(59, 59, 59)
                 .addComponent(utilityTabLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         utilityTabButtonLayout.setVerticalGroup(
             utilityTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, utilityTabButtonLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+            .addGroup(utilityTabButtonLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addComponent(utilityTabLabel)
-                .addContainerGap())
-        );
-
-        billingTabButton.setBackground(new java.awt.Color(102, 102, 102));
-        billingTabButton.setForeground(new java.awt.Color(255, 255, 255));
-        billingTabButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                billingTabButtonMousePressed(evt);
-            }
-        });
-
-        billingTabLabel.setForeground(new java.awt.Color(255, 255, 255));
-        billingTabLabel.setText("Billing Services");
-        billingTabLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                billingTabLabelMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout billingTabButtonLayout = new javax.swing.GroupLayout(billingTabButton);
-        billingTabButton.setLayout(billingTabButtonLayout);
-        billingTabButtonLayout.setHorizontalGroup(
-            billingTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billingTabButtonLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(billingTabLabel)
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
-        billingTabButtonLayout.setVerticalGroup(
-            billingTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billingTabButtonLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(billingTabLabel)
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         profileTabButton.setBackground(new java.awt.Color(102, 102, 102));
@@ -207,16 +170,16 @@ public class customerJFrame extends javax.swing.JFrame {
         profileTabButtonLayout.setHorizontalGroup(
             profileTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileTabButtonLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(52, 52, 52)
                 .addComponent(profileTabLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         profileTabButtonLayout.setVerticalGroup(
             profileTabButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileTabButtonLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+            .addGroup(profileTabButtonLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addComponent(profileTabLabel)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         logoutjButton2.setBackground(new java.awt.Color(0, 51, 51));
@@ -233,23 +196,20 @@ public class customerJFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(utilityTabButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(billingTabButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(profileTabButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(logoutjButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addComponent(profileTabButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(231, 231, 231)
+                .addGap(219, 219, 219)
                 .addComponent(utilityTabButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(billingTabButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(profileTabButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(logoutjButton2)
                 .addGap(52, 52, 52))
         );
@@ -266,10 +226,10 @@ public class customerJFrame extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
 
         bankingServicejPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -291,6 +251,7 @@ public class customerJFrame extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
+        jLabel5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel5.setText("Rating");
 
         jLabel6.setText("How would you rate your experience today?");
@@ -302,21 +263,20 @@ public class customerJFrame extends javax.swing.JFrame {
             .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
                 .addGroup(bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addGroup(bankingServicejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newSupportRequestButton)
-                            .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
                         .addGap(266, 266, 266)
                         .addComponent(jLabel5))
                     .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bankingServicejPanel4Layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(newSupportRequestButton)))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
         bankingServicejPanel4Layout.setVerticalGroup(
@@ -326,13 +286,13 @@ public class customerJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(52, 52, 52)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(62, 62, 62)
                 .addComponent(newSupportRequestButton)
-                .addGap(86, 86, 86))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", bankingServicejPanel4);
@@ -501,11 +461,6 @@ public class customerJFrame extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("SSN");
 
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("DOB");
-
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -545,10 +500,6 @@ public class customerJFrame extends javax.swing.JFrame {
                                 .addComponent(nameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(myProfilejPanel4Layout.createSequentialGroup()
                                 .addGroup(myProfilejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(myProfilejPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(dobMProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(myProfilejPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -607,9 +558,7 @@ public class customerJFrame extends javax.swing.JFrame {
                     .addComponent(houseAddL1MProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(myProfilejPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
                     .addComponent(jLabel15)
-                    .addComponent(dobMProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(houseAddL2MProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(165, Short.MAX_VALUE))
         );
@@ -642,19 +591,9 @@ public class customerJFrame extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_utilityTabButtonMousePressed
 
-    private void billingTabButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTabButtonMousePressed
-        // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_billingTabButtonMousePressed
-
-    private void billingTabLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billingTabLabelMousePressed
-        // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_billingTabLabelMousePressed
-
     private void profileTabButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileTabButtonMousePressed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(2);
+        jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_profileTabButtonMousePressed
 
     private void profileTabLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileTabLabelMousePressed
@@ -740,9 +679,6 @@ public class customerJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bankingServicejPanel4;
-    private javax.swing.JPanel billingTabButton;
-    private javax.swing.JLabel billingTabLabel;
-    private javax.swing.JTextField dobMProfile;
     private javax.swing.JTextField houseAddL1MProfile;
     private javax.swing.JTextField houseAddL2MProfile;
     private javax.swing.JTextField houseAreaMProfile;
@@ -751,7 +687,6 @@ public class customerJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

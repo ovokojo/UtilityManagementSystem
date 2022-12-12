@@ -188,8 +188,8 @@ public class BankManagerPage extends javax.swing.JFrame {
         accountsTabButton = new javax.swing.JPanel();
         accountsTabLabel = new javax.swing.JLabel();
         logoutBotton = new javax.swing.JButton();
-        menuBarPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        menuBarPanel = new javax.swing.JPanel();
         tabbedPane = new javax.swing.JTabbedPane();
         accountListPanel = new javax.swing.JPanel();
         bankAccountScrollPane3 = new javax.swing.JScrollPane();
@@ -352,31 +352,27 @@ public class BankManagerPage extends javax.swing.JFrame {
         });
         sideBarPanel.add(logoutBotton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel1.setText("Welcome!");
+        sideBarPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 20));
+
         pagePanel.add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 700));
 
         menuBarPanel.setBackground(new java.awt.Color(0, 0, 0));
         menuBarPanel.setPreferredSize(new java.awt.Dimension(766, 56));
 
-        jLabel1.setText("Bank Dashboard");
-
         javax.swing.GroupLayout menuBarPanelLayout = new javax.swing.GroupLayout(menuBarPanel);
         menuBarPanel.setLayout(menuBarPanelLayout);
         menuBarPanelLayout.setHorizontalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuBarPanelLayout.createSequentialGroup()
-                .addGap(316, 316, 316)
-                .addComponent(jLabel1)
-                .addContainerGap(346, Short.MAX_VALUE))
+            .addGap(0, 760, Short.MAX_VALUE)
         );
         menuBarPanelLayout.setVerticalGroup(
             menuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuBarPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(21, 21, 21))
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 30));
+        pagePanel.add(menuBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 760, 60));
 
         tabbedPane.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -578,6 +574,7 @@ public class BankManagerPage extends javax.swing.JFrame {
         jLabel6.setText("Staff");
 
         bankStaffTable.setBackground(new java.awt.Color(53, 53, 53));
+        bankStaffTable.setForeground(new java.awt.Color(255, 255, 255));
         bankStaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
