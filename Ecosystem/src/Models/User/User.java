@@ -13,6 +13,8 @@ import Models.muncipality.CitizenInfo;
  * @author thomaskojoaddaquay
  */
 public class User {
+
+    
   private String username;
     private String password;
     private String role;
