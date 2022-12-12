@@ -6,6 +6,7 @@
             <name>Ecosystem</name>
             <source-roots>
                 <root id="src.assets.dir"/>
+                <root id="src.assets.dir"/>
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>

@@ -6,6 +6,7 @@ package pages.customer;
 import Models.User.RoleType;
 import Models.User.User;
 import Models.muncipality.CitizenInfo;
+import Pages.Login;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -35,10 +36,10 @@ public class customerJFrame extends javax.swing.JFrame {
         nameMProfile.setText(currentUser.getCitizenInfo().getName());
         ssnMProfile.setText(currentUser.getCitizenInfo().getSsn());
         dobMProfile.setText(currentUser.getCitizenInfo().getBirthDate().toString());
-        houseIDMProfile.setText(currentUser.getCitizenInfo().getHouse().houseId);
-        houseAreaMProfile.setText(currentUser.getCitizenInfo().getHouse().cityArea);
-        houseAddL1MProfile.setText(currentUser.getCitizenInfo().getHouse().addressOne);
-        houseAddL2MProfile.setText(currentUser.getCitizenInfo().getHouse().addressTwo);
+//        houseIDMProfile.setText(currentUser.getCitizenInfo().getHouse().houseId);
+//        houseAreaMProfile.setText(currentUser.getCitizenInfo().getHouse().cityArea);
+//        houseAddL1MProfile.setText(currentUser.getCitizenInfo().getHouse().addressOne);
+//        houseAddL2MProfile.setText(currentUser.getCitizenInfo().getHouse().addressTwo);
     }
     
     
@@ -68,6 +69,7 @@ public class customerJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        logoutjButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         bankingServicejPanel4 = new javax.swing.JPanel();
@@ -206,6 +208,15 @@ public class customerJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        logoutjButton2.setBackground(new java.awt.Color(0, 51, 51));
+        logoutjButton2.setForeground(new java.awt.Color(255, 255, 255));
+        logoutjButton2.setText("LOGOUT");
+        logoutjButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutjButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -213,6 +224,10 @@ public class customerJFrame extends javax.swing.JFrame {
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(logoutjButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +238,9 @@ public class customerJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(logoutjButton2)
+                .addGap(52, 52, 52))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
@@ -573,6 +590,13 @@ public class customerJFrame extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void logoutjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButton2ActionPerformed
+        // TODO add your handling code here:
+        Login loginpg = new Login();
+        loginpg.show();
+        dispose();
+    }//GEN-LAST:event_logoutjButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -640,6 +664,7 @@ public class customerJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton logoutjButton2;
     private javax.swing.JPanel myProfileRedirectionjPanel6;
     private javax.swing.JPanel myProfilejPanel4;
     private javax.swing.JTextField nameLabel;
