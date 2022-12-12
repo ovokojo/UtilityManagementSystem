@@ -5,7 +5,6 @@
 package Models.User;
 
 import Business.Enterprise.Enterprise;
-import Business.Organization.Organization;
 import Business.System.EcoSystem;
 import javax.swing.JPanel;
 import Models.User.User;

@@ -14,7 +14,7 @@ import Pages.NewUserPage;
  * @author thomaskojoaddaquay
  */
 public class SystemAdminPage extends javax.swing.JFrame {
-private UserDirectory users = new UserDirectory();
+public UserDirectory users = new UserDirectory();
     /**
      * Creates new form AdminHomePage
      */
@@ -148,6 +148,7 @@ private UserDirectory users = new UserDirectory();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new SystemAdminPage().setVisible(true);
             }

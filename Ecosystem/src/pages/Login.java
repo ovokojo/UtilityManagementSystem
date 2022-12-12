@@ -24,9 +24,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         // TODO: Read users from database & store in UserDirectory
-        initComponents();
+       initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,17 +35,30 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgPanel = new javax.swing.JPanel();
+        usernameField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
-        usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
+        bgLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Username");
+        bgPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        usernameField.setText("sys");
+        bgPanel.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 150, -1));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Username");
+        bgPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
+        bgPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -54,39 +66,23 @@ public class Login extends javax.swing.JFrame {
                 loginButtonActionPerformed(evt);
             }
         });
-
-        usernameField.setText("sys");
+        bgPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 150, -1));
 
         passwordField.setText("sys");
+        bgPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 150, -1));
+
+        bgLabel.setIcon(new javax.swing.ImageIcon("/Users/thomaskojoaddaquay/Desktop/UtilityManagementSystem/Ecosystem/assets/login-bg.jpg")); // NOI18N
+        bgPanel.add(bgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(306, 306, 306)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(usernameField)
-                    .addComponent(passwordField))
-                .addContainerGap(344, Short.MAX_VALUE))
+            .addComponent(bgPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(loginButton)
-                .addContainerGap(209, Short.MAX_VALUE))
+            .addComponent(bgPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -108,32 +104,29 @@ public class Login extends javax.swing.JFrame {
         // TODO: Correct roles for enterprises
         User currentUser = users.getActiveUser();
         if (currentUser.getRole().equals(RoleType.SystemAdmin)) {
-        // TODO: Navigate to system admin JFrame
-            SystemAdminPage home = new SystemAdminPage();
+            AdminPage home = new AdminPage();
             home.show();
             dispose();
         }
        if (currentUser.getRole().equals(RoleType.MunicipalityAdmin) 
                || currentUser.getRole().equals(RoleType.MunicipalityCitizenManager)
                || currentUser.getRole().equals(RoleType.MunicipalityHousingManager)) {
-        // TODO: Navigate to system admin JFrame
             MunicipalityPage home = new MunicipalityPage();
             home.setCurrentUser(currentUser);
             home.show();
             dispose();
         }
          if (currentUser.getRole().equals(RoleType.UtilityAdmin) || currentUser.getRole().equals(RoleType.UtilityManager)) {
-        // TODO: Navigate to system admin JFrame
             UtilityManager home = new UtilityManager();
             home.show();
             dispose();
         }
           if (currentUser.getRole().equals(RoleType.BankAdmin) || currentUser.getRole().equals(RoleType.BankManager)) {
-        // TODO: Navigate to system admin JFrame
             BankPage home = new BankPage();
             home.show();
             dispose();
         }
+        // TODO: If customer, navigate to customer fram
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -174,6 +167,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bgLabel;
+    private javax.swing.JPanel bgPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;

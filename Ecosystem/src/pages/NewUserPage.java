@@ -7,10 +7,8 @@ package Pages;
 import Pages.SystemAdmin.SystemAdminPage;
 import java.text.MessageFormat;
 import javax.swing.JOptionPane;
-import models.Admin;
 import Business.Enterprise.Enterprise;
 import Models.User.RoleType;
-import Business.Staff.Staff;
 import Models.User.UserDirectory;
 
 /**
@@ -121,38 +119,38 @@ public class NewUserPage extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        String _username = usernameField.getText();
-        String _password = passwordField.getText();
-        String _enterprise =  enterpriseDropdown.getSelectedItem().toString();
-        String _role = roleDropdown.getSelectedItem().toString();
-        // Validate fields
-        if ("".equals(_username) || _username == null) {
-            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
-            return;
-        }
-        if ("".equals(_password) || _password == null) {
-            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
-            return;
-        }
-        if(UserDirectory.checkUsername(_username)) {
-          JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
-            return;
-        }
-        if (_role.equals(RoleType.admin)) {
-            Admin newAdmin = new Admin(_username, _password, _enterprise, _role);
-            UserDirectory.addUser(newAdmin);
-            System.out.println("Created admin");
-        }
-        if (_role.equals(RoleType.staff)) {
-            Staff newAdmin = new Staff(_username, _password, _enterprise, _role);
-            UserDirectory.addUser(newAdmin);
-            System.out.println("Created staff");
-        }
-        JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Created!", _username));
-        SystemAdminPage home = new SystemAdminPage();
-        home.populateTable();
-        home.show();
-        dispose();
+//        String _username = usernameField.getText();
+//        String _password = passwordField.getText();
+//        String _enterprise =  enterpriseDropdown.getSelectedItem().toString();
+//        String _role = roleDropdown.getSelectedItem().toString();
+//        // Validate fields
+//        if ("".equals(_username) || _username == null) {
+//            JOptionPane.showMessageDialog(this, "Username is required", "Error", 0);
+//            return;
+//        }
+//        if ("".equals(_password) || _password == null) {
+//            JOptionPane.showMessageDialog(this, "Password is required", "Error", 0);
+//            return;
+//        }
+//        if(UserDirectory.checkUsername(_username)) {
+//          JOptionPane.showMessageDialog(this, "Username already exists", "Error", 0);
+//            return;
+//        }
+//        if (_role.equals(RoleType.admin)) {
+//            Admin newAdmin = new Admin(_username, _password, _enterprise, _role);
+//            UserDirectory.addUser(newAdmin);
+//            System.out.println("Created admin");
+//        }
+//        if (_role.equals(RoleType.staff)) {
+//            Staff newAdmin = new Staff(_username, _password, _enterprise, _role);
+//            UserDirectory.addUser(newAdmin);
+//            System.out.println("Created staff");
+//        }
+//        JOptionPane.showMessageDialog(this, MessageFormat.format("{0} Successfully Created!", _username));
+//        SystemAdminPage home = new SystemAdminPage();
+//        home.populateTable();
+//        home.show();
+//        dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void enterpriseDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterpriseDropdownActionPerformed
